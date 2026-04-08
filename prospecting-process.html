@@ -267,21 +267,26 @@ function buildCard(w, i) {
 
 document.getElementById("grid").innerHTML = weeks.map((w, i) => buildCard(w, i)).join("");
 
+
 function toggle(id) {
   const body = document.getElementById(id);
   const chev = document.getElementById("chev-" + id);
   const isOpen = body.classList.contains("open");
+
+  // Close all other cards
+  weeks.forEach((_, i) => {
+    const otherId = "body-" + i;
+    if (otherId !== id) {
+      document.getElementById(otherId).classList.remove("open");
+      document.getElementById("chev-" + otherId).classList.remove("open");
+    }
+  });
+
+  // Toggle the clicked card
   body.classList.toggle("open", !isOpen);
   chev.classList.toggle("open", !isOpen);
 }
 
-function toggleAll(open) {
-  weeks.forEach((_, i) => {
-    const id = "body-" + i;
-    document.getElementById(id).classList.toggle("open", open);
-    document.getElementById("chev-" + id).classList.toggle("open", open);
-  });
-}
 </script>
 </body>
 </html>
