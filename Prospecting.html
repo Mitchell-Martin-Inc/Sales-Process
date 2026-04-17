@@ -1,196 +1,50 @@
+import React, { useState } from "react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ExternalLink } from "lucide-react";
+import SideNavView from "@/components/prospecting/SideNavView";
+import KanbanView from "@/components/prospecting/KanbanView";
+import CalendarView from "@/components/prospecting/CalendarView";
 
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans,'Segoe UI',system-ui,sans-serif);color:var(--color-text-primary)}
-.page{max-width:860px;margin:0 auto;padding:1.5rem 1rem 2.5rem}
+export default function Prospecting() {
+  const [view, setView] = useState("sidenav");
 
-.top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:1.25rem}
-.top-left h1{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
-.top-left p{font-size:13px;color:var(--color-text-secondary)}
-a.apollo{background:#c8f000;border:none;color:#1a2200;padding:0 12px;height:32px;border-radius:var(--border-radius-md,8px);font-size:12px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:inherit;white-space:nowrap}
-a.apollo:hover{background:#d4ff0a}
-a.apollo svg{width:14px;height:14px;flex-shrink:0}
-
-.switcher{display:flex;gap:6px;margin-bottom:1.25rem}
-.ls-btn{padding:0 14px;height:32px;border-radius:var(--border-radius-md,8px);border:0.5px solid var(--color-border-secondary,rgba(0,0,0,.2));background:var(--color-background-primary,#fff);color:var(--color-text-secondary);font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s}
-.ls-btn.on{background:var(--color-text-primary,#1a1a18);color:var(--color-background-primary,#fff);border-color:transparent}
-.ls-btn:hover:not(.on){background:var(--color-background-secondary);color:var(--color-text-primary)}
-
-.layout{display:none}.layout.on{display:block}
-
-/* SIDE-NAV */
-.sn-shell{display:flex;border:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.12));border-radius:var(--border-radius-lg,12px);background:var(--color-background-primary,#fff);overflow:hidden;min-height:380px}
-.sn-nav{width:190px;flex-shrink:0;border-right:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.1));padding:8px}
-.sn-item{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:var(--border-radius-md,8px);cursor:pointer;transition:background .15s}
-.sn-item:hover:not(.on){background:var(--color-background-secondary)}
-.sn-item.on{background:var(--color-background-secondary)}
-.sn-dot{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
-.sn-txt{font-size:13px;color:var(--color-text-secondary);line-height:1.2}
-.sn-txt b{display:block;font-size:10px;font-weight:400;color:var(--color-text-tertiary)}
-.sn-item.on .sn-txt{color:var(--color-text-primary)}
-.sn-panel{flex:1;padding:22px 24px;overflow:auto}
-.sp-eyebrow{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
-.sp-title{font-size:17px;font-weight:500;margin-bottom:3px}
-.sp-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:16px}
-.sp-hr{height:0.5px;background:var(--color-border-tertiary,rgba(0,0,0,.1));margin-bottom:14px}
-.sp-row{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:10px 0;border-bottom:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.08))}
-.sp-row:last-child{border-bottom:none}
-.sp-day{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;padding-top:1px}
-.sp-copy{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
-
-/* KANBAN */
-.kb-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
-.kb-col{border:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.12));border-radius:var(--border-radius-lg,12px);background:var(--color-background-primary,#fff);overflow:hidden;cursor:pointer;transition:border-color .2s,opacity .2s}
-.kb-col:hover{border-color:var(--color-border-secondary)}
-.kb-col.on{border-color:var(--color-border-primary,rgba(0,0,0,.3))}
-.kb-col:not(.on){opacity:.5}
-.kb-head{padding:10px 9px 9px;border-bottom:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.08))}
-.kb-num{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;margin-bottom:7px}
-.kb-wk{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
-.kb-title{font-size:11px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
-.kb-body{padding:8px;display:flex;flex-direction:column;gap:5px}
-.kb-chip{padding:6px 7px;border-radius:5px;background:var(--color-background-secondary);font-size:10px;color:var(--color-text-secondary);line-height:1.4}
-.kb-dtag{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
-
-/* CALENDAR */
-.cal-grid{display:grid;grid-template-columns:52px repeat(5,1fr);border:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.12));border-radius:var(--border-radius-lg,12px);overflow:hidden;background:var(--color-background-primary,#fff)}
-.cal-corner,.cal-dh{background:var(--color-background-secondary);padding:8px 4px;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--color-text-secondary);text-align:center;border-bottom:0.5px solid var(--color-border-tertiary)}
-.cal-corner{border-right:0.5px solid var(--color-border-tertiary)}
-.cal-dh{border-right:0.5px solid var(--color-border-tertiary)}
-.cal-dh:last-child{border-right:none}
-.cal-wl{padding:6px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-right:0.5px solid var(--color-border-tertiary);border-bottom:0.5px solid var(--color-border-tertiary)}
-.cal-wl:last-of-type,.cal-cell:nth-last-child(-n+6){border-bottom:none}
-.cal-wnum{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500}
-.cal-wtxt{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-tertiary)}
-.cal-cell{padding:5px;border-right:0.5px solid var(--color-border-tertiary,rgba(0,0,0,.08));border-bottom:0.5px solid var(--color-border-tertiary);min-height:64px}
-.cal-cell:nth-child(6n){border-right:none}
-.cal-ev{border-radius:4px;padding:4px 6px;font-size:10px;line-height:1.4;margin-bottom:3px}
-.cal-ev-title{font-weight:500;margin-bottom:1px}
-.cal-ev-copy{opacity:.75;font-size:9px}
-
-.c1b{background:#e6f1fb;color:#0c447c}.c1t{color:#185fa5}
-.c2b{background:#e1f5ee;color:#085041}.c2t{color:#0f6e56}
-.c3b{background:#eaf3de;color:#27500a}.c3t{color:#3b6d11}
-.c4b{background:#faeeda;color:#633806}.c4t{color:#854f0b}
-.c5b{background:#faece7;color:#712b13}.c5t{color:#993c1d}
-.c6b{background:#fbeaf0;color:#72243e}.c6t{color:#993556}
-</style>
-
-<div class="page">
-  <div class="top">
-    <div class="top-left">
-      <h1>Prospecting process</h1>
-      <p>6-week outreach framework</p>
-    </div>
-    <a href="https://app.apollo.io/#sequences/69dd389c707c2f0019342ecd" target="_blank" rel="noopener noreferrer" class="apollo">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#1a2200"><g transform="translate(50,50)"><path d="M-4,-8 L-2,-36 Q0,-41 2,-36 L4,-8 Q0,-4 -4,-8 Z" transform="rotate(0)"/><path d="M-4,-8 L-2,-36 Q0,-41 2,-36 L4,-8 Q0,-4 -4,-8 Z" transform="rotate(45)"/><path d="M-4,-8 L-2,-36 Q0,-41 2,-36 L4,-8 Q0,-4 -4,-8 Z" transform="rotate(90)"/><path d="M-4,-8 L-2,-36 Q0,-41 2,-36 L4,-8 Q0,-4 -4,-8 Z" transform="rotate(135)"/><path d="M-4,-8 L-2,-36 Q0,-41 2,-36 L4,-8 Q0,-4 -4,-8 Z" transform="rotate(180)"/><path d="M-4,-8 L-2,-36 Q0,-41 2,-36 L4,-8 Q0,-4 -4,-8 Z" transform="rotate(225)"/><path d="M-4,-8 L-2,-36 Q0,-41 2,-36 L4,-8 Q0,-4 -4,-8 Z" transform="rotate(270)"/><path d="M-4,-8 L-2,-36 Q0,-41 2,-36 L4,-8 Q0,-4 -4,-8 Z" transform="rotate(315)"/></g></svg>
-      Add to Apollo
-    </a>
-  </div>
-
-  <div class="switcher">
-    <button class="ls-btn on" onclick="show('sidenav',this)">Side-nav</button>
-    <button class="ls-btn" onclick="show('kanban',this)">Kanban</button>
-    <button class="ls-btn" onclick="show('calendar',this)">Calendar</button>
-  </div>
-
-  <div class="layout on" id="l-sidenav">
-    <div class="sn-shell">
-      <nav class="sn-nav" id="sn-nav"></nav>
-      <div class="sn-panel" id="sn-panel"></div>
-    </div>
-  </div>
-
-  <div class="layout" id="l-kanban">
-    <div class="kb-grid" id="kb-wrap"></div>
-  </div>
-
-  <div class="layout" id="l-calendar">
-    <div class="cal-grid" id="cal-grid"></div>
-  </div>
-</div>
-
-<script>
-const W=[
-  {n:"Week 1",l:"Initial reach out",s:"Make your first impression",days:[
-    {d:"Mon — Day 1",t:"Send an initial outreach email introducing who you are, why you're reaching out, and a value-add specific to the prospect's buyer persona."},
-    {d:"Wed — Day 3",t:"Follow-up phone call. If no answer, leave a short and friendly voicemail referencing your earlier email."},
-    {d:"Fri — Day 5",t:"Send a LinkedIn connection request with a personalized note mentioning your email or voicemail to reinforce the relationship."}
-  ]},
-  {n:"Week 2",l:"Provide value",s:"Educate and engage",days:[
-    {d:"Tue — Day 2",t:"Follow up your initial email with additional info or useful resources such as relevant articles or white papers aligned to their interests."},
-    {d:"Wed — Day 3",t:"Social media engagement — like or comment on one of the prospect's recent posts if they're active on LinkedIn."},
-    {d:"Thu — Day 4",t:"Short check-in call. If there's still no response, reference that you'll reach out again next week to stay top of mind."}
-  ]},
-  {n:"Week 3",l:"Building a connection",s:"Personalize & deepen the relationship",days:[
-    {d:"Wed — Day 3",t:"Send a pro-market candidate profile and mention current market trends — positioning yourself as a trusted advisor."},
-    {d:"Thu — Day 4",t:"Send a quick text or LinkedIn message referencing the pro-market candidate profile to reinforce the conversation."}
-  ]},
-  {n:"Week 4",l:"Personal engagement",s:"Warm outreach & live contact",days:[
-    {d:"Mon — Day 1",t:"Send a friendly 'just checking in' email, inviting the prospect to share any questions about your services or the market."},
-    {d:"Fri — Day 5",t:"Make a quick call and leave a voicemail that refers back to your previous messages and the pro-market candidate profile."}
-  ]},
-  {n:"Week 5",l:"Offer resources",s:"Demonstrate expertise",days:[
-    {d:"Tue — Day 2",t:"Email reply to the pro-market candidate profile — add your commentary, insights, or a gentle nudge to gauge interest."},
-    {d:"Thu — Day 4",t:"Follow-up call to see if they had a chance to review your email from Tuesday. Keep it brief and conversational."}
-  ]},
-  {n:"Week 6",l:"Final push / closing",s:"Wrap up or leave the door open",days:[
-    {d:"Mon — Day 1",t:"Send a summary email articulating exactly how you can add specific value to their buyer persona and business."},
-    {d:"Wed — Day 3",t:"Send a short LinkedIn message expressing that you'd love to connect whenever they're available — low pressure."},
-    {d:"Fri — Day 5",t:"Final call. Leave a friendly voicemail reiterating your open-door policy and ask if they know anyone who could benefit from an introduction."}
-  ]}
-];
-
-const DAY_IDX={"Mon — Day 1":0,"Tue — Day 2":1,"Wed — Day 3":2,"Thu — Day 4":3,"Fri — Day 5":4};
-const DAYS=["Mon","Tue","Wed","Thu","Fri"];
-let snActive=0;
-
-function buildSN(){
-  document.getElementById('sn-nav').innerHTML=W.map((w,i)=>`
-    <div class="sn-item${i===snActive?' on':''}" onclick="snSel(${i})">
-      <div class="sn-dot c${i+1}b">${i+1}</div>
-      <div class="sn-txt">${w.l}<b>${w.n}</b></div>
-    </div>`).join('');
-  const w=W[snActive];
-  document.getElementById('sn-panel').innerHTML=`
-    <div class="sp-eyebrow c${snActive+1}t">${w.n}</div>
-    <div class="sp-title">${w.l}</div>
-    <div class="sp-sub">${w.s}</div>
-    <div class="sp-hr"></div>
-    ${w.days.map(d=>`<div class="sp-row"><div class="sp-day c${snActive+1}t">${d.d}</div><div class="sp-copy">${d.t}</div></div>`).join('')}`;
-}
-function snSel(i){snActive=i;buildSN();}
-
-function buildKB(){
-  document.getElementById('kb-wrap').innerHTML=W.map((w,i)=>`
-    <div class="kb-col on" id="kb-${i}" onclick="kbTog(${i})">
-      <div class="kb-head">
-        <div class="kb-num c${i+1}b">${i+1}</div>
-        <div class="kb-wk c${i+1}t">${w.n}</div>
-        <div class="kb-title">${w.l}</div>
+  return (
+    <div className="max-w-[860px] mx-auto px-4 py-6 pb-10 font-inter">
+      {/* Header */}
+      <div className="flex items-start justify-between flex-wrap gap-3 mb-5">
+        <div>
+          <h1 className="text-lg font-medium text-foreground mb-0.5">
+            Prospecting process
+          </h1>
+          <p className="text-[13px] text-muted-foreground">
+            6-week outreach framework
+          </p>
+        </div>
+        <a
+          href="https://app.apollo.io/#sequences/69dd389c707c2f0019342ecd"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg text-xs font-medium transition-colors"
+          style={{ background: "#c8f000", color: "#1a2200" }}
+        >
+          <ExternalLink className="w-3.5 h-3.5" />
+          Add to Apollo
+        </a>
       </div>
-      <div class="kb-body">${w.days.map(d=>`<div class="kb-chip"><div class="kb-dtag c${i+1}t">${d.d}</div>${d.t}</div>`).join('')}</div>
-    </div>`).join('');
-}
-function kbTog(i){document.getElementById('kb-'+i).classList.toggle('on');}
 
-function buildCal(){
-  let h=`<div class="cal-corner"></div>${DAYS.map(d=>`<div class="cal-dh">${d}</div>`).join('')}`;
-  W.forEach((w,wi)=>{
-    const cells=Array(5).fill('');
-    w.days.forEach(d=>{const di=DAY_IDX[d.d];if(di!==undefined)cells[di]+=`<div class="cal-ev c${wi+1}b"><div class="cal-ev-title">${w.l}</div><div class="cal-ev-copy">${d.t.substring(0,52)}…</div></div>`;});
-    h+=`<div class="cal-wl"><div class="cal-wnum c${wi+1}b">${wi+1}</div><div class="cal-wtxt">Wk ${wi+1}</div></div>`;
-    cells.forEach(c=>{h+=`<div class="cal-cell">${c}</div>`;});
-  });
-  document.getElementById('cal-grid').innerHTML=h;
-}
+      {/* View switcher */}
+      <Tabs value={view} onValueChange={setView} className="mb-5">
+        <TabsList className="bg-secondary h-9">
+          <TabsTrigger value="sidenav" className="text-xs">Side-nav</TabsTrigger>
+          <TabsTrigger value="kanban" className="text-xs">Kanban</TabsTrigger>
+          <TabsTrigger value="calendar" className="text-xs">Calendar</TabsTrigger>
+        </TabsList>
+      </Tabs>
 
-function show(id,btn){
-  document.querySelectorAll('.layout').forEach(l=>l.classList.remove('on'));
-  document.querySelectorAll('.ls-btn').forEach(b=>b.classList.remove('on'));
-  document.getElementById('l-'+id).classList.add('on');
-  btn.classList.add('on');
+      {/* Views */}
+      {view === "sidenav" && <SideNavView />}
+      {view === "kanban" && <KanbanView />}
+      {view === "calendar" && <CalendarView />}
+    </div>
+  );
 }
-
-buildSN();buildKB();buildCal();
-</script>
