@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Performers Ticker</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: rgba(255, 255, 255, 0.96);
+      --panel-strong: rgba(255, 255, 255, 0.98);
+      --line: rgba(52, 154, 70, 0.18);
+      --text: #002D5B;
+      --muted: #002D5B;
+      --accent: #002D5B;
+      --hero-a: rgba(0, 45, 91, 0.14);
+      --hero-b: rgba(125, 199, 118, 0.16);
+      --danger: #002D5B;
+      --warning: #b88918;
+      --shadow: 0 18px 44px rgba(24, 60, 34, 0.12);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --ticker-duration: 42s;
+      --design-width: 1920px;
+      --design-height: 1080px;
+      --screen-scale: 1;
+      --screen-pad: 18px;
+      --panel-gap: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top left, rgba(0, 45, 91, 0.06), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(125, 199, 118, 0.08), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbf8 100%);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(0, 45, 91, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 45, 91, 0.035) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent 90%);
+      pointer-events: none;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    .viewport-shell {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+    }
+
+    .screen-stage {
+      width: calc(var(--design-width) * var(--screen-scale));
+      height: calc(var(--design-height) * var(--screen-scale));
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .screen {
+      width: var(--design-width);
+      height: var(--design-height);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: var(--panel-gap);
+      padding: var(--screen-pad);
+      position: absolute;
+      inset: 0 auto auto 0;
+      transform: scale(var(--screen-scale));
+      transform-origin: top left;
+    }
+
+    .topbar, .hero-panel, .stats-panel, .leaderboard-panel, .ticker-panel, .podium-panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: flex-start;
+      padding: 10px 18px 8px;
+      border-radius: var(--radius-xl);
+      align-items: center;
+    }
+
+    .eyebrow, .mini-kicker, .meta-card span, .stat-card span, .row-meta, .ticker-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow { color: var(--accent); margin-bottom: 4px; }
+
+    .eyebrow:empty {
+      display: none;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1;
+      max-width: none;
+    }
+
+    h1:empty {
+      display: none;
+    }
+
+    .subtitle, .section-head p, .stat-card p, .row-team, .ticker-item p {
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .subtitle {
+      max-width: 74ch;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .subtitle:empty {
+      display: none;
+    }
+
+    .brand-stack {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .meta-card, .stat-card, .leaderboard-row, .podium-card, .ticker-item, .metric-chip {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    .meta-card, .stat-card { padding: 14px 16px; border-radius: 18px; }
+    .meta-card strong, .stat-card strong { display: block; margin-top: 8px; font-size: 26px; line-height: 1; }
+    .stat-card p { display: none; }
+    .stat-card { padding: 12px 14px; }
+    .stat-card span { font-size: 11px; }
+    .stat-card strong { margin-top: 6px; font-size: 21px; }
+
+    .logo-card {
+      min-height: 74px;
+      padding: 2px 0;
+      border-radius: 0;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 0;
+      text-align: center;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .logo-card img {
+      display: block;
+      max-width: 100%;
+      max-height: 68px;
+      object-fit: contain;
+    }
+
+    .clock-wall {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+      padding: 10px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(9, 20, 37, 0.72);
+    }
+
+    .clock-card {
+      padding: 8px 8px 7px;
+      border-radius: 16px;
+      border: 1px solid rgba(160, 188, 255, 0.16);
+      background: rgba(5, 12, 23, 0.68);
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .clock-city {
+      color: #002D5B;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .clock-region {
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .clock-face {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 2px solid rgba(160, 188, 255, 0.26);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.16), transparent 52%),
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.04), rgba(3, 8, 16, 0.9));
+      box-shadow: inset 0 0 0 6px rgba(255, 255, 255, 0.02);
+    }
+
+    .clock-face::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      border: 1px dashed rgba(160, 188, 255, 0.14);
+    }
+
+    .clock-hand {
+      position: absolute;
+      left: 50%;
+      bottom: 50%;
+      transform-origin: 50% 100%;
+      border-radius: 999px;
+      translate: -50% 0;
+    }
+
+    .clock-hand.hour {
+      width: 3px;
+      height: 14px;
+      background: #f6f9ff;
+    }
+
+    .clock-hand.minute {
+      width: 2px;
+      height: 18px;
+      background: #9edcff;
+    }
+
+    .clock-hand.second {
+      width: 1px;
+      height: 21px;
+      background: var(--accent);
+    }
+
+    .clock-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      translate: -50% -50%;
+      box-shadow: 0 0 0 2px rgba(8, 17, 31, 0.85);
+    }
+
+    .clock-digital {
+      color: #f6f9ff;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(540px, 1.1fr);
+      gap: var(--panel-gap);
+      min-height: 0;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-rows: minmax(0, 0.68fr) minmax(0, 1.32fr);
+      gap: var(--panel-gap);
+      min-height: 0;
+    }
+
+    .side-rail {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: var(--panel-gap);
+      min-height: 0;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 76px;
+      gap: 8px;
+      align-items: start;
+      min-height: 0;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 22% 22%, rgba(103, 213, 255, 0.28), transparent 26%),
+        radial-gradient(circle at 78% 18%, rgba(142, 247, 195, 0.2), transparent 22%);
+      pointer-events: none;
+    }
+
+    .hero-copy, .hero-rank { position: relative; z-index: 1; }
+    .hero-copy {
+      min-width: 0;
+      display: grid;
+      align-content: start;
+      gap: 6px;
+      overflow: hidden;
+    }
+    .hero-name {
+      margin-top: 0;
+      font-size: 33px;
+      line-height: 0.92;
+      max-width: none;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow-wrap: anywhere;
+    }
+    .hero-name.tight { font-size: 28px; }
+    .hero-name.compact { font-size: 23px; }
+    .hero-team {
+      margin-top: 0;
+      color: #d3def4;
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hero-summary {
+      margin-top: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+      max-width: none;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .hero-summary.compact { font-size: 11px; }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 0;
+    }
+
+    .metric-chip { padding: 7px 9px; border-radius: 14px; background: rgba(6, 16, 29, 0.52); min-width: 0; }
+    .metric-chip strong { display: block; margin-top: 4px; font-size: 22px; line-height: 1; }
+
+    .hero-footer, .podium-support {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 0;
+    }
+
+    .badge, .delta, .rank-stamp, .podium-rank, .row-badge, .status-line {
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .badge, .delta, .row-badge {
+      padding: 10px 14px;
+      background: rgba(0, 45, 91, 0.06);
+      border: 1px solid rgba(0, 45, 91, 0.12);
+    }
+
+    .delta.up, .row-badge { color: var(--accent); background: rgba(77, 214, 160, 0.12); border-color: rgba(77, 214, 160, 0.28); }
+    .delta.down { color: var(--danger); background: rgba(255, 140, 140, 0.12); border-color: rgba(255, 140, 140, 0.28); }
+
+    .hero-rank { display: grid; gap: 6px; justify-items: center; align-content: start; }
+    .rank-stamp {
+      min-width: 70px;
+      padding: 6px 7px;
+      background: linear-gradient(135deg, rgba(255, 217, 124, 0.28), rgba(255, 217, 124, 0.1));
+      border: 1px solid rgba(255, 217, 124, 0.28);
+      color: #fff1c3;
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .spotlight-location {
+      width: 70px;
+      min-height: 70px;
+      padding: 7px 6px;
+      border-radius: 18px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 5px;
+      text-align: center;
+      background: linear-gradient(145deg, rgba(103, 213, 255, 0.22), rgba(142, 247, 195, 0.18));
+      border: 1px solid rgba(160, 188, 255, 0.24);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+
+    .spotlight-location .mini-kicker {
+      font-size: 8px;
+      letter-spacing: 0.1em;
+    }
+
+    .spotlight-location strong {
+      font-size: 12px;
+      line-height: 1.15;
+      color: #f6f9ff;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-panel .badge,
+    .hero-panel .delta {
+      padding: 7px 9px;
+      font-size: 10px;
+    }
+
+    .budget-low {
+      color: var(--danger) !important;
+    }
+
+    .budget-high {
+      color: var(--accent) !important;
+    }
+
+    .stats-panel {
+      border-radius: var(--radius-xl);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      align-content: start;
+    }
+
+    .podium-panel {
+      border-radius: var(--radius-xl);
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .podium {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .podium-card {
+      border-radius: var(--radius-lg);
+      padding: 10px 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .podium-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(103, 213, 255, 0.08), transparent 60%); pointer-events: none; }
+    .podium-rank { display: inline-flex; padding: 6px 10px; background: rgba(255, 255, 255, 0.05); color: var(--muted); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .podium-card h3 { margin-top: 8px; font-size: 20px; line-height: 1; }
+    .podium-card p { margin-top: 5px; color: var(--muted); font-size: 12px; }
+    .podium-metric { margin-top: 10px; font-size: 24px; font-weight: 800; line-height: 1; }
+
+    .leaderboard-panel { border-radius: var(--radius-xl); padding: 14px; display: grid; gap: 10px; min-height: 0; overflow: hidden; }
+    .section-head { display: flex; justify-content: space-between; gap: 14px; align-items: end; }
+    .section-head h2 { font-size: 28px; line-height: 1; }
+    .section-head p { font-size: 13px; }
+    .section-head--compact { align-items: center; }
+    .leaderboard-viewport { overflow: hidden; min-height: 0; }
+    .leaderboard-grid { display: grid; gap: 8px; transition: transform 900ms ease; will-change: transform; }
+    .leaderboard-row {
+      border-radius: 20px;
+      padding: 10px 12px;
+      display: grid;
+      grid-template-columns: 50px minmax(0, 1fr) 92px minmax(110px, 0.62fr) minmax(110px, 0.62fr) minmax(88px, 0.5fr) 96px;
+      gap: 10px;
+      align-items: center;
+      box-shadow: var(--shadow);
+      min-height: 76px;
+    }
+
+    .row-rank {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 16px;
+      font-weight: 800;
+      position: relative;
+    }
+
+    .rank-cup {
+      position: absolute;
+      right: -8px;
+      top: -8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+    }
+
+    .rank-cup svg {
+      width: 12px;
+      height: 12px;
+      display: block;
+    }
+
+    .rank-cup.gold {
+      background: linear-gradient(135deg, #ffe58f, #d4a317);
+      color: #5b4300;
+    }
+
+    .rank-cup.silver {
+      background: linear-gradient(135deg, #f4f7fb, #93a0b7);
+      color: #33415c;
+    }
+
+    .rank-cup.bronze {
+      background: linear-gradient(135deg, #e5b18a, #9b5f31);
+      color: #3f220f;
+    }
+
+    .row-name { font-size: 18px; font-weight: 700; line-height: 1.02; }
+    .row-team { margin-top: 4px; font-size: 12px; }
+    .row-metric strong, .row-secondary strong, .row-tertiary strong, .row-years strong { display: block; margin-top: 5px; font-size: 18px; line-height: 1; }
+    .row-badge { justify-self: end; text-align: center; font-size: 11px; padding: 8px 10px; }
+
+    .ticker-panel {
+      border-radius: var(--radius-xl);
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .ticker-label {
+      height: 100%;
+      padding: 12px 16px;
+      border-right: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(0, 45, 91, 0.08), rgba(125, 199, 118, 0.06));
+      display: grid;
+      align-content: center;
+      gap: 6px;
+    }
+
+    .ticker-label strong { font-size: 18px; line-height: 1; }
+    .ticker-label p { color: var(--muted); font-size: 12px; line-height: 1.35; }
+    .ticker-wrap { overflow: hidden; padding: 10px 0; }
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      min-width: max-content;
+      padding: 0;
+      animation: ticker-scroll var(--ticker-duration) linear infinite;
+      will-change: transform;
+    }
+    .ticker-segment {
+      display: inline-flex;
+      gap: 12px;
+      flex: 0 0 auto;
+      min-width: max-content;
+      padding: 0 12px;
+    }
+    .ticker-item { min-width: 220px; padding: 10px 12px; border-radius: 18px; }
+    .ticker-item strong { display: block; margin-top: 6px; font-size: 15px; line-height: 1.1; }
+    .ticker-item p { margin-top: 6px; font-size: 12px; }
+
+    .status-line {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      padding: 7px 10px;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--line);
+    }
+
+    .empty-state {
+      padding: 26px;
+      border-radius: 24px;
+      border: 1px dashed rgba(0, 45, 91, 0.22);
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.5;
+      background: rgba(248, 252, 249, 0.98);
+    }
+
+    .performance-grid-panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius-xl);
+      padding: 14px;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 12px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .section-head--power {
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .metric-panel {
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(245, 251, 246, 0.99)),
+        rgba(255, 255, 255, 0.98);
+      border-radius: 24px;
+      padding: 16px 16px 12px;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+      gap: 10px;
+      min-height: 0;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .metric-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(0, 45, 91, 0.06), transparent 34%),
+        radial-gradient(circle at 82% 12%, rgba(125, 199, 118, 0.08), transparent 26%);
+      pointer-events: none;
+    }
+
+    .metric-panel.metric-panel--feature {
+      grid-column: span 2;
+    }
+
+    .metric-panel-header,
+    .metric-panel-summary,
+    .metric-columns,
+    .metric-list {
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric-panel-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      column-gap: 12px;
+      row-gap: 2px;
+      padding: 2px 8px 4px 8px;
+      border-bottom: 1px solid rgba(0, 45, 91, 0.12);
+      align-items: end;
+    }
+
+    .metric-header-copy {
+      display: contents;
+    }
+
+    .metric-title-row {
+      display: flex;
+      align-items: end;
+      gap: 10px;
+      min-width: 0;
+      padding-bottom: 1px;
+    }
+
+    .metric-panel-header h3 {
+      font-size: 18px;
+      line-height: 1;
+      color: #002D5B;
+      flex: 0 1 auto;
+      min-width: 0;
+    }
+
+    .metric-title-value {
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .metric-panel-header .mini-kicker {
+      font-size: 9px;
+      line-height: 1;
+      color: #002D5B;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .metric-title-row {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .metric-panel-summary {
+      display: none;
+    }
+
+    .metric-panel-summary strong {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .metric-summary-value {
+      min-width: 0;
+    }
+
+    .metric-header-leader {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      display: grid;
+      justify-items: center;
+      align-content: end;
+      align-self: end;
+      gap: 1px;
+      min-width: 58px;
+      padding-bottom: 1px;
+    }
+
+    .metric-leader-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(52, 154, 70, 0.22);
+      background: linear-gradient(180deg, rgba(223, 237, 247, 1), rgba(241, 248, 244, 1));
+      box-shadow: 0 10px 24px rgba(28, 74, 38, 0.14);
+      display: grid;
+      place-items: center;
+    }
+
+    .metric-leader-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .metric-header-leader span,
+    .metric-panel-summary span:last-child {
+      color: var(--muted);
+      font-size: 7px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .metric-list {
+      display: grid;
+      gap: 0;
+      min-height: 0;
+      align-content: start;
+    }
+
+    .metric-columns,
+    .metric-row {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) 80px 46px 92px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .metric-columns {
+      padding: 0 2px 4px;
+      border-bottom: 1px solid rgba(0, 45, 91, 0.08);
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .metric-columns span:nth-child(3),
+    .metric-columns span:nth-child(4),
+    .metric-columns span:nth-child(5) {
+      text-align: right;
+    }
+
+    .metric-row {
+      border-bottom: 1px solid rgba(0, 45, 91, 0.08);
+      background: transparent;
+      border-radius: 0;
+      padding: 7px 2px;
+      min-height: 44px;
+    }
+
+    .metric-row:first-child {
+      border-top: 1px solid rgba(0, 45, 91, 0.08);
+    }
+
+    .metric-rank {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(0, 45, 91, 0.06);
+      font-size: 13px;
+      font-weight: 800;
+      position: relative;
+      align-self: center;
+      justify-self: center;
+    }
+
+    .metric-rank .rank-cup {
+      right: -5px;
+      top: -5px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .metric-rank .rank-cup svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    .metric-person {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .metric-person strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .metric-person span {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .metric-value {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .metric-days {
+      text-align: right;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .metric-status {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .metric-status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 76px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      border: 1px solid rgba(0, 45, 91, 0.1);
+      background: rgba(0, 45, 91, 0.05);
+      color: #002D5B;
+    }
+
+    .metric-status-badge.status-new {
+      background: rgba(52, 154, 70, 0.12);
+      border-color: rgba(52, 154, 70, 0.22);
+      color: #002D5B;
+    }
+
+    .metric-status-badge.status-streak {
+      background: rgba(0, 45, 91, 0.12);
+      border-color: rgba(0, 45, 91, 0.18);
+      color: #002D5B;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-25%, 0, 0); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="viewport-shell">
+  <div class="screen-stage">
+  <div class="screen">
+    <header class="topbar">
+      <div class="brand-stack">
+        <div class="meta-card logo-card">
+          <img src="file:///C:/Users/simon.storer/OneDrive%20-%20Mitchell%20Martin%20Inc/Desktop/MMI.png" alt="Mitchell Martin logo">
+        </div>
+        <div class="brand-copy">
+          <p class="eyebrow" id="boardEyebrow"></p>
+          <h1 id="boardTitle"></h1>
+          <p class="subtitle" id="boardSubtitle"></p>
+        </div>
+      </div>
+    </header>
+
+    <section class="performance-grid-panel">
+      <div class="section-head section-head--power">
+        <p id="leaderboardCaption">Top 5 rankings across the core recruiting and sales metrics.</p>
+      </div>
+      <div class="metric-grid" id="metricBoardGrid"></div>
+    </section>
+
+    <section class="ticker-panel">
+      <div class="ticker-label">
+        <span class="mini-kicker">Ticker</span>
+        <strong id="tickerTitle">Now Celebrating</strong>
+        <p id="tickerSubtitle">Continuous recognition across every monitor.</p>
+      </div>
+      <div class="ticker-wrap"><div class="ticker-track" id="tickerTrack"></div></div>
+    </section>
+
+    <div class="status-line" id="statusLine">Source: sample</div>
+  </div>
+  </div>
+  </div>
+
+  <script src="./top-performers-ticker.config.js"></script>
+  <script src="./top-performers-ticker.sample-data.js"></script>
+  <script>
+    const DEFAULT_CONFIG = {
+      board: {
+        eyebrow: "Leaderboard View",
+        title: "Performance Leaderboards",
+        subtitle: "",
+        periodLabel: "Q2",
+        tickerTitle: "Now Celebrating",
+        tickerSubtitle: "Continuous recognition across every monitor.",
+        leaderboardCaption: "Sorted by the configured headline metric."
+      },
+      display: {
+        locale: "en-US",
+        currency: "USD",
+        timezone: undefined,
+        metricBoards: [
+          { key: "primaryValue", label: "GP", format: "currency", feature: true },
+          { key: "confirmedStartsValue", label: "Confirmed Starts", format: "number" },
+          { key: "interviewsValue", label: "# of Interviews", format: "number" },
+          { key: "submissionsValue", label: "# of Submissions", format: "number" },
+          { key: "jobsValue", label: "# of Jobs", format: "number" },
+          { key: "meetingsValue", label: "# of Meetings", format: "number" },
+          { key: "dialsValue", label: "# of Dials", format: "number" }
+        ],
+        topCount: 10,
+        visibleRows: 5,
+        leaderboardScrollMs: 2600,
+        rotationMs: 9000,
+        refreshMs: 300000,
+        tickerDurationSeconds: 42
+      },
+      metrics: {
+        primaryLabel: "Total GP",
+        primaryFormat: "currency",
+        secondaryLabel: "% of Budget YTD",
+        secondaryFormat: "percent",
+        yearsAtMmiLabel: "Years at MMI",
+        yearsAtMmiFormat: "number",
+        dealsYtdLabel: "Deals YTD",
+        dealsYtdFormat: "number",
+        deltaFormat: "percent"
+      },
+      source: {
+        type: "sample",
+        method: "GET",
+        endpoint: "",
+        performersPath: "",
+        updatedAtPath: "",
+        headers: {},
+        body: null,
+        fieldMap: {
+          name: "name",
+          team: "team",
+          summary: "summary",
+          badge: "badge",
+          primaryValue: "primaryValue",
+          primaryLabel: "primaryLabel",
+          primaryFormat: "primaryFormat",
+          secondaryValue: "secondaryValue",
+          secondaryLabel: "secondaryLabel",
+          secondaryFormat: "secondaryFormat",
+          yearsAtMmiValue: "yearsAtMmiValue",
+          dealsYtdValue: "dealsYtdValue",
+          daysAtPositionValue: "daysAtPositionValue",
+          confirmedStartsValue: "confirmedStartsValue",
+          interviewsValue: "interviewsValue",
+          submissionsValue: "submissionsValue",
+          jobsValue: "jobsValue",
+          meetingsValue: "meetingsValue",
+          dialsValue: "dialsValue",
+          photoUrl: "photoUrl",
+          delta: "delta",
+          location: "location"
+        }
+      }
+    };
+
+    const config = mergeConfig(DEFAULT_CONFIG, window.TOP_PERFORMERS_TICKER_CONFIG || {});
+    const nodes = {
+      boardEyebrow: document.getElementById("boardEyebrow"),
+      boardTitle: document.getElementById("boardTitle"),
+      boardSubtitle: document.getElementById("boardSubtitle"),
+      metricBoardGrid: document.getElementById("metricBoardGrid"),
+      spotlightName: document.getElementById("spotlightName"),
+      spotlightTeam: document.getElementById("spotlightTeam"),
+      spotlightSummary: document.getElementById("spotlightSummary"),
+      spotlightMetricLabel: document.getElementById("spotlightMetricLabel"),
+      spotlightMetricValue: document.getElementById("spotlightMetricValue"),
+      spotlightSecondaryLabel: document.getElementById("spotlightSecondaryLabel"),
+      spotlightSecondaryValue: document.getElementById("spotlightSecondaryValue"),
+      spotlightBadge: document.getElementById("spotlightBadge"),
+      spotlightDelta: document.getElementById("spotlightDelta"),
+      spotlightRank: document.getElementById("spotlightRank"),
+      spotlightLocation: document.getElementById("spotlightLocation"),
+      statsPanel: document.getElementById("statsPanel"),
+      podium: document.getElementById("podium"),
+      leaderboardViewport: document.getElementById("leaderboardViewport"),
+      leaderboardRows: document.getElementById("leaderboardRows"),
+      leaderboardCaption: document.getElementById("leaderboardCaption"),
+      tickerTitle: document.getElementById("tickerTitle"),
+      tickerSubtitle: document.getElementById("tickerSubtitle"),
+      tickerTrack: document.getElementById("tickerTrack"),
+      statusLine: document.getElementById("statusLine")
+    };
+    const state = {
+      spotlightIndex: 0,
+      leaderboardIndex: 0,
+      leaderboardDirection: 1,
+      rotationTimer: null,
+      refreshTimer: null,
+      leaderboardTimer: null,
+      dataset: { performers: [] }
+    };
+
+    function mergeConfig(base, override) {
+      const merged = { ...base, ...override };
+      merged.board = { ...base.board, ...(override.board || {}) };
+      merged.display = { ...base.display, ...(override.display || {}) };
+      merged.metrics = { ...base.metrics, ...(override.metrics || {}) };
+      merged.source = { ...base.source, ...(override.source || {}) };
+      merged.source.fieldMap = { ...base.source.fieldMap, ...((override.source && override.source.fieldMap) || {}) };
+      return merged;
+    }
+
+    function getPath(target, path) {
+      if (!path) return undefined;
+      return path.split(".").reduce((current, segment) => {
+        if (current == null) return undefined;
+        return /^\d+$/.test(segment) ? current[Number(segment)] : current[segment];
+      }, target);
+    }
+
+    function toNumber(value) {
+      if (typeof value === "number" && Number.isFinite(value)) return value;
+      if (typeof value === "string") {
+        const parsed = Number(value.replace(/[$,%\s,]/g, ""));
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+      return 0;
+    }
+
+    function formatValue(value, format) {
+      const number = toNumber(value);
+      if (format === "currency") {
+        return new Intl.NumberFormat(config.display.locale, { style: "currency", currency: config.display.currency, maximumFractionDigits: 0 }).format(number);
+      }
+      if (format === "percent") {
+        const percentValue = Math.abs(number) > 1 ? number / 100 : number;
+        return new Intl.NumberFormat(config.display.locale, { style: "percent", maximumFractionDigits: 1 }).format(percentValue);
+      }
+      if (format === "decimal") {
+        return new Intl.NumberFormat(config.display.locale, { maximumFractionDigits: 1 }).format(number);
+      }
+      return new Intl.NumberFormat(config.display.locale, { maximumFractionDigits: 0 }).format(number);
+    }
+
+    function formatTimestamp(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "Unavailable";
+      return new Intl.DateTimeFormat(config.display.locale, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: config.display.timezone }).format(date);
+    }
+
+    function getClockParts(timeZone) {
+      const formatter = new Intl.DateTimeFormat("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+        timeZone
+      });
+
+      const parts = formatter.formatToParts(new Date());
+      const lookup = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+      const hour = Number(lookup.hour || 0) % 12;
+      const minute = Number(lookup.minute || 0);
+      const second = Number(lookup.second || 0);
+
+      return {
+        hour,
+        minute,
+        second,
+        digital: `${lookup.hour || "12"}:${lookup.minute || "00"} ${lookup.dayPeriod || ""}`.trim()
+      };
+    }
+
+    function escapeHtml(value) {
+      return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+    }
+
+    function getInitials(name) {
+      const parts = String(name || "")
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2);
+      return parts.map((part) => part[0].toUpperCase()).join("") || "MM";
+    }
+
+    function hashString(value) {
+      let hash = 0;
+      const text = String(value || "");
+      for (let index = 0; index < text.length; index += 1) {
+        hash = ((hash << 5) - hash) + text.charCodeAt(index);
+        hash |= 0;
+      }
+      return Math.abs(hash);
+    }
+
+    function getProfileImageUrl(performer) {
+      if (performer.photoUrl) {
+        return performer.photoUrl;
+      }
+
+      const hash = hashString(`${performer.name}|${performer.team}|${performer.location}`);
+      const palette = [
+        { skin: "#F2C7A5", hair: "#4D342C", shirt: "#6FA8DC", bgA: "#EEF6FF", bgB: "#E6F4EC" },
+        { skin: "#DDAA83", hair: "#2E2A28", shirt: "#7EC8A5", bgA: "#EDF7F2", bgB: "#E5EEF9" },
+        { skin: "#F0C29A", hair: "#7B4B2A", shirt: "#9CAFD9", bgA: "#F4F8FF", bgB: "#EDF8F1" },
+        { skin: "#C98F6D", hair: "#1F1D1D", shirt: "#86BFA2", bgA: "#EFF6F3", bgB: "#EAF0FA" },
+        { skin: "#E6B894", hair: "#5B4636", shirt: "#87A9C9", bgA: "#F2F8FE", bgB: "#EEF8F2" }
+      ][hash % 5];
+      const hairStyle = hash % 3;
+      const eyeOffset = (hash % 4) - 1.5;
+      const mouthCurve = hash % 2 === 0 ? "62 73 68 73 72 69" : "62 71 68 75 72 71";
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="${palette.bgA}"/>
+              <stop offset="100%" stop-color="${palette.bgB}"/>
+            </linearGradient>
+          </defs>
+          <rect width="120" height="120" rx="22" fill="url(#bg)"/>
+          <rect x="22" y="84" width="76" height="26" rx="12" fill="${palette.shirt}"/>
+          <ellipse cx="60" cy="44" rx="20" ry="24" fill="${palette.skin}"/>
+          ${hairStyle === 0 ? `<path d="M39 46c0-16 10-27 21-27s22 10 22 24v7c-4-8-12-15-22-15-9 0-16 4-21 11V46Z" fill="${palette.hair}"/>` : ""}
+          ${hairStyle === 1 ? `<path d="M40 44c2-16 12-24 24-24 11 0 18 7 20 18-4-4-8-6-14-6-8 0-15 3-22 12-4 0-7 0-8 0Z" fill="${palette.hair}"/>` : ""}
+          ${hairStyle === 2 ? `<path d="M37 48c0-19 13-29 26-29 14 0 23 10 23 26-5-5-14-9-24-9-8 0-17 3-25 12V48Z" fill="${palette.hair}"/>` : ""}
+          <circle cx="${54 + eyeOffset}" cy="52" r="2.4" fill="#233E63"/>
+          <circle cx="${66 + eyeOffset}" cy="52" r="2.4" fill="#233E63"/>
+          <path d="M${mouthCurve}" stroke="#9A5C4E" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+          <path d="M34 101c6-13 16-20 26-20 11 0 21 7 26 20" fill="${palette.shirt}"/>
+        </svg>
+      `.trim();
+
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function fitSummaryText(value) {
+      const text = String(value || "").trim();
+      if (text.length <= 120) {
+        return text;
+      }
+
+      return `${text.slice(0, 117).trimEnd()}...`;
+    }
+
+    function applyCanvasScale() {
+      const designWidth = 1920;
+      const designHeight = 1080;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const scale = Math.min(width / designWidth, height / designHeight);
+      document.documentElement.style.setProperty("--screen-scale", String(Math.max(scale, 0.1)));
+    }
+
+    function getRankCupMarkup(rank) {
+      const tone = rank === 1 ? "gold" : rank === 2 ? "silver" : rank === 3 ? "bronze" : "";
+      if (!tone) {
+        return "";
+      }
+
+      return `
+        <span class="rank-cup ${tone}" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" focusable="false" aria-hidden="true">
+            <path d="M7 4h10v2h2a1 1 0 0 1 1 1c0 3.04-1.64 5.28-4.52 6.18A5.5 5.5 0 0 1 13 17.46V20h3v2H8v-2h3v-2.54a5.5 5.5 0 0 1-2.48-4.1C5.64 12.28 4 10.04 4 7a1 1 0 0 1 1-1h2V4Zm10 4V6h1c-.17 1.95-1.1 3.34-2.8 4.14A5.46 5.46 0 0 0 17 8ZM7 8a5.46 5.46 0 0 0 1.8 2.14C7.1 9.34 6.17 7.95 6 6h1v2Z"/>
+          </svg>
+        </span>
+      `;
+    }
+
+    function getBudgetToneClass(label, value, format) {
+      if (label !== config.metrics.secondaryLabel || format !== "percent") {
+        return "";
+      }
+
+      const numericValue = toNumber(value);
+      const normalizedPercent = Math.abs(numericValue) > 1 ? numericValue / 100 : numericValue;
+
+      if (normalizedPercent < 0.25) {
+        return "budget-low";
+      }
+
+      if (normalizedPercent > 0.25) {
+        return "budget-high";
+      }
+
+      return "";
+    }
+
+    function getMetricBoardDefinitions() {
+      const boards = Array.isArray(config.display.metricBoards) ? config.display.metricBoards : [];
+      return boards.length ? boards : [
+        { key: "primaryValue", label: "GP", format: "currency", feature: true }
+      ];
+    }
+
+    function getSortedMetricLeaders(performers, metricKey, limit = 5) {
+      return [...performers]
+        .filter((performer) => toNumber(performer[metricKey]) > 0)
+        .sort((a, b) => toNumber(b[metricKey]) - toNumber(a[metricKey]))
+        .slice(0, limit)
+        .map((performer, index) => ({ ...performer, metricRank: index + 1 }));
+    }
+
+    function getPositionStatus(daysAtPosition) {
+      const days = Math.max(0, Math.round(toNumber(daysAtPosition)));
+      if (days <= 1) {
+        return { label: "Just got it", className: "status-new" };
+      }
+      if (days >= 5) {
+        return { label: `${days}-day streak`, className: "status-streak" };
+      }
+      return { label: "Holding", className: "" };
+    }
+
+    function renderMetricBoards(performers) {
+      if (!nodes.metricBoardGrid) {
+        return;
+      }
+
+      const boards = getMetricBoardDefinitions();
+
+      if (!performers.length) {
+        nodes.metricBoardGrid.innerHTML = '<div class="empty-state">No performers were returned from the configured source yet.</div>';
+        return;
+      }
+
+      nodes.metricBoardGrid.innerHTML = boards.map((board) => {
+        const leaders = getSortedMetricLeaders(performers, board.key, 5);
+
+        if (!leaders.length) {
+          return `
+            <section class="metric-panel ${board.feature ? "metric-panel--feature" : ""}">
+              <div class="metric-panel-header">
+                <span class="mini-kicker">Top 5</span>
+                <h3>${escapeHtml(board.label)}</h3>
+              </div>
+              <div class="empty-state">No values are available for this metric yet.</div>
+            </section>
+          `;
+        }
+
+        const leader = leaders[0];
+        const format = board.format || "number";
+
+        return `
+          <section class="metric-panel ${board.feature ? "metric-panel--feature" : ""}">
+            <div class="metric-panel-header">
+              <div class="metric-header-copy">
+                <span class="mini-kicker">Top 5</span>
+                <div class="metric-title-row">
+                  <h3>${escapeHtml(board.label)}</h3>
+                  <strong class="metric-title-value">${escapeHtml(formatValue(leader[board.key], format))}</strong>
+                </div>
+              </div>
+              <div class="metric-header-leader">
+                <div class="metric-leader-avatar">
+                  <img src="${escapeHtml(getProfileImageUrl(leader))}" alt="${escapeHtml(leader.name)} profile picture">
+                </div>
+                <span>${escapeHtml(leader.name)}</span>
+              </div>
+            </div>
+            <div class="metric-columns">
+              <span></span>
+              <span>Rep</span>
+              <span>Value</span>
+              <span>Days</span>
+              <span>Status</span>
+            </div>
+            <div class="metric-list">
+              ${leaders.map((performer) => {
+                const positionStatus = getPositionStatus(performer.daysAtPositionValue);
+                return `
+                <div class="metric-row">
+                  <div class="metric-rank">${performer.metricRank}${getRankCupMarkup(performer.metricRank)}</div>
+                  <div class="metric-person">
+                    <strong>${escapeHtml(performer.name)}</strong>
+                    <span>${escapeHtml(performer.team)}</span>
+                  </div>
+                  <div class="metric-value">${escapeHtml(formatValue(performer[board.key], format))}</div>
+                  <div class="metric-days">${escapeHtml(formatValue(performer.daysAtPositionValue, "number"))}</div>
+                  <div class="metric-status"><span class="metric-status-badge ${positionStatus.className}">${escapeHtml(positionStatus.label)}</span></div>
+                </div>
+              `;
+              }).join("")}
+            </div>
+          </section>
+        `;
+      }).join("");
+    }
+
+    function applySpotlightSizing(performer) {
+      const nameLength = (performer.name || "").trim().length;
+      const summaryLength = (performer.summary || "").trim().length;
+
+      nodes.spotlightName.className = "hero-name";
+      nodes.spotlightSummary.className = "hero-summary";
+
+      if (nameLength > 22) {
+        nodes.spotlightName.classList.add("tight");
+      }
+
+      if (nameLength > 32) {
+        nodes.spotlightName.classList.remove("tight");
+        nodes.spotlightName.classList.add("compact");
+      }
+
+      if (summaryLength > 135 || nameLength > 28) {
+        nodes.spotlightSummary.classList.add("compact");
+      }
+    }
+
+    function normalizePerformers(payload) {
+      const rows = getPath(payload, config.source.performersPath) || payload.performers || payload.data || payload.value || getPath(payload, "results.0.tables.0.rows") || [];
+      return (Array.isArray(rows) ? rows : [])
+        .map((row) => ({
+          name: row[config.source.fieldMap.name] || "Unknown Performer",
+          team: row[config.source.fieldMap.team] || "Team not supplied",
+          summary: row[config.source.fieldMap.summary] || "Top performer in the latest reporting cycle.",
+          badge: row[config.source.fieldMap.badge] || "On the rise",
+          location: row[config.source.fieldMap.location] || "Location TBD",
+          primaryLabel: row[config.source.fieldMap.primaryLabel] || config.metrics.primaryLabel,
+          primaryFormat: row[config.source.fieldMap.primaryFormat] || config.metrics.primaryFormat,
+          primaryValue: toNumber(row[config.source.fieldMap.primaryValue]),
+          secondaryLabel: row[config.source.fieldMap.secondaryLabel] || config.metrics.secondaryLabel,
+          secondaryFormat: row[config.source.fieldMap.secondaryFormat] || config.metrics.secondaryFormat,
+          secondaryValue: toNumber(row[config.source.fieldMap.secondaryValue]),
+          yearsAtMmiValue: toNumber(row[config.source.fieldMap.yearsAtMmiValue]),
+          dealsYtdValue: toNumber(row[config.source.fieldMap.dealsYtdValue]),
+          daysAtPositionValue: toNumber(row[config.source.fieldMap.daysAtPositionValue]),
+          confirmedStartsValue: toNumber(row[config.source.fieldMap.confirmedStartsValue]),
+          interviewsValue: toNumber(row[config.source.fieldMap.interviewsValue]),
+          submissionsValue: toNumber(row[config.source.fieldMap.submissionsValue]),
+          jobsValue: toNumber(row[config.source.fieldMap.jobsValue]),
+          meetingsValue: toNumber(row[config.source.fieldMap.meetingsValue]),
+          dialsValue: toNumber(row[config.source.fieldMap.dialsValue]),
+          photoUrl: row[config.source.fieldMap.photoUrl] || "",
+          deltaValue: toNumber(row[config.source.fieldMap.delta])
+        }));
+    }
+
+    async function loadDataset() {
+      if (config.source.type === "sample") {
+        return {
+          updatedAt: (window.TOP_PERFORMERS_SAMPLE_DATA || {}).updatedAt || new Date().toISOString(),
+          performers: normalizePerformers(window.TOP_PERFORMERS_SAMPLE_DATA || { performers: [] })
+        };
+      }
+
+      if (!config.source.endpoint) throw new Error("A source endpoint is required for live data.");
+      const requestInit = { method: config.source.method || "GET", headers: config.source.headers || {} };
+      if (config.source.body) requestInit.body = typeof config.source.body === "string" ? config.source.body : JSON.stringify(config.source.body);
+      const response = await fetch(config.source.endpoint, requestInit);
+      if (!response.ok) throw new Error(`Data request failed with status ${response.status}.`);
+      const payload = await response.json();
+      return {
+        updatedAt: getPath(payload, config.source.updatedAtPath) || payload.updatedAt || new Date().toISOString(),
+        performers: normalizePerformers(payload)
+      };
+    }
+
+    function buildStats(performers) {
+      if (!performers.length) {
+        nodes.statsPanel.innerHTML = '<div class="empty-state">No performers were returned from the configured source yet.</div>';
+        return;
+      }
+
+      const teamTotals = performers.reduce((memo, performer) => {
+        memo[performer.team] = (memo[performer.team] || 0) + performer.primaryValue;
+        return memo;
+      }, {});
+      const topTeam = Object.entries(teamTotals).sort((a, b) => b[1] - a[1])[0];
+      const totalPrimary = performers.reduce((sum, performer) => sum + performer.primaryValue, 0);
+      const totalSecondary = performers.reduce((sum, performer) => sum + performer.secondaryValue, 0);
+      const averageSecondary = totalSecondary / performers.length;
+      const averageDelta = performers.reduce((sum, performer) => sum + performer.deltaValue, 0) / performers.length;
+      const cards = [
+        { label: `Total ${config.metrics.primaryLabel}`, value: formatValue(totalPrimary, config.metrics.primaryFormat), detail: `Combined across the ${performers.length} people currently shown on the board.` },
+        {
+          label: `${config.metrics.secondaryFormat === "percent" ? "Average" : "Total"} ${config.metrics.secondaryLabel}`,
+          value: formatValue(config.metrics.secondaryFormat === "percent" ? averageSecondary : totalSecondary, config.metrics.secondaryFormat),
+          detail: "Useful when you want the wallboard to celebrate both output and efficiency."
+        },
+        { label: "Top Team", value: topTeam ? topTeam[0] : "Unavailable", detail: topTeam ? `${formatValue(topTeam[1], config.metrics.primaryFormat)} in headline production.` : "No team breakdown available." },
+        { label: "Average Trend", value: formatValue(averageDelta, config.metrics.deltaFormat), detail: "Average movement versus the comparison period configured in your source." }
+      ];
+      nodes.statsPanel.innerHTML = cards.map((card) => `<div class="stat-card"><span>${escapeHtml(card.label)}</span><strong>${escapeHtml(card.value)}</strong><p>${escapeHtml(card.detail)}</p></div>`).join("");
+    }
+
+    function renderSpotlight(performer) {
+      if (!performer) {
+        nodes.spotlightName.textContent = "No data yet";
+        nodes.spotlightTeam.textContent = "Connect a source to populate the spotlight.";
+        nodes.spotlightSummary.textContent = "This page is ready for sample data, a JSON feed, or a Power BI / Fabric proxy endpoint.";
+        nodes.spotlightMetricLabel.textContent = config.metrics.primaryLabel;
+        nodes.spotlightMetricValue.textContent = "--";
+        nodes.spotlightSecondaryLabel.textContent = config.metrics.secondaryLabel;
+        nodes.spotlightSecondaryValue.textContent = "--";
+        nodes.spotlightBadge.textContent = "Waiting on data";
+        nodes.spotlightRank.textContent = "Rank --";
+        nodes.spotlightLocation.textContent = "TBD";
+        nodes.spotlightDelta.textContent = "--";
+        nodes.spotlightDelta.className = "delta";
+        nodes.spotlightSecondaryValue.className = "";
+        nodes.spotlightName.className = "hero-name";
+        nodes.spotlightSummary.className = "hero-summary";
+        return;
+      }
+      nodes.spotlightName.textContent = performer.name;
+      nodes.spotlightTeam.textContent = performer.team;
+      nodes.spotlightSummary.textContent = fitSummaryText(performer.summary);
+      nodes.spotlightMetricLabel.textContent = performer.primaryLabel;
+      nodes.spotlightMetricValue.textContent = formatValue(performer.primaryValue, performer.primaryFormat);
+      nodes.spotlightSecondaryLabel.textContent = performer.secondaryLabel;
+      nodes.spotlightSecondaryValue.textContent = formatValue(performer.secondaryValue, performer.secondaryFormat);
+      nodes.spotlightSecondaryValue.className = getBudgetToneClass(performer.secondaryLabel, performer.secondaryValue, performer.secondaryFormat);
+      nodes.spotlightBadge.textContent = performer.badge;
+      nodes.spotlightRank.textContent = `Rank #${performer.rank}`;
+      nodes.spotlightLocation.textContent = performer.location;
+      nodes.spotlightDelta.textContent = `${performer.deltaValue >= 0 ? "+" : "-"}${formatValue(Math.abs(performer.deltaValue), config.metrics.deltaFormat)}`;
+      nodes.spotlightDelta.className = `delta ${performer.deltaValue >= 0 ? "up" : "down"}`;
+      applySpotlightSizing(performer);
+    }
+
+    function renderPodium(performers) {
+      nodes.podium.innerHTML = performers.slice(0, 3).map((performer) => `
+        <article class="podium-card">
+          <div class="podium-rank">Rank #${performer.rank}</div>
+          <h3>${escapeHtml(performer.name)}</h3>
+          <p>${escapeHtml(performer.team)}</p>
+          <div class="podium-metric">${escapeHtml(formatValue(performer.primaryValue, performer.primaryFormat))}</div>
+          <div class="podium-support">
+            <span class="badge">${escapeHtml(performer.badge)}</span>
+            <span class="delta ${performer.deltaValue >= 0 ? "up" : "down"}">${performer.deltaValue >= 0 ? "+" : "-"}${escapeHtml(formatValue(Math.abs(performer.deltaValue), config.metrics.deltaFormat))}</span>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function updateLeaderboardOffset(index) {
+      const rows = Array.from(nodes.leaderboardRows.children);
+      const targetRow = rows[index];
+      const targetOffset = targetRow ? targetRow.offsetTop : 0;
+      nodes.leaderboardRows.style.transform = `translateY(-${targetOffset}px)`;
+    }
+
+    function syncLeaderboardViewport() {
+      const rows = Array.from(nodes.leaderboardRows.children);
+      const visibleRows = Math.max(1, config.display.visibleRows || 5);
+      const slice = rows.slice(0, visibleRows);
+
+      if (!slice.length) {
+        nodes.leaderboardViewport.style.height = "";
+        return;
+      }
+
+      const rowGap = Number.parseFloat(getComputedStyle(nodes.leaderboardRows).rowGap || "0");
+      const totalHeight = slice.reduce((sum, row) => sum + row.offsetHeight, 0) + rowGap * Math.max(0, slice.length - 1);
+      nodes.leaderboardViewport.style.height = `${Math.ceil(totalHeight)}px`;
+    }
+
+    function startLeaderboardAutoScroll(performers) {
+      clearInterval(state.leaderboardTimer);
+      state.leaderboardIndex = 0;
+      state.leaderboardDirection = 1;
+      syncLeaderboardViewport();
+      updateLeaderboardOffset(0);
+
+      const visibleRows = Math.max(1, config.display.visibleRows || 5);
+      const maxIndex = Math.max(0, performers.length - visibleRows);
+
+      if (maxIndex === 0) {
+        return;
+      }
+
+      state.leaderboardTimer = setInterval(() => {
+        if (state.leaderboardIndex >= maxIndex) {
+          state.leaderboardDirection = -1;
+        } else if (state.leaderboardIndex <= 0) {
+          state.leaderboardDirection = 1;
+        }
+
+        state.leaderboardIndex += state.leaderboardDirection;
+        updateLeaderboardOffset(state.leaderboardIndex);
+      }, config.display.leaderboardScrollMs || 2600);
+    }
+
+    function renderLeaderboard(performers) {
+      nodes.leaderboardRows.innerHTML = performers.length ? performers.map((performer) => `
+        <article class="leaderboard-row">
+          <div class="row-rank">${performer.rank}${getRankCupMarkup(performer.rank)}</div>
+          <div><div class="row-name">${escapeHtml(performer.name)}</div><div class="row-team">${escapeHtml(performer.team)}</div></div>
+          <div class="row-years"><span class="row-meta">${escapeHtml(config.metrics.yearsAtMmiLabel)}</span><strong>${escapeHtml(formatValue(performer.yearsAtMmiValue, config.metrics.yearsAtMmiFormat))}</strong></div>
+          <div class="row-metric"><span class="row-meta">${escapeHtml(performer.primaryLabel)}</span><strong>${escapeHtml(formatValue(performer.primaryValue, performer.primaryFormat))}</strong></div>
+          <div class="row-secondary"><span class="row-meta">${escapeHtml(performer.secondaryLabel)}</span><strong class="${getBudgetToneClass(performer.secondaryLabel, performer.secondaryValue, performer.secondaryFormat)}">${escapeHtml(formatValue(performer.secondaryValue, performer.secondaryFormat))}</strong></div>
+          <div class="row-tertiary"><span class="row-meta">${escapeHtml(config.metrics.dealsYtdLabel)}</span><strong>${escapeHtml(formatValue(performer.dealsYtdValue, config.metrics.dealsYtdFormat))}</strong></div>
+          <div class="row-badge">${escapeHtml(performer.badge)}</div>
+        </article>
+      `).join("") : '<div class="empty-state">No leaderboard rows are available yet. Update the source config and refresh this page.</div>';
+      startLeaderboardAutoScroll(performers);
+    }
+
+    function renderTicker(performers) {
+      const gpLeaders = getSortedMetricLeaders(performers, "primaryValue", Math.max(5, config.display.topCount || 10));
+      const itemMarkup = gpLeaders.map((performer) => `
+        <div class="ticker-item">
+          <small>Rank #${performer.metricRank} | ${escapeHtml(performer.team)}</small>
+          <strong>${escapeHtml(performer.name)} | ${escapeHtml(formatValue(performer.primaryValue, performer.primaryFormat))}</strong>
+          <p>${escapeHtml(performer.badge)} | GP leader board</p>
+        </div>
+      `).join("");
+      nodes.tickerTrack.innerHTML = itemMarkup ? Array.from({ length: 4 }, () => `<div class="ticker-segment">${itemMarkup}</div>`).join("") : "";
+      document.documentElement.style.setProperty("--ticker-duration", `${config.display.tickerDurationSeconds}s`);
+    }
+
+    function renderBoard(dataset) {
+      state.dataset = dataset;
+      nodes.boardEyebrow.textContent = config.board.eyebrow;
+      nodes.boardTitle.textContent = config.board.title;
+      nodes.boardSubtitle.textContent = config.board.subtitle;
+      nodes.tickerTitle.textContent = config.board.tickerTitle;
+      nodes.tickerSubtitle.textContent = config.board.tickerSubtitle;
+      nodes.leaderboardCaption.textContent = `${config.board.leaderboardCaption} Showing ${Math.min(5, dataset.performers.length)} leaders in each tile.`;
+      nodes.statusLine.textContent = `Source: ${config.source.type}`;
+      clearInterval(state.rotationTimer);
+      clearInterval(state.leaderboardTimer);
+      renderMetricBoards(dataset.performers);
+      renderTicker(dataset.performers);
+    }
+
+    function renderClockWall() {
+      if (!nodes.clockWall) {
+        return;
+      }
+      const zones = Array.isArray(config.display.clockZones) ? config.display.clockZones : [];
+
+      nodes.clockWall.innerHTML = zones.map((zone) => {
+        const clock = getClockParts(zone.timeZone);
+        const hourRotation = (clock.hour * 30) + (clock.minute * 0.5);
+        const minuteRotation = clock.minute * 6;
+        const secondRotation = clock.second * 6;
+
+        return `
+          <div class="clock-card">
+            <div class="clock-city">${escapeHtml(zone.label)}</div>
+            <div class="clock-face" aria-label="${escapeHtml(zone.city)} clock">
+              <span class="clock-hand hour" style="transform: translate(-50%, 0) rotate(${hourRotation}deg);"></span>
+              <span class="clock-hand minute" style="transform: translate(-50%, 0) rotate(${minuteRotation}deg);"></span>
+              <span class="clock-hand second" style="transform: translate(-50%, 0) rotate(${secondRotation}deg);"></span>
+              <span class="clock-center"></span>
+            </div>
+            <div class="clock-digital">${escapeHtml(clock.digital)}</div>
+            <div class="clock-region">${escapeHtml(zone.city)}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    async function refreshBoard() {
+      try {
+        renderBoard(await loadDataset());
+      } catch (error) {
+        clearInterval(state.leaderboardTimer);
+        nodes.statusLine.textContent = `Source error: ${error.message}`;
+        nodes.metricBoardGrid.innerHTML = `<div class="empty-state">${escapeHtml(error.message)}<br><br>Tip: use sample mode first, then switch to a JSON or Power BI / Fabric proxy endpoint.</div>`;
+        nodes.tickerTrack.innerHTML = "";
+      }
+    }
+
+    window.addEventListener("resize", applyCanvasScale);
+
+    applyCanvasScale();
+    refreshBoard();
+    clearInterval(state.refreshTimer);
+    state.refreshTimer = setInterval(refreshBoard, config.display.refreshMs);
+  </script>
+</body>
+</html>
