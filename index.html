@@ -14,6 +14,7 @@
       <nav class="toplinks" aria-label="Page shortcuts">
         <a href="#playbook-search">Search</a>
         <a href="#prospecting">Prospecting</a>
+        <a href="#market-intel">Market Intel</a>
         <a href="#meetings">Meetings</a>
         <a href="#technology">Tech SOP</a>
       </nav>
@@ -38,6 +39,7 @@
           <a href="#pitch">Pitching MMI</a>
           <a href="#lifecycle">Sales Lifecycle</a>
           <a href="#prospecting">Prospecting</a>
+          <a href="#market-intel">Market Intelligence</a>
           <a href="#strategy">Buyer Strategy</a>
           <a href="#networking">Networking</a>
           <a href="#meetings">Calls & Meetings</a>
@@ -252,6 +254,110 @@
                   <a href="https://m365.cloud.microsoft/chat/?titleId=T_ac19b564-5a9b-6e66-be39-87ad84d02d48&source=embedded-builder" target="_blank" rel="noreferrer">Healthcare</a>
                   <a href="https://m365.cloud.microsoft/chat/?titleId=T_2a2f1beb-4ac6-addd-3de4-cb01b8009b20&source=embedded-builder" target="_blank" rel="noreferrer">IT</a>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="playbook-section market-intel-section" id="market-intel" data-title="Market Intelligence Builder" data-search="market intelligence healthcare IT finance staffing United States BLS JOLTS OEWS talent insights hiring trends compensation benchmark skill availability time to fill outreach discovery prompt">
+            <div class="section-heading">
+              <p class="eyebrow">Market intelligence</p>
+              <h2>Generate a sales-ready market brief</h2>
+              <p>Build a current, evidence-led point of view for Healthcare, IT, or Finance staffing conversations. Use it before prospecting, intro meetings, pro-marketing, and job-order intake.</p>
+            </div>
+
+            <div class="intel-workbench">
+              <form class="intel-controls" id="intelForm">
+                <label>
+                  <span>Vertical</span>
+                  <select id="intelVertical">
+                    <option value="healthcare">Healthcare</option>
+                    <option value="it">IT</option>
+                    <option value="finance">Finance</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Buyer</span>
+                  <select id="intelBuyer">
+                    <option value="talent">Talent Acquisition</option>
+                    <option value="executive">CIO / CTO / CFO / COO</option>
+                    <option value="operations">Operations Leader</option>
+                    <option value="procurement">Procurement / MSP</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Region</span>
+                  <select id="intelRegion">
+                    <option value="United States">United States</option>
+                    <option value="Northeast">Northeast</option>
+                    <option value="Midwest">Midwest</option>
+                    <option value="South">South</option>
+                    <option value="West">West</option>
+                    <option value="New York metro">New York metro</option>
+                    <option value="New Jersey">New Jersey</option>
+                    <option value="Philadelphia metro">Philadelphia metro</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Signal</span>
+                  <select id="intelSignal">
+                    <option value="hiring spike">Hiring spike</option>
+                    <option value="hard-to-fill role">Hard-to-fill role</option>
+                    <option value="leadership change">Leadership change</option>
+                    <option value="cost pressure">Cost pressure</option>
+                    <option value="project deadline">Project deadline</option>
+                    <option value="turnover risk">Turnover risk</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Role or skill focus</span>
+                  <input id="intelRole" type="text" value="specialized contract talent" placeholder="Example: Epic analysts, cloud engineers, FP&A consultants">
+                </label>
+                <button class="intel-generate" type="submit">Generate Brief</button>
+              </form>
+
+              <div class="intel-output" aria-live="polite">
+                <div class="intel-brief">
+                  <div>
+                    <p class="eyebrow">Sales angle</p>
+                    <h3 id="intelHeadline">Healthcare staffing brief for United States</h3>
+                  </div>
+                  <p id="intelNarrative"></p>
+                </div>
+
+                <div class="intel-grid">
+                  <article class="intel-live-data">
+                    <h3>Current Data Pull</h3>
+                    <div class="intel-status" id="intelDataStatus">Ready to pull BLS data.</div>
+                    <div class="metric-strip" id="intelMetrics"></div>
+                    <ul id="intelSources"></ul>
+                  </article>
+                  <article>
+                    <h3>Client Questions</h3>
+                    <ul id="intelQuestions"></ul>
+                  </article>
+                  <article>
+                    <h3>Talk Track</h3>
+                    <p id="intelTalkTrack"></p>
+                  </article>
+                  <article>
+                    <h3>Outreach Starter</h3>
+                    <p id="intelOutreach"></p>
+                  </article>
+                </div>
+
+                <div class="intel-actions">
+                  <button type="button" id="pullBlsData">Pull BLS Data</button>
+                  <button type="button" id="copyIntel">Copy Brief</button>
+                  <button type="button" id="copyAgentPrompt">Copy Agent Prompt</button>
+                  <button type="button" id="refreshIntel">Refresh Angle</button>
+                  <a href="https://www.bls.gov/developers/api_signature_v2.htm" target="_blank" rel="noreferrer">Open BLS API</a>
+                  <a href="https://www.bls.gov/news.release/jolts.nr0.htm" target="_blank" rel="noreferrer">Open BLS JOLTS</a>
+                  <a href="https://www.bls.gov/news.release/empsit.nr0.htm" target="_blank" rel="noreferrer">Open Employment</a>
+                  <a href="https://www.bls.gov/oes/tables.htm" target="_blank" rel="noreferrer">Open OEWS Wages</a>
+                  <a href="https://chatgpt.com/" target="_blank" rel="noreferrer">Open ChatGPT</a>
+                  <a href="https://m365.cloud.microsoft/chat/" target="_blank" rel="noreferrer">Open Copilot</a>
+                </div>
+                <p class="intel-note">Live sources should be checked before client use. BLS JOLTS is monthly, OEWS wage tables are annual, and LinkedIn/Apollo/JobDiva should be used for account-level validation.</p>
               </div>
             </div>
           </section>
