@@ -1,292 +1,406 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prospecting Process</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mitchell Martin Sales Playbook</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="https://www.mitchellmartin.com/" target="_blank" rel="noreferrer" aria-label="Open Mitchell Martin website">
+        <img src="https://www.mitchellmartin.com/wp-content/uploads/2025/08/logo-train-scaled.png" alt="Mitchell Martin">
+      </a>
+      <nav class="toplinks" aria-label="Page shortcuts">
+        <a href="#playbook-search">Search</a>
+        <a href="#prospecting">Prospecting</a>
+        <a href="#meetings">Meetings</a>
+        <a href="#technology">Tech SOP</a>
+      </nav>
+    </header>
 
-  body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #0d1b2a;
-    color: #f0f4f8;
-    min-height: 100vh;
-    padding: 2rem 1.5rem 3rem;
-  }
+    <main>
+      <section class="search-band" id="playbook-search" aria-labelledby="search-title">
+        <img class="playbook-logo" src="mmi-playbook-logo.png" alt="Mitchell Martin Playbook">
+        <div class="search-title-block">
+          <h2 id="search-title">Search the playbook</h2>
+        </div>
+        <label class="search-box">
+          <span>Search by topic, tool, tactic, or phrase</span>
+          <input id="searchInput" type="search" placeholder="Try: objection, Apollo, job order, PE-backed, voicemail">
+        </label>
+        <div class="search-results" id="searchResults" aria-live="polite"></div>
+      </section>
 
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.02em;
-  }
+      <div class="layout">
+        <aside class="sidenav" aria-label="Playbook navigation">
+          <a href="#foundation">Foundation</a>
+          <a href="#pitch">Pitching MMI</a>
+          <a href="#lifecycle">Sales Lifecycle</a>
+          <a href="#prospecting">Prospecting</a>
+          <a href="#strategy">Buyer Strategy</a>
+          <a href="#networking">Networking</a>
+          <a href="#meetings">Calls & Meetings</a>
+          <a href="#close">Prep, Debrief, Close</a>
+          <a href="#technology">Technology SOP</a>
+          <a href="#first-deal">First Deal</a>
+        </aside>
 
-  .subtitle {
-    text-align: center;
-    font-size: 0.95rem;
-    color: #8fa3b8;
-    margin-bottom: 2rem;
-  }
+        <div class="content">
+          <section class="playbook-section" id="foundation" data-title="Foundation" data-search="who we are growth compassion technology family companies employee owned core values">
+            <div class="section-heading">
+              <p class="eyebrow">Foundation</p>
+              <h2>Who Mitchell Martin is</h2>
+              <p>Sell from the company story: growth, relationships, specialized talent, and a people-first operating model strengthened by technology.</p>
+            </div>
+            <div class="story-grid">
+              <article>
+                <span class="node-dot"></span>
+                <h3>Growth Focus</h3>
+                <p>We do more than fill openings. We help companies and people grow by understanding both sides of the match.</p>
+              </article>
+              <article>
+                <span class="node-dot"></span>
+                <h3>Compassion + Technology</h3>
+                <p>Founded by Eugene Holtzman in 1984, MMI blends socially minded roots with a belief that technology drives business forward.</p>
+              </article>
+              <article>
+                <span class="node-dot"></span>
+                <h3>Family of Companies</h3>
+                <p>Mitchell Martin, Mitchell Martin Healthcare, Dale Workforce Solutions, Grant Wagner Talent, and Talent Tech Labs extend the platform.</p>
+              </article>
+            </div>
+          </section>
 
-  .controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 2rem;
-  }
+          <section class="playbook-section" id="pitch" data-title="Pitching MMI" data-search="value proposition pitch recruiting engine innovation niche teams 3 to 1 ratio employee owned privately held MSP delivery platform">
+            <div class="section-heading">
+              <p class="eyebrow">Pitching MMI</p>
+              <h2>Turn the value prop into a conversation</h2>
+              <p>Use the pitch as a modular system. Lead with the proof point that matches the buyer's pressure.</p>
+            </div>
+            <div class="pitch-stack">
+              <article class="pitch-card">
+                <span>01</span>
+                <h3>Specialized Reach</h3>
+                <p>Distinct IT and healthcare disciplines nationwide, with deep pools across cybersecurity, Salesforce, ERP, Workday, SAP, UI/UX, cloud, Agile/PMO, data science, RPA, and healthcare IT.</p>
+              </article>
+              <article class="pitch-card">
+                <span>02</span>
+                <h3>Delivery Engine</h3>
+                <p>Hundreds of recruiters across the US, Philippines, and India, with niche pipelines and a recruiter-to-sales ratio built for speed and scale.</p>
+              </article>
+              <article class="pitch-card">
+                <span>03</span>
+                <h3>Stable + Agile</h3>
+                <p>Over 40 years in staffing, executive tenure averaging over 20 years, employee-owned, privately held, and able to move quickly for customers.</p>
+              </article>
+              <article class="pitch-card">
+                <span>04</span>
+                <h3>Technology Enabled</h3>
+                <p>Modern tools support sourcing, recruiting, research, communication, redeployment, and market intelligence through the Talent Tech Labs mindset.</p>
+              </article>
+            </div>
+          </section>
 
-  .controls button {
-    background: transparent;
-    border: 1px solid #2e4a63;
-    color: #8fa3b8;
-    padding: 6px 16px;
-    border-radius: 6px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+          <section class="playbook-section" id="lifecycle" data-title="Sales Lifecycle" data-search="sales lifecycle research activities buyer persona account strategy networking objection cold call voicemail intro meeting job order prep debrief close technology">
+            <div class="section-heading">
+              <p class="eyebrow">Operating system</p>
+              <h2>The sales lifecycle</h2>
+              <p>A simple path for moving from market signal to filled role.</p>
+            </div>
+            <div class="lifecycle-map">
+              <article><b>Research</b><span>Find signals, names, referrals, and timing.</span></article>
+              <article><b>Engage</b><span>Use calls, email, LinkedIn, pro-marketing, and events.</span></article>
+              <article><b>Diagnose</b><span>Map buyer type, pain, team, process, and urgency.</span></article>
+              <article><b>Capture</b><span>Take a job order with delivery aligned early.</span></article>
+              <article><b>Advance</b><span>Prep, debrief, close, document, and redeploy.</span></article>
+            </div>
+          </section>
 
-  .controls button:hover {
-    border-color: #5b8fb9;
-    color: #c9daea;
-    background: rgba(91,143,185,0.1);
-  }
+          <section class="playbook-section" id="prospecting" data-title="Prospecting" data-search="friends family candidates consultants current clients new executives news job boards past clients referral sources pro marketing phoneburner support MSA market intelligence hot bossing handwritten notes Apollo sequence 6 week cadence identify market hiring managers ownership check message content execute outreach follow up tracking">
+            <div class="section-heading">
+              <p class="eyebrow">Prospecting</p>
+              <h2>Build pipeline from multiple signal streams</h2>
+              <p>Prospecting works best when each week combines warm network moves, market triggers, data-backed campaigns, and disciplined call blocks.</p>
+            </div>
+            <div class="source-wheel" aria-label="Prospecting source map">
+              <div class="wheel-center">Opportunity Signals</div>
+              <span>Referrals</span>
+              <span>Candidates</span>
+              <span>Consultants</span>
+              <span>Clients</span>
+              <span>New CIO/CTO</span>
+              <span>News</span>
+              <span>Job Boards</span>
+              <span>MSA Accounts</span>
+            </div>
+            <div class="tactic-grid">
+              <article>
+                <h3>Pro-Market Candidates</h3>
+                <p>Package a newly available consultant with availability, skill set, and interview windows. Ask directly when an intro call works best.</p>
+              </article>
+              <article>
+                <h3>Time Block Calls</h3>
+                <p>Plan lists 48 hours ahead with Support, use PhoneBurner, and block outreach by title, target account, and campaign.</p>
+              </article>
+              <article>
+                <h3>Flip Reference Checks</h3>
+                <p>Target a company, speak with someone who reported to the manager, sell dream opportunities, and create a reference-led path back to the boss.</p>
+              </article>
+              <article>
+                <h3>Use Market Intelligence</h3>
+                <p>Bring hiring trends, compensation benchmarks, skill availability, time-to-fill, and interview-to-offer data into the sales conversation.</p>
+              </article>
+              <article>
+                <h3>Work MSA Accounts</h3>
+                <p>You already have a license to sell. Cross-reference JobDiva, use Apollo and LinkedIn, and call across the account to find decision makers.</p>
+              </article>
+              <article>
+                <h3>Give Before Asking</h3>
+                <p>Share relevant content, white papers, event notes, and thoughtful handwritten cards so the first ask has context.</p>
+              </article>
+            </div>
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+            <div class="pro-market-system">
+              <div class="pro-market-heading">
+                <div>
+                  <p class="eyebrow">Pro-marketing strategy</p>
+                  <h3>Targeted, compliant outbound methodology</h3>
+                  <p>Use this when you have a strong candidate, redeployable talent, or a market-specific value story to bring to hiring managers.</p>
+                </div>
+                <a class="apollo-link" href="https://app.apollo.io/#sequences/69dd389c707c2f0019342ecd" target="_blank" rel="noreferrer">Add to Apollo</a>
+              </div>
 
-  @media (max-width: 750px) { .grid { grid-template-columns: 1fr; } }
-  @media (min-width: 751px) and (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+              <div class="pro-steps" aria-label="Sales pro-marketing strategy workflow">
+                <article>
+                  <span>1</span>
+                  <h4>Identify Your Market</h4>
+                  <p>Find companies actively hiring, review posted roles, and confirm industry, geography, and market signals.</p>
+                </article>
+                <article>
+                  <span>2</span>
+                  <h4>Identify Hiring Managers</h4>
+                  <p>Map the decision maker, influencer, and end user so messaging lands with the right buying role.</p>
+                </article>
+                <article>
+                  <span>2A</span>
+                  <h4>Ownership Check</h4>
+                  <p>Submit the list for approval, verify client ownership and contact rules, and confirm compliance before outreach.</p>
+                </article>
+                <article>
+                  <span>3</span>
+                  <h4>Build the Message</h4>
+                  <p>Clarify the value proposition, choose the strongest persona angle, and promote pro-market candidates or redeployed talent.</p>
+                </article>
+                <article>
+                  <span>4</span>
+                  <h4>Execute Outreach</h4>
+                  <p>Use email, calls, LinkedIn, and text. Follow the Mitchell Martin cadence and treat templates as guardrails, not scripts.</p>
+                </article>
+                <article>
+                  <span>5</span>
+                  <h4>Track and Refine</h4>
+                  <p>Review results weekly, track replies and movement, and log all outreach in JobDiva.</p>
+                </article>
+              </div>
 
-  .week-card {
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.07);
-    background: #142233;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+              <div class="cadence-board" aria-label="6-week prospecting process">
+                <div class="cadence-intro">
+                  <p class="eyebrow">6-week cadence</p>
+                  <h3>Stay visible without sounding canned</h3>
+                  <p>Each week has a purpose: first impression, value, connection, live contact, expertise, and a graceful close.</p>
+                </div>
+                <div class="cadence-grid">
+                  <article>
+                    <b>Week 1</b>
+                    <h4>Initial Reach Out</h4>
+                    <p>Mon: tailored intro email. Wed: follow-up call and voicemail. Fri: personalized LinkedIn connection request.</p>
+                  </article>
+                  <article>
+                    <b>Week 2</b>
+                    <h4>Provide Value</h4>
+                    <p>Tue: useful resource or article. Wed: engage with a LinkedIn post. Thu: short check-in call.</p>
+                  </article>
+                  <article>
+                    <b>Week 3</b>
+                    <h4>Build Connection</h4>
+                    <p>Wed: send a pro-market profile with market trends. Thu: reinforce with text or LinkedIn message.</p>
+                  </article>
+                  <article>
+                    <b>Week 4</b>
+                    <h4>Personal Engagement</h4>
+                    <p>Mon: friendly check-in email. Fri: quick call referencing prior messages and the candidate profile.</p>
+                  </article>
+                  <article>
+                    <b>Week 5</b>
+                    <h4>Offer Resources</h4>
+                    <p>Tue: reply with commentary or insight. Thu: brief call to see if they reviewed the note.</p>
+                  </article>
+                  <article>
+                    <b>Week 6</b>
+                    <h4>Final Push</h4>
+                    <p>Mon: summary of specific value. Wed: low-pressure LinkedIn message. Fri: final call and referral ask.</p>
+                  </article>
+                </div>
+              </div>
 
-  .week-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.35); }
+              <div class="resource-callout">
+                <h3>Helpful resources</h3>
+                <p>Use pre-built Copilot agents to create client-ready market intelligence for Financial Services, Healthcare, and IT. Bring the insight into outreach so the message sounds consultative, not generic.</p>
+                <div>
+                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_3bd64108-82bc-9db6-9361-f1b187caa82d&source=embedded-builder" target="_blank" rel="noreferrer">Financial Services</a>
+                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_ac19b564-5a9b-6e66-be39-87ad84d02d48&source=embedded-builder" target="_blank" rel="noreferrer">Healthcare</a>
+                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_2a2f1beb-4ac6-addd-3de4-cb01b8009b20&source=embedded-builder" target="_blank" rel="noreferrer">IT</a>
+                </div>
+              </div>
+            </div>
+          </section>
 
-  .week-header {
-    padding: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 13px;
-  }
+          <section class="playbook-section" id="strategy" data-title="Buyer Personas and Account Strategy" data-search="buyer persona account strategy CIO VP engineering director IT talent acquisition MSP PE backed private equity mid market value prop cadence">
+            <div class="section-heading">
+              <p class="eyebrow">Buyer strategy</p>
+              <h2>Match the sales motion to the account</h2>
+              <p>Buyer personas define the person. Account strategy defines the terrain. Strong selling aligns both.</p>
+            </div>
+            <div class="persona-board">
+              <article>
+                <h3>MSP / VMS</h3>
+                <p>Know program rules, submission windows, response time metrics, ratios, and the program manager's expectations.</p>
+              </article>
+              <article>
+                <h3>PE-Backed</h3>
+                <p>Lead with speed, scalability, transformation support, project staffing, and the ability to keep up with aggressive growth.</p>
+              </article>
+              <article>
+                <h3>Mid-Market</h3>
+                <p>Relationship-building and education matter. These buyers may need help formalizing hiring process and interview discipline.</p>
+              </article>
+            </div>
+          </section>
 
-  .wh-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
+          <section class="playbook-section" id="networking" data-title="Networking and Objections" data-search="networking charity events marketing team associations round tables webinars user groups LinkedIn alumni referrals current consultants past consultants conferences objection handling rebuttals">
+            <div class="section-heading">
+              <p class="eyebrow">Trust building</p>
+              <h2>Network before the ask</h2>
+              <p>Use events, associations, user groups, consultants, and LinkedIn to create warmer paths to decision makers.</p>
+            </div>
+            <div class="split-panel">
+              <article>
+                <h3>Networking Plays</h3>
+                <ul>
+                  <li>Join client-sponsored charity events and industry round tables.</li>
+                  <li>Organize events with Marketing when the ROI is clear.</li>
+                  <li>Ask current and past consultants for managers, procurement, HR, and peer referrals.</li>
+                  <li>Use alumni, friends, and family as inside paths to target accounts.</li>
+                </ul>
+              </article>
+              <article class="objection-card">
+                <h3>Objection Handling</h3>
+                <p>Prepare for pushback before the call. The goal is not to win a debate. It is to acknowledge the concern, add specific value, and earn the next step.</p>
+              </article>
+            </div>
+          </section>
 
-  .wh-text { flex: 1; min-width: 0; }
-  .wh-week { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 2px; }
-  .wh-label { font-size: 15px; font-weight: 600; color: #e8f0f8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .wh-sub { font-size: 12px; color: #6e8ca8; margin-top: 2px; }
+          <section class="playbook-section" id="meetings" data-title="Cold Calls Intro Meetings Job Orders" data-search="cold call voicemail preparation intro meeting rapport open ended questions actively listen job order intake delivery intake call pain points exclusive interview timeslots resume review">
+            <div class="section-heading">
+              <p class="eyebrow">Conversation craft</p>
+              <h2>Move every conversation toward a calendar event</h2>
+              <p>Preparation, specificity, open-ended questions, and clean next steps are the core behaviors.</p>
+            </div>
+            <div class="meeting-flow">
+              <article>
+                <span>Call</span>
+                <h3>Cold Call / Voicemail</h3>
+                <p>Quick intro, why you are calling, specific value, expected objections, and a clear ask for an intro meeting.</p>
+              </article>
+              <article>
+                <span>Discover</span>
+                <h3>Intro Meeting</h3>
+                <p>Build rapport, transition smoothly, ask open-ended questions, learn role, initiatives, team, candidate preferences, process, firms, gaps, and pain.</p>
+              </article>
+              <article>
+                <span>Intake</span>
+                <h3>Job Order</h3>
+                <p>Include delivery when possible. Confirm why the role is open, logistics, duties, technical skills, soft skills, top three requirements, and pain points.</p>
+              </article>
+            </div>
+          </section>
 
-  .chevron {
-    font-size: 11px;
-    color: #4a6780;
-    transition: transform 0.25s;
-    flex-shrink: 0;
-  }
-  .chevron.open { transform: rotate(180deg); }
+          <section class="playbook-section" id="close" data-title="Prep Debrief and Close" data-search="prep debrief close candidate client interview logistics pre close follow up time JobDiva candidate debrief client debrief feedback call">
+            <div class="section-heading">
+              <p class="eyebrow">Advance the deal</p>
+              <h2>Prep, debrief, and close as one loop</h2>
+              <p>Interview management is where sales strategy becomes visible. Capture facts, set follow-up times, and document in JobDiva.</p>
+            </div>
+            <div class="loop-diagram">
+              <article>
+                <h3>Prep Candidate</h3>
+                <p>Confirm alignment, logistics, other opportunities, interest rank, and whether MMI can accept on their behalf.</p>
+              </article>
+              <article>
+                <h3>Prep Client</h3>
+                <p>Confirm process stage, culture, why the candidate should choose the role, interview details, and feedback call time.</p>
+              </article>
+              <article>
+                <h3>Debrief + Close</h3>
+                <p>Debrief candidate first, use that intel for the client close, then document the path forward.</p>
+              </article>
+            </div>
+          </section>
 
-  .week-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-  .week-body.open { max-height: 1000px; }
+          <section class="playbook-section" id="technology" data-title="Technology SOP" data-search="LinkedIn Apollo LinkedIn Recruiter Talent Insights JobDiva AI tools ChatGPT Copilot Claude sales tech SOP hotlists projects sequences market data dashboards">
+            <div class="section-heading">
+              <p class="eyebrow">Technology SOP</p>
+              <h2>Use the stack with intent</h2>
+              <p>Each tool has a job. The operating habit is to connect research, outreach, tracking, and market intelligence.</p>
+            </div>
+            <div class="tool-table" role="table" aria-label="Sales technology playbook">
+              <div role="row">
+                <b role="cell">LinkedIn</b>
+                <span role="cell">Connect with target managers, track moves, find hiring posts, warm up outreach, and post anonymized pro-markets.</span>
+              </div>
+              <div role="row">
+                <b role="cell">Apollo</b>
+                <span role="cell">Build GTM lists, launch sequences, support pro-marketing, and upload organized hotlists into JobDiva through Support.</span>
+              </div>
+              <div role="row">
+                <b role="cell">LinkedIn Recruiter</b>
+                <span role="cell">Create prospect projects, identify open-to-work managers, start candidate conversations, and flip qualified intel into sales calls.</span>
+              </div>
+              <div role="row">
+                <b role="cell">Talent Insights</b>
+                <span role="cell">Find live market data by geography, niche, growth, openings, companies, and skill pools.</span>
+              </div>
+              <div role="row">
+                <b role="cell">JobDiva</b>
+                <span role="cell">System of record for contacts, hotlists, click-to-dial, job orders, candidate data, notes, and metric reporting.</span>
+              </div>
+              <div role="row">
+                <b role="cell">AI Tools</b>
+                <span role="cell">Draft messaging, job descriptions, account research, hiring-manager discovery, and market-data starting points.</span>
+              </div>
+            </div>
+          </section>
 
-  .body-inner { padding: 0 16px 16px; }
-
-  .divider { height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 12px; }
-
-  .day-item {
-    padding: 10px 12px;
-    border-radius: 9px;
-    background: rgba(255,255,255,0.04);
-    margin-bottom: 8px;
-    border-left: 3px solid transparent;
-    transition: background 0.15s;
-  }
-  .day-item:last-child { margin-bottom: 0; }
-  .day-item:hover { background: rgba(255,255,255,0.07); }
-
-  .day-label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    margin-bottom: 5px;
-  }
-
-  .day-text { font-size: 13px; color: #b0c4d8; line-height: 1.6; }
-
-  .w1 .wh-icon { background: #1a4a7a; color: #7ab8f5; }
-  .w1 .wh-week { color: #5ba0e0; }
-  .w1 .day-item { border-left-color: #2d6da8; }
-  .w1 .day-label { color: #5ba0e0; }
-
-  .w2 .wh-icon { background: #0f4a3a; color: #5dd4aa; }
-  .w2 .wh-week { color: #3dbf8e; }
-  .w2 .day-item { border-left-color: #1a7a5a; }
-  .w2 .day-label { color: #3dbf8e; }
-
-  .w3 .wh-icon { background: #2a4a10; color: #a0d455; }
-  .w3 .wh-week { color: #8ac030; }
-  .w3 .day-item { border-left-color: #4a8020; }
-  .w3 .day-label { color: #8ac030; }
-
-  .w4 .wh-icon { background: #4a3200; color: #f5b840; }
-  .w4 .wh-week { color: #e0a020; }
-  .w4 .day-item { border-left-color: #8a6010; }
-  .w4 .day-label { color: #e0a020; }
-
-  .w5 .wh-icon { background: #4a2010; color: #f0845a; }
-  .w5 .wh-week { color: #d86030; }
-  .w5 .day-item { border-left-color: #8a3820; }
-  .w5 .day-label { color: #d86030; }
-
-  .w6 .wh-icon { background: #4a1030; color: #f075a8; }
-  .w6 .wh-week { color: #d04880; }
-  .w6 .day-item { border-left-color: #8a2050; }
-  .w6 .day-label { color: #d04880; }
-</style>
-</head>
-<body>
-
-<h1>Prospecting Process</h1>
-<p class="subtitle">A 6-week outreach framework — click each week to expand</p>
-
-<div class="controls">
-  <button onclick="toggleAll(true)">Expand all</button>
-  <button onclick="toggleAll(false)">Collapse all</button>
-</div>
-
-<div class="grid" id="grid"></div>
-
-<script>
-const weeks = [
-  {
-    cls: "w1", num: "Week 1", label: "Initial Reach Out",
-    sub: "Make your first impression", icon: "1",
-    days: [
-      { label: "Mon — Day 1", text: "Send an initial outreach email introducing who you are, why you're reaching out, and a value-add specific to the prospect's buyer persona." },
-      { label: "Wed — Day 3", text: "Follow-up phone call. If no answer, leave a short and friendly voicemail referencing your earlier email." },
-      { label: "Fri — Day 5", text: "Send a LinkedIn connection request with a personalized note mentioning your email or voicemail to reinforce the relationship." }
-    ]
-  },
-  {
-    cls: "w2", num: "Week 2", label: "Provide Value",
-    sub: "Educate and engage", icon: "2",
-    days: [
-      { label: "Tue — Day 2", text: "Follow up your initial email with additional info or useful resources such as relevant articles or white papers aligned to their interests." },
-      { label: "Wed — Day 3", text: "Social media engagement — like or comment on one of the prospect's recent posts if they're active on LinkedIn." },
-      { label: "Thu — Day 4", text: "Short check-in call. If there's still no response, reference that you'll reach out again next week to stay top of mind." }
-    ]
-  },
-  {
-    cls: "w3", num: "Week 3", label: "Building a Connection",
-    sub: "Personalize & deepen the relationship", icon: "3",
-    days: [
-      { label: "Wed — Day 3", text: "Send a pro-market candidate profile and mention current market trends and how you help other clients navigate them — positioning yourself as a trusted advisor." },
-      { label: "Thu — Day 4", text: "Send a quick text message or LinkedIn message referencing the pro-market candidate profile you shared to reinforce the conversation." }
-    ]
-  },
-  {
-    cls: "w4", num: "Week 4", label: "Personal Engagement",
-    sub: "Warm outreach & live contact", icon: "4",
-    days: [
-      { label: "Mon — Day 1", text: "Send a friendly 'just checking in' email, inviting the prospect to share any questions they may have about your services or the market." },
-      { label: "Fri — Day 5", text: "Make a quick call and leave a simple voicemail that refers back to your previous messages and the pro-market candidate profile you shared." }
-    ]
-  },
-  {
-    cls: "w5", num: "Week 5", label: "Offer Resources",
-    sub: "Demonstrate expertise", icon: "5",
-    days: [
-      { label: "Tue — Day 2", text: "Email reply to the pro-market candidate profile — add your commentary, insights, or a gentle nudge to gauge their interest level." },
-      { label: "Thu — Day 4", text: "Follow-up call to see if they had a chance to review your email from Tuesday. Keep it brief and conversational." }
-    ]
-  },
-  {
-    cls: "w6", num: "Week 6", label: "Final Push / Closing",
-    sub: "Wrap up or leave the door open", icon: "6",
-    days: [
-      { label: "Mon — Day 1", text: "Send a summary email articulating exactly how you can add specific value to their buyer persona and business — make the case clearly." },
-      { label: "Wed — Day 3", text: "Send a short LinkedIn message expressing that you'd love to connect whenever they're available — low pressure, relationship-focused." },
-      { label: "Fri — Day 5", text: "Final call. Leave a friendly backing-off voicemail reiterating your open-door policy for future needs, and politely ask if they know anyone who could benefit from an introduction." }
-    ]
-  }
-];
-
-function buildCard(w, i) {
-  const id = "body-" + i;
-  return `
-  <div class="week-card ${w.cls}">
-    <div class="week-header" onclick="toggle('${id}')">
-      <div class="wh-icon">${w.icon}</div>
-      <div class="wh-text">
-        <div class="wh-week">${w.num}</div>
-        <div class="wh-label">${w.label}</div>
-        <div class="wh-sub">${w.sub}</div>
+          <section class="playbook-section" id="first-deal" data-title="First Deal Resources" data-search="customer success stories case studies first deal talent tracker compensation calculator resources training SharePoint">
+            <div class="section-heading">
+              <p class="eyebrow">After the win</p>
+              <h2>Your first deal starts the next operating rhythm</h2>
+              <p>Use the Talent Tracker, compensation calculator, case studies, SOP, and Training SharePoint resources to keep the deal clean and repeatable.</p>
+            </div>
+            <div class="resource-strip">
+              <article><b>SOP</b><span>Recruiting / Sales Job Flow</span></article>
+              <article><b>Proof</b><span>Customer success stories</span></article>
+              <article><b>Tracker</b><span>Talent Tracker steps</span></article>
+              <article><b>Pay</b><span>Compensation calculator</span></article>
+              <article><b>Library</b><span>Training resources</span></article>
+            </div>
+          </section>
+        </div>
       </div>
-      <span class="chevron" id="chev-${id}">▼</span>
-    </div>
-    <div class="week-body" id="${id}">
-      <div class="body-inner">
-        <div class="divider"></div>
-        ${w.days.map(d => `
-        <div class="day-item">
-          <div class="day-label">${d.label}</div>
-          <div class="day-text">${d.text}</div>
-        </div>`).join("")}
-      </div>
-    </div>
-  </div>`;
-}
+    </main>
 
-document.getElementById("grid").innerHTML = weeks.map((w, i) => buildCard(w, i)).join("");
-
-
-function toggle(id) {
-  const body = document.getElementById(id);
-  const chev = document.getElementById("chev-" + id);
-  const isOpen = body.classList.contains("open");
-
-  // Close all other cards
-  weeks.forEach((_, i) => {
-    const otherId = "body-" + i;
-    if (otherId !== id) {
-      document.getElementById(otherId).classList.remove("open");
-      document.getElementById("chev-" + otherId).classList.remove("open");
-    }
-  });
-
-  // Toggle the clicked card
-  body.classList.toggle("open", !isOpen);
-  chev.classList.toggle("open", !isOpen);
-}
-
-</script>
-</body>
+    <button class="back-top" type="button" id="backTop" aria-label="Back to top">&uarr;</button>
+    <script src="app.js"></script>
+  </body>
 </html>
