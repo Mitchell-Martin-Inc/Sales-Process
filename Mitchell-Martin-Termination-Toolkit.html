@@ -1,0 +1,1133 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mitchell Martin | Termination Best Practices</title>
+    <style>
+:root {
+  --mmi-blue: #00538f;
+  --mmi-deep: #042f54;
+  --mmi-navy: #071b2d;
+  --mmi-green: #39a848;
+  --ink: #142335;
+  --muted: #65758a;
+  --line: #dbe5ee;
+  --soft: #f4f8fb;
+  --white: #ffffff;
+  --alert: #b42318;
+  --amber: #b36b00;
+  --shadow: 0 22px 60px rgba(4, 47, 84, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    linear-gradient(135deg, rgba(0, 83, 143, 0.08), transparent 32rem),
+    linear-gradient(315deg, rgba(57, 168, 72, 0.11), transparent 26rem),
+    #f7fafc;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 18rem minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.rail {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 1.25rem;
+  color: var(--white);
+  background: linear-gradient(180deg, var(--mmi-deep), #061423);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.brand {
+  display: block;
+  padding: 0.9rem;
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.brand img {
+  width: 100%;
+  display: block;
+}
+
+.rail nav {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.rail nav a {
+  text-decoration: none;
+  padding: 0.85rem 0.9rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 700;
+}
+
+.rail nav a:hover,
+.rail nav a:focus-visible {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+
+.mini-card {
+  margin-top: auto;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mini-label,
+.eyebrow {
+  margin: 0 0 0.55rem;
+  color: var(--mmi-green);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.mini-card strong {
+  display: block;
+  color: var(--white);
+  line-height: 1.35;
+}
+
+main {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  min-height: calc(100vh - 2.5rem);
+  padding: clamp(1.4rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.6fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -8rem -13rem auto;
+  width: 28rem;
+  height: 28rem;
+  background: repeating-linear-gradient(90deg, rgba(0, 83, 143, 0.08) 0 1rem, transparent 1rem 2rem);
+  transform: rotate(-26deg);
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  max-width: 12ch;
+  margin: 0;
+  color: var(--mmi-deep);
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  line-height: 0.92;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+h2 {
+  margin: 0;
+  color: var(--mmi-deep);
+  font-size: clamp(1.5rem, 3vw, 2.35rem);
+  line-height: 1.05;
+}
+
+h3 {
+  margin: 0 0 0.75rem;
+  color: var(--mmi-deep);
+  font-size: 1.08rem;
+}
+
+.lede {
+  max-width: 42rem;
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+  font-size: clamp(1.02rem, 1.8vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.button {
+  min-height: 2.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--mmi-deep);
+  background: var(--white);
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button.primary {
+  color: var(--white);
+  border-color: var(--mmi-blue);
+  background: var(--mmi-blue);
+}
+
+.button.ghost {
+  box-shadow: none;
+}
+
+.button svg,
+.icon-button svg,
+.risk-status svg,
+.icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: currentColor;
+  flex: 0 0 auto;
+}
+
+.hero-meter {
+  position: relative;
+  z-index: 1;
+  padding: 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #ffffff, #eef6fb);
+}
+
+.meter-ring {
+  width: min(15rem, 58vw);
+  aspect-ratio: 1;
+  margin: 0 auto 1rem;
+  border: 1.1rem solid rgba(0, 83, 143, 0.14);
+  border-top-color: var(--mmi-green);
+  border-right-color: var(--mmi-blue);
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.meter-ring span {
+  color: var(--mmi-deep);
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 0.8;
+}
+
+.meter-ring small {
+  color: var(--muted);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.hero-meter ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-meter li {
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  color: var(--mmi-deep);
+  background: var(--white);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+section + section {
+  margin-top: 1.25rem;
+}
+
+.section-head {
+  padding: clamp(1.15rem, 2.5vw, 1.75rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head.split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.risk-grid,
+.script-grid,
+.pip-grid,
+.closing-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.risk-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 1.25rem;
+}
+
+.risk-chip {
+  min-height: 6.2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--mmi-deep);
+  background: var(--soft);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.risk-chip::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto 0.6rem;
+  background: var(--mmi-blue);
+  clip-path: polygon(50% 0, 100% 86%, 0 86%);
+}
+
+.risk-chip:hover {
+  transform: translateY(-2px);
+}
+
+.risk-chip.active {
+  color: var(--white);
+  border-color: var(--alert);
+  background: var(--alert);
+}
+
+.risk-chip.active::before {
+  background: var(--white);
+}
+
+.risk-status {
+  margin: 0 1.25rem 1.25rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  border-radius: 8px;
+  color: var(--mmi-deep);
+  background: #eaf5eb;
+  font-weight: 800;
+}
+
+.risk-status.alert {
+  color: #6f1610;
+  background: #fde9e7;
+}
+
+.segmented {
+  display: flex;
+  padding: 0.25rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--soft);
+}
+
+.segmented button {
+  min-width: 6.5rem;
+  border: 0;
+  border-radius: 7px;
+  padding: 0.65rem 0.8rem;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.segmented button.active {
+  color: var(--white);
+  background: var(--mmi-blue);
+}
+
+.path-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.path-card {
+  min-height: 11rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  position: relative;
+}
+
+.path-card::after {
+  content: "";
+  position: absolute;
+  top: 1.35rem;
+  right: -0.9rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: var(--mmi-green);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.path-card:last-child::after {
+  display: none;
+}
+
+.path-card span {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--mmi-blue);
+  font-weight: 900;
+}
+
+.path-card p {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.progress-line {
+  height: 0.55rem;
+  margin: 1.25rem 1.25rem 0;
+  border-radius: 999px;
+  background: #e5edf5;
+  overflow: hidden;
+}
+
+.progress-line span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--mmi-green), var(--mmi-blue));
+  transition: width 0.25s ease;
+}
+
+.step-list {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1.25rem;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.step-number {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--mmi-deep);
+  font-weight: 900;
+}
+
+.step p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.step input {
+  width: 1.35rem;
+  height: 1.35rem;
+  accent-color: var(--mmi-green);
+}
+
+.pip-grid,
+.script-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 1.25rem;
+}
+
+.pip article,
+.script-card {
+  padding: 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-bottom: 1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+}
+
+.icon.ok {
+  color: #145823;
+  background: #e5f5e9;
+}
+
+.icon.stop {
+  color: #7a1a14;
+  background: #fde9e7;
+}
+
+.pip ul,
+.check-list,
+.x-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pip li,
+.check-list li,
+.x-list li {
+  display: grid;
+  grid-template-columns: 1.45rem minmax(0, 1fr);
+  gap: 0.55rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.pip li::before,
+.check-list li::before {
+  content: "";
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.1rem;
+  background: var(--mmi-green);
+  clip-path: polygon(14% 50%, 38% 74%, 86% 20%, 100% 34%, 39% 100%, 0 62%);
+}
+
+.x-list li::before {
+  content: "";
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.1rem;
+  background: var(--alert);
+  clip-path: polygon(15% 0, 50% 35%, 85% 0, 100% 15%, 65% 50%, 100% 85%, 85% 100%, 50% 65%, 15% 100%, 0 85%, 35% 50%, 0 15%);
+}
+
+.script-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.icon-button {
+  width: 2.6rem;
+  height: 2.6rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--mmi-blue);
+  background: var(--soft);
+  cursor: pointer;
+}
+
+.script-card p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.guidance-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0 1.25rem 1.25rem;
+}
+
+.guidance-strip span {
+  padding: 0.75rem;
+  border-radius: 8px;
+  color: var(--mmi-deep);
+  background: #eaf5eb;
+  font-weight: 900;
+  text-align: center;
+}
+
+.closing-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 1.25rem;
+}
+
+.closing-grid .panel {
+  box-shadow: var(--shadow);
+}
+
+.do-card .check-list,
+.dont-card .x-list {
+  padding: 1.25rem;
+}
+
+.toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  color: var(--white);
+  background: var(--mmi-deep);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(0.6rem);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 940px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    position: static;
+    height: auto;
+    padding: 0.8rem;
+  }
+
+  .brand {
+    width: min(21rem, 100%);
+  }
+
+  .rail nav {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .rail nav a {
+    text-align: center;
+    padding: 0.7rem 0.35rem;
+    font-size: 0.9rem;
+  }
+
+  .mini-card {
+    display: none;
+  }
+
+  .hero,
+  .path-board,
+  .risk-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero > div:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 680px) {
+  main {
+    padding: 0.8rem;
+  }
+
+  .rail nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero,
+  .risk-grid,
+  .path-board,
+  .pip-grid,
+  .script-grid,
+  .guidance-strip,
+  .closing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  h1 {
+    max-width: 12ch;
+  }
+
+  .section-head.split {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .segmented {
+    overflow-x: auto;
+  }
+
+  .segmented button {
+    min-width: 7rem;
+  }
+
+  .path-card::after {
+    top: auto;
+    right: 1.25rem;
+    bottom: -0.9rem;
+    transform: rotate(90deg);
+  }
+
+  .step {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .step input {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="rail" aria-label="Toolkit navigation">
+        <a class="brand" href="#top" aria-label="Mitchell Martin termination toolkit home">
+          <img src="data:image/png;base64,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" alt="Mitchell Martin">
+        </a>
+        <nav>
+          <a href="#risk">Risk</a>
+          <a href="#path">Path</a>
+          <a href="#steps">Steps</a>
+          <a href="#scripts">Scripts</a>
+          <a href="#closeout">Closeout</a>
+        </nav>
+        <div class="mini-card">
+          <span class="mini-label">HR first</span>
+          <strong>No decision is communicated until HR reviews it.</strong>
+        </div>
+      </aside>
+
+      <main id="top">
+        <section class="hero panel">
+          <div>
+            <p class="eyebrow">Manager Training Playbook</p>
+            <h1>Termination Best Practices</h1>
+            <p class="lede">A practical, step-by-step toolkit for making thoughtful, consistent, documented, and respectful employment decisions in partnership with HR.</p>
+            <div class="hero-actions" aria-label="Primary toolkit actions">
+              <a class="button primary" href="#risk">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Zm0 5.4 4.6 8.6H7.4L12 8.4Zm-.9 3.1h1.8v3.8h-1.8v-3.8Zm0 4.8h1.8v1.8h-1.8v-1.8Z"/></svg>
+                Start risk check
+              </a>
+              <a class="button" href="#steps">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v2H5V4Zm0 5h14v2H5V9Zm0 5h9v2H5v-2Zm0 5h9v2H5v-2Zm12.5-3.8 1.4 1.4-3.9 3.9-2.1-2.1 1.4-1.4.7.7 2.5-2.5Z"/></svg>
+                Open checklist
+              </a>
+            </div>
+          </div>
+          <div class="hero-meter" aria-label="Eight step termination process">
+            <div class="meter-ring">
+              <span>8</span>
+              <small>steps</small>
+            </div>
+            <ol>
+              <li>Pause</li>
+              <li>Document</li>
+              <li>PIP</li>
+              <li>HR</li>
+              <li>Meeting</li>
+              <li>Next steps</li>
+              <li>Team</li>
+              <li>Debrief</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="risk" class="risk panel">
+          <div class="section-head">
+            <p class="eyebrow">Red Flags</p>
+            <h2>Stop and contact HR before proceeding</h2>
+          </div>
+          <div class="risk-grid">
+            <button class="risk-chip" type="button" data-risk="complaint">Recent complaint</button>
+            <button class="risk-chip" type="button" data-risk="leave">Protected leave</button>
+            <button class="risk-chip" type="button" data-risk="accommodation">Accommodation request</button>
+            <button class="risk-chip" type="button" data-risk="retaliation">Retaliation concern</button>
+            <button class="risk-chip" type="button" data-risk="medical">Medical or disability issue</button>
+            <button class="risk-chip" type="button" data-risk="investigation">Ongoing investigation</button>
+            <button class="risk-chip" type="button" data-risk="documentation">Inconsistent records</button>
+            <button class="risk-chip" type="button" data-risk="urgent">Time-sensitive situation</button>
+          </div>
+          <div class="risk-status" id="riskStatus" role="status">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-2h2v2Zm0-4h-2V7h2v6Z"/></svg>
+            <span>Select any factor that applies. If one is active, HR review comes first.</span>
+          </div>
+        </section>
+
+        <section id="path" class="panel">
+          <div class="section-head split">
+            <div>
+              <p class="eyebrow">Decision Path</p>
+              <h2>Start with the situation type</h2>
+            </div>
+            <div class="segmented" role="tablist" aria-label="Situation type">
+              <button type="button" class="active" data-path="performance" role="tab" aria-selected="true">Performance</button>
+              <button type="button" data-path="conduct" role="tab" aria-selected="false">Conduct</button>
+              <button type="button" data-path="business" role="tab" aria-selected="false">Business</button>
+            </div>
+          </div>
+          <div class="path-board" id="pathBoard"></div>
+        </section>
+
+        <section id="steps" class="panel">
+          <div class="section-head split">
+            <div>
+              <p class="eyebrow">Quick Reference</p>
+              <h2>Work through the eight steps</h2>
+            </div>
+            <button class="button ghost" id="resetProgress" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.3 4H3.5A9 9 0 1 0 12 3V0L7 5l5 5V7Z"/></svg>
+              Reset
+            </button>
+          </div>
+          <div class="progress-line" aria-hidden="true">
+            <span id="progressFill"></span>
+          </div>
+          <div class="step-list" id="stepList"></div>
+        </section>
+
+        <section class="pip panel">
+          <div class="section-head">
+            <p class="eyebrow">PIP Fit</p>
+            <h2>Use the right lane</h2>
+          </div>
+          <div class="pip-grid">
+            <article>
+              <div class="icon ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 16.2-3.5-3.5L4 14.2 9 19 20.5 7.5 19 6 9 16.2Z"/></svg></div>
+              <h3>PIP may fit</h3>
+              <ul>
+                <li>Performance-based issue</li>
+                <li>Expectations can be defined</li>
+                <li>Improvement is realistic</li>
+                <li>Coaching has not been sufficient</li>
+                <li>Manager can support the process</li>
+                <li>Employee has shown ability and desire</li>
+              </ul>
+            </article>
+            <article>
+              <div class="icon stop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l5 5v8l-5 5H8l-5-5V8l5-5Zm3 5v6h2V8h-2Zm0 8v2h2v-2h-2Z"/></svg></div>
+              <h3>PIP may not fit</h3>
+              <ul>
+                <li>Serious misconduct</li>
+                <li>Major policy violation</li>
+                <li>Trust is irreparably damaged</li>
+                <li>Repeated coaching already occurred</li>
+                <li>Role or business needs changed</li>
+                <li>Continued employment creates risk</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="scripts" class="panel">
+          <div class="section-head">
+            <p class="eyebrow">Copy-Ready Language</p>
+            <h2>Keep the message clear and respectful</h2>
+          </div>
+          <div class="script-grid">
+            <article class="script-card">
+              <div class="script-top">
+                <h3>Manager meeting script</h3>
+                <button class="icon-button" data-copy="managerScript" type="button" aria-label="Copy manager script">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4v14h2V3h10V1Zm3 4H8v18h11V5Zm-2 16h-7V7h7v14Z"/></svg>
+                </button>
+              </div>
+              <p id="managerScript">Thank you for meeting with us. Weâ€™ve made the decision to end your employment with Mitchell Martin, effective [date]. This decision is based on [brief factual reason]. This decision is final. I know this is difficult news. HR will walk you through final pay, benefits, return of company property, and any next steps.</p>
+            </article>
+            <article class="script-card">
+              <div class="script-top">
+                <h3>Team message</h3>
+                <button class="icon-button" data-copy="teamScript" type="button" aria-label="Copy team message">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4v14h2V3h10V1Zm3 4H8v18h11V5Zm-2 16h-7V7h7v14Z"/></svg>
+                </button>
+              </div>
+              <p id="teamScript">[Employee Name] is no longer with the company. We appreciate their contributions and wish them well. In the interim, please direct any questions or work-related needs to [Manager/Contact Name]. We will share any additional coverage updates as needed.</p>
+            </article>
+          </div>
+          <div class="guidance-strip">
+            <span>Keep it brief</span>
+            <span>Do not debate</span>
+            <span>Protect confidentiality</span>
+            <span>Send HR next</span>
+          </div>
+        </section>
+
+        <section id="closeout" class="closing-grid">
+          <article class="panel do-card">
+            <div class="section-head">
+              <p class="eyebrow">Manager Doâ€™s</p>
+              <h2>Steady moves</h2>
+            </div>
+            <ul class="check-list">
+              <li>Involve HR early</li>
+              <li>Be factual and respectful</li>
+              <li>Document concerns as they happen</li>
+              <li>Be consistent</li>
+              <li>Keep the meeting brief</li>
+              <li>Protect confidentiality</li>
+              <li>Plan team coverage in advance</li>
+            </ul>
+          </article>
+          <article class="panel dont-card">
+            <div class="section-head">
+              <p class="eyebrow">Manager Donâ€™ts</p>
+              <h2>Avoid the traps</h2>
+            </div>
+            <ul class="x-list">
+              <li>Surprise HR</li>
+              <li>Terminate without documentation</li>
+              <li>Make emotional statements</li>
+              <li>Debate the decision</li>
+              <li>Share details with the team</li>
+              <li>Promise severance without approval</li>
+              <li>Delay final pay review</li>
+              <li>Ignore state-specific requirements</li>
+            </ul>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+    <script>
+const paths = {
+  performance: [
+    "Confirm expectations were communicated.",
+    "Review documentation and examples.",
+    "Decide whether a PIP is appropriate.",
+    "Partner with HR, then plan the meeting and message."
+  ],
+  conduct: [
+    "Confirm facts and policy alignment.",
+    "Secure documentation and timelines.",
+    "Partner with HR, especially for investigations.",
+    "Plan the meeting, logistics, and access changes."
+  ],
+  business: [
+    "Confirm business rationale and selection criteria.",
+    "Partner with HR on pay, benefits, and timing.",
+    "Plan manager, employee, and team communications.",
+    "Set coverage for work, clients, and stakeholders."
+  ]
+};
+
+const steps = [
+  {
+    title: "Pause and pressure-test the decision",
+    detail: "Confirm the issue was discussed, expectations were clear, examples were shared, and the employee had a reasonable opportunity to correct the concern."
+  },
+  {
+    title: "Gather and review documentation",
+    detail: "Collect coaching notes, warnings, reviews, attendance records, complaints, emails, work samples, follow-up notes, and any PIP records."
+  },
+  {
+    title: "Decide whether a PIP fits",
+    detail: "Use a PIP when expectations can be clearly defined and improvement is realistic. Skip it when misconduct, risk, or a major policy issue changes the decision."
+  },
+  {
+    title: "Partner with HR before communicating",
+    detail: "HR confirms the reason, documentation, consistency, risk factors, final pay, PTO, severance, benefits, timing, logistics, and communication plan."
+  },
+  {
+    title: "Plan the termination meeting",
+    detail: "Keep the meeting brief, respectful, and direct. The manager usually delivers the decision while HR covers process and next steps."
+  },
+  {
+    title: "HR covers next steps",
+    detail: "Review final day, paycheck timing, PTO payout, benefits, COBRA, severance, equipment, belongings, system access, and contact person."
+  },
+  {
+    title: "Communicate professionally to the team",
+    detail: "Use a short message that preserves privacy, appreciates contributions, and redirects work needs to the right coverage contact."
+  },
+  {
+    title: "Debrief and close out",
+    detail: "Confirm access, team communication, client coverage, workload ownership, morale concerns, and any process lessons."
+  }
+];
+
+const pathBoard = document.querySelector("#pathBoard");
+const pathButtons = document.querySelectorAll("[data-path]");
+const stepList = document.querySelector("#stepList");
+const progressFill = document.querySelector("#progressFill");
+const resetProgress = document.querySelector("#resetProgress");
+const riskStatus = document.querySelector("#riskStatus");
+const riskChips = document.querySelectorAll(".risk-chip");
+const toast = document.querySelector("#toast");
+const storageKey = "mmi-termination-progress";
+
+function renderPath(type) {
+  pathBoard.innerHTML = paths[type]
+    .map((text, index) => `
+      <article class="path-card">
+        <span>${index + 1}</span>
+        <p>${text}</p>
+      </article>
+    `)
+    .join("");
+}
+
+function getProgress() {
+  try {
+    return JSON.parse(localStorage.getItem(storageKey)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveProgress(progress) {
+  localStorage.setItem(storageKey, JSON.stringify(progress));
+}
+
+function updateProgressBar() {
+  const progress = getProgress();
+  const done = steps.filter((_, index) => progress[index]).length;
+  progressFill.style.width = `${(done / steps.length) * 100}%`;
+}
+
+function renderSteps() {
+  const progress = getProgress();
+  stepList.innerHTML = steps
+    .map((step, index) => `
+      <article class="step">
+        <span class="step-number">${index + 1}</span>
+        <div>
+          <h3>${step.title}</h3>
+          <p>${step.detail}</p>
+        </div>
+        <input type="checkbox" aria-label="Mark step ${index + 1} complete" data-step="${index}" ${progress[index] ? "checked" : ""}>
+      </article>
+    `)
+    .join("");
+  updateProgressBar();
+}
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+  window.setTimeout(() => toast.classList.remove("show"), 1600);
+}
+
+pathButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    pathButtons.forEach((item) => {
+      item.classList.remove("active");
+      item.setAttribute("aria-selected", "false");
+    });
+    button.classList.add("active");
+    button.setAttribute("aria-selected", "true");
+    renderPath(button.dataset.path);
+  });
+});
+
+riskChips.forEach((chip) => {
+  chip.addEventListener("click", () => {
+    chip.classList.toggle("active");
+    const activeCount = document.querySelectorAll(".risk-chip.active").length;
+    riskStatus.classList.toggle("alert", activeCount > 0);
+    riskStatus.querySelector("span").textContent = activeCount > 0
+      ? `${activeCount} HR review factor${activeCount === 1 ? "" : "s"} selected. Pause and partner with HR before any decision is communicated.`
+      : "Select any factor that applies. If one is active, HR review comes first.";
+  });
+});
+
+stepList.addEventListener("change", (event) => {
+  const checkbox = event.target.closest("[data-step]");
+  if (!checkbox) return;
+  const progress = getProgress();
+  progress[checkbox.dataset.step] = checkbox.checked;
+  saveProgress(progress);
+  updateProgressBar();
+});
+
+resetProgress.addEventListener("click", () => {
+  localStorage.removeItem(storageKey);
+  renderSteps();
+});
+
+document.querySelectorAll("[data-copy]").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const target = document.getElementById(button.dataset.copy);
+    try {
+      await navigator.clipboard.writeText(target.textContent.trim());
+      showToast("Copied");
+    } catch {
+      showToast("Copy unavailable");
+    }
+  });
+});
+
+renderPath("performance");
+renderSteps();
+
+</script>
+  </body>
+</html>
+
