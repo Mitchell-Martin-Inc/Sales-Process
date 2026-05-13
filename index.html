@@ -4,25 +4,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mitchell Martin Sales Playbook</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260513-objection-coach-clean">
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="https://www.mitchellmartin.com/" target="_blank" rel="noreferrer" aria-label="Open Mitchell Martin website">
-        <img src="https://www.mitchellmartin.com/wp-content/uploads/2025/08/logo-train-scaled.png" alt="Mitchell Martin">
+        <img src="mmi-playbook-logo.png" alt="Mitchell Martin Playbook">
       </a>
       <nav class="toplinks" aria-label="Page shortcuts">
-        <a href="#playbook-search">Search</a>
+        <a href="#home">Home</a>
+        <a href="#foundation">Foundation</a>
+        <a href="#pitch">Pitching MMI</a>
+        <a href="#lifecycle">Sales Lifecycle</a>
         <a href="#prospecting">Prospecting</a>
-        <a href="#market-intel">Market Intel</a>
-        <a href="#meetings">Meetings</a>
+        <a href="#market-intel">Market Intelligence</a>
+        <a href="#strategy">Buyer Strategy</a>
+        <a href="#networking">Networking</a>
+        <a href="#meetings">Calls & Meetings</a>
+        <a href="#close">Prep, Debrief, Close</a>
         <a href="#technology">Tech SOP</a>
+        <a href="#first-deal">First Deal</a>
       </nav>
     </header>
 
     <main>
       <section class="search-band" id="playbook-search" aria-labelledby="search-title">
-        <img class="playbook-logo" src="mmi-playbook-logo.png" alt="Mitchell Martin Playbook">
         <div class="search-title-block">
           <h2 id="search-title">Search the playbook</h2>
         </div>
@@ -31,54 +37,214 @@
           <input id="searchInput" type="search" placeholder="Try: objection, Apollo, job order, PE-backed, voicemail">
         </label>
         <div class="search-results" id="searchResults" aria-live="polite"></div>
+        <aside class="resource-panel" aria-labelledby="resourceTitle">
+          <div class="resource-heading">
+            <span>Resources</span>
+            <h3 id="resourceTitle">MMI Playbook Resources</h3>
+          </div>
+          <div class="resource-list" id="resourceList"></div>
+        </aside>
+        <div class="page-actions" aria-label="Page navigation">
+          <button type="button" id="backPage">Back</button>
+          <button type="button" id="homePage">Home</button>
+        </div>
       </section>
 
       <div class="layout">
-        <aside class="sidenav" aria-label="Playbook navigation">
-          <a href="#foundation">Foundation</a>
-          <a href="#pitch">Pitching MMI</a>
-          <a href="#lifecycle">Sales Lifecycle</a>
-          <a href="#prospecting">Prospecting</a>
-          <a href="#market-intel">Market Intelligence</a>
-          <a href="#strategy">Buyer Strategy</a>
-          <a href="#networking">Networking</a>
-          <a href="#meetings">Calls & Meetings</a>
-          <a href="#close">Prep, Debrief, Close</a>
-          <a href="#technology">Technology SOP</a>
-          <a href="#first-deal">First Deal</a>
-        </aside>
-
         <div class="content">
-          <section class="playbook-section" id="foundation" data-title="Foundation" data-search="who we are growth compassion technology family companies employee owned core values">
+          <section class="playbook-section home-section" id="home" data-title="Home" data-search="home sales playbook start here navigation overview market intelligence prospecting meetings technology first deal">
             <div class="section-heading">
-              <p class="eyebrow">Foundation</p>
-              <h2>Who Mitchell Martin is</h2>
-              <p>Sell from the company story: growth, relationships, specialized talent, and a people-first operating model strengthened by technology.</p>
+              <p class="eyebrow">Sales playbook</p>
+              <h2>Choose the play you need</h2>
+              <p>Use this as a quick operating hub for prospecting, market intelligence, buyer conversations, meeting prep, and deal execution.</p>
             </div>
-            <div class="story-grid">
-              <article>
-                <span class="node-dot"></span>
-                <h3>Growth Focus</h3>
-                <p>We do more than fill openings. We help companies and people grow by understanding both sides of the match.</p>
-              </article>
-              <article>
-                <span class="node-dot"></span>
-                <h3>Compassion + Technology</h3>
-                <p>Founded by Eugene Holtzman in 1984, MMI blends socially minded roots with a belief that technology drives business forward.</p>
-              </article>
-              <article>
-                <span class="node-dot"></span>
-                <h3>Family of Companies</h3>
-                <p>Mitchell Martin, Mitchell Martin Healthcare, Dale Workforce Solutions, Grant Wagner Talent, and Talent Tech Labs extend the platform.</p>
-              </article>
+            <div class="home-play-grid">
+              <a href="#foundation"><span>01</span><img src="icon_01.png" alt=""><b>Foundation</b><em>Company story and positioning.</em></a>
+              <a href="#pitch"><span>02</span><img src="icon_02.png" alt=""><b>Pitching MMI</b><em>Value prop and proof points.</em></a>
+              <a href="#lifecycle"><span>03</span><img src="icon_03.png" alt=""><b>Sales Lifecycle</b><em>Research to filled role.</em></a>
+              <a href="#prospecting"><span>04</span><img src="icon_04.png" alt=""><b>Prospecting</b><em>Signals, campaigns, cadence.</em></a>
+              <a href="#market-intel"><span>05</span><img src="icon_05.png" alt=""><b>Market Intelligence</b><em>Data and market briefs.</em></a>
+              <a href="#strategy"><span>06</span><img src="icon_06.png" alt=""><b>Buyer Strategy</b><em>Personas and account motion.</em></a>
+              <a href="#networking"><span>07</span><img src="icon_07.png" alt=""><b>Networking</b><em>Warm paths and referrals.</em></a>
+              <a href="#meetings"><span>08</span><img src="icon_08.png" alt=""><b>Calls & Meetings</b><em>Calls, intros, job orders.</em></a>
+              <a href="#close"><span>09</span><img src="icon_09.png" alt=""><b>Prep, Debrief, Close</b><em>Advance the deal cleanly.</em></a>
+              <a href="#technology"><span>10</span><img src="icon_10.png" alt=""><b>Technology SOP</b><em>Use the sales stack well.</em></a>
+              <a href="#first-deal"><span>11</span><img src="icon_11.png" alt=""><b>First Deal</b><em>Keep wins repeatable.</em></a>
             </div>
           </section>
 
-          <section class="playbook-section" id="pitch" data-title="Pitching MMI" data-search="value proposition pitch recruiting engine innovation niche teams 3 to 1 ratio employee owned privately held MSP delivery platform">
+          <section class="playbook-section" id="foundation" data-title="Foundation" data-search="who we are people first tech trust tech touch growth compassion technology employee owned offices United States India Philippines founder Eugene Holtzman 1984 core values ownership purpose relationships transparency clinical staffing IT staffing healthcare staffing specialized talent">
+            <div class="section-heading">
+              <p class="eyebrow">Foundation</p>
+              <h2>Who Mitchell Martin is</h2>
+              <p>Sell from the company story: people-first relationships, specialized talent, employee ownership, and a practical blend of human insight with smart technology.</p>
+            </div>
+
+            <div class="foundation-identity">
+              <article>
+                <span>Founded</span>
+                <b>1984</b>
+                <p>Built by Eugene Holtzman around the belief that the right opportunity can change the trajectory of a person and a business.</p>
+              </article>
+              <article>
+                <span>Ownership</span>
+                <b>Employee-owned</b>
+                <p>Every team member has a stake in long-term outcomes, which supports accountability, urgency, and care in client relationships.</p>
+              </article>
+              <article>
+                <span>Reach</span>
+                <b>U.S., India, Philippines</b>
+                <p>Distributed teams and long-term candidate relationships give MMI broader sourcing reach without losing relationship context.</p>
+              </article>
+              <article>
+                <span>Approach</span>
+                <b>Tech & Trust</b>
+                <p>Smart tools help us move faster, but human judgment is what turns a resume, requirement, or signal into the right match.</p>
+              </article>
+            </div>
+
+            <div class="story-grid">
+              <article>
+                <span class="node-dot"></span>
+                <h3>People first, always</h3>
+                <p>MMI starts with people: candidates looking for meaningful work, clients trying to build stronger teams, and colleagues accountable to one another.</p>
+              </article>
+              <article>
+                <span class="node-dot"></span>
+                <h3>Specialized enough to matter</h3>
+                <p>Across IT, healthcare, healthcare IT, and professional services, the value is focus: recruiters who understand the role, setting, skills, and hiring pressure.</p>
+              </article>
+              <article>
+                <span class="node-dot"></span>
+                <h3>Relationships before transactions</h3>
+                <p>The sales motion should feel consultative. Lead with trust, transparency, useful market context, and a commitment to outcomes beyond one requisition.</p>
+              </article>
+            </div>
+
+            <div class="foundation-operating-model">
+              <div>
+                <p class="eyebrow">Operating model</p>
+                <h3>Where human insight and delivery discipline meet</h3>
+                <p>Mitchell Martin positions staffing as a relationship-led service supported by technology, structured recruiting teams, and practical market intelligence. The rep's job is to connect those pieces to the buyer's pressure: speed, quality, compliance, cost, risk, or continuity.</p>
+              </div>
+              <div class="foundation-pillars">
+                <article>
+                  <b>Understand the environment</b>
+                  <p>Ask about workflow, team structure, urgency, process, compliance, and manager expectations before pitching talent.</p>
+                </article>
+                <article>
+                  <b>Calibrate the market</b>
+                  <p>Bring signals on candidate availability, compensation, location constraints, project timing, and competing demand.</p>
+                </article>
+                <article>
+                  <b>Deliver with accountability</b>
+                  <p>Use ownership, documentation, feedback loops, and clear next steps so clients experience MMI as organized and invested.</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="foundation-values">
+              <article>
+                <span>01</span>
+                <h3>People first, always</h3>
+                <p>Every decision we make starts with people in mind, whether it is a consultant, client, or team member.</p>
+              </article>
+              <article>
+                <span>02</span>
+                <h3>Act like an owner</h3>
+                <p>We take responsibility and care about the long term because this company belongs to all of us.</p>
+              </article>
+              <article>
+                <span>03</span>
+                <h3>Stay hungry, stay human</h3>
+                <p>We are ambitious, competitive, and growth-minded, but never at the cost of integrity, kindness, or empathy.</p>
+              </article>
+              <article>
+                <span>04</span>
+                <h3>Move with purpose</h3>
+                <p>We are always agile, with smart technology supporting our speed and people leading our purpose.</p>
+              </article>
+              <article>
+                <span>05</span>
+                <h3>Stronger together</h3>
+                <p>We believe success is shared. We support one another and give back wherever we can because we are stronger together.</p>
+              </article>
+            </div>
+
+            <div class="foundation-talk-tracks">
+              <article>
+                <h3>Core positioning</h3>
+                <p>Mitchell Martin helps organizations build capable teams by combining specialized recruiting expertise, long-term candidate relationships, market context, and technology-supported delivery.</p>
+              </article>
+              <article>
+                <h3>When a buyer asks why MMI</h3>
+                <p>We are people-first, employee-owned, and structured around the realities of specialized hiring. That means faster alignment, better fit, and a team that owns the result.</p>
+              </article>
+              <article>
+                <h3>When a buyer worries about fit</h3>
+                <p>We look beyond keyword matching. We qualify for role requirements, environment, manager expectations, schedule, compliance needs, and what will make the person successful after day one.</p>
+              </article>
+            </div>
+
+            <div class="foundation-use-cases">
+              <p class="eyebrow">Use the foundation when...</p>
+              <div>
+                <span>You are opening a first meeting and need a simple company story.</span>
+                <span>The buyer has only seen MMI as a resume supplier.</span>
+                <span>You need to connect employee ownership to accountability.</span>
+                <span>You are selling a specialized IT, healthcare, or healthcare IT role.</span>
+                <span>The client cares about quality, compliance, and speed at the same time.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="playbook-section" id="pitch" data-title="Pitching MMI" data-search="value proposition pitch recruiting engine innovation niche teams Ropes.ai Alex.ai AI platforms proof partnerships investment bank regulatory pressure prequalified talent delivery platform 50 interview progression 105 placements 80 full-time">
             <div class="section-heading">
               <p class="eyebrow">Pitching MMI</p>
               <h2>Turn the value prop into a conversation</h2>
-              <p>Use the pitch as a modular system. Lead with the proof point that matches the buyer's pressure.</p>
+              <p>Use this section to explain who we are, why we matter, how we deliver, and where the proof shows up in client outcomes.</p>
+            </div>
+            <div class="value-prop-board">
+              <article class="value-prop-panel">
+                <div>
+                  <p class="eyebrow">Who we are and why we matter</p>
+                  <h3>Technology and talent should reduce risk, not add complexity.</h3>
+                </div>
+                <div class="why-how-what">
+                  <section>
+                    <b>Why</b>
+                    <p>Our mission is to help organizations execute faster and with confidence by reducing uncertainty in both delivery and hiring.</p>
+                  </section>
+                  <section>
+                    <b>How</b>
+                    <p>We combine deep technology and operating expertise with proprietary AI platforms that embed intelligence into delivery and talent decisions.</p>
+                  </section>
+                  <section>
+                    <b>What</b>
+                    <p>Mitchell Martin delivers technology and talent solutions powered by Ropes.ai and Alex.ai, improving workforce quality, insight, execution, and decision-making across teams.</p>
+                  </section>
+                </div>
+              </article>
+              <article class="value-prop-panel delivery-panel">
+                <div>
+                  <p class="eyebrow">Who we are and how we deliver</p>
+                  <h3>We bridge talent shortages with speed, quality, and confidence.</h3>
+                </div>
+                <div class="why-how-what">
+                  <section>
+                    <b>Why</b>
+                    <p>Clients should not have to choose between moving quickly and knowing the talent is aligned to the work.</p>
+                  </section>
+                  <section>
+                    <b>How</b>
+                    <p>Rigor, industry expertise, technology expertise, and AI-supported validation help reduce risk and improve outcomes from day one.</p>
+                  </section>
+                  <section>
+                    <b>What</b>
+                    <p>Ropes.ai rigorously tests and pre-vets candidates. Alex.ai enhances insight, execution, and decision-making so hiring becomes a strategic advantage.</p>
+                  </section>
+                </div>
+              </article>
             </div>
             <div class="pitch-stack">
               <article class="pitch-card">
@@ -102,13 +268,42 @@
                 <p>Modern tools support sourcing, recruiting, research, communication, redeployment, and market intelligence through the Talent Tech Labs mindset.</p>
               </article>
             </div>
+            <div class="partnership-proof">
+              <div class="proof-copy">
+                <p class="eyebrow">Proof of partnerships</p>
+                <h3>Strategic partner, not transactional staffing provider.</h3>
+                <p>In partnership with a major investment bank, Mitchell Martin helped validate and de-risk a long-term staffing strategy under intense regulatory pressure and cost constraints.</p>
+                <p>By delivering higher-quality, pre-qualified talent faster than internal teams, MMI helped the client shift regulatory work to lower-cost locations without sacrificing quality.</p>
+                <p>The result was not just successful hiring, but a permanent operating-model change that drove ongoing time and cost savings while maintaining regulatory rigor.</p>
+              </div>
+              <div class="proof-metrics" aria-label="Partnership proof points">
+                <article><b>50%+</b><span>Interview progression rate vs. 10% internal success rate</span></article>
+                <article><b>105</b><span>Total placements delivered through the program</span></article>
+                <article><b>80</b><span>Placements converted to full-time employees</span></article>
+                <article><b>&lt;1 week</b><span>Resume delivery timeline for qualified talent</span></article>
+              </div>
+            </div>
+            <div class="talk-track-strip">
+              <article>
+                <h3>When the buyer cares about risk</h3>
+                <p>"We reduce uncertainty by validating talent before it reaches your team, then using AI-supported insight to keep hiring and execution decisions sharper."</p>
+              </article>
+              <article>
+                <h3>When the buyer cares about speed</h3>
+                <p>"The value is not just more resumes. It is proven, ready-to-perform talent delivered quickly enough to protect project timelines and operating plans."</p>
+              </article>
+              <article>
+                <h3>When the buyer cares about cost</h3>
+                <p>"We help leaders move work into the right operating model without trading away quality, compliance, or manager confidence."</p>
+              </article>
+            </div>
           </section>
 
-          <section class="playbook-section" id="lifecycle" data-title="Sales Lifecycle" data-search="sales lifecycle research activities buyer persona account strategy networking objection cold call voicemail intro meeting job order prep debrief close technology">
+          <section class="playbook-section" id="lifecycle" data-title="Sales Lifecycle" data-search="sales lifecycle sales pipeline awareness engagement job reqs job requisitions delivery trust partnerships how MMI achieves sales events warm calls references virtual meetings cold calls hot calls in-person meetings research activities buyer persona account strategy networking objection cold call voicemail intro meeting job order prep debrief close technology">
             <div class="section-heading">
               <p class="eyebrow">Operating system</p>
               <h2>The sales lifecycle</h2>
-              <p>A simple path for moving from market signal to filled role.</p>
+              <p>A simple path for moving from market signal to filled role. The pipeline only works when there is enough activity at the top to create qualified opportunities at the bottom.</p>
             </div>
             <div class="lifecycle-map">
               <article><b>Research</b><span>Find signals, names, referrals, and timing.</span></article>
@@ -116,6 +311,87 @@
               <article><b>Diagnose</b><span>Map buyer type, pain, team, process, and urgency.</span></article>
               <article><b>Capture</b><span>Take a job order with delivery aligned early.</span></article>
               <article><b>Advance</b><span>Prep, debrief, close, document, and redeploy.</span></article>
+            </div>
+
+            <div class="pipeline-board">
+              <div class="pipeline-heading">
+                <p class="eyebrow">Sales pipeline</p>
+                <h3>Lots of activity at the top creates partnerships at the bottom</h3>
+                <p>Keep the top of the funnel full, qualify steadily, and move only real opportunities into delivery. Trust is not a stage you skip to; it is earned by how cleanly every prior stage is handled.</p>
+              </div>
+              <div class="pipeline-funnel" aria-label="MMI sales pipeline funnel">
+                <div class="pipeline-stage awareness">
+                  <span>1</span>
+                  <b>Awareness</b>
+                  <em>High-volume targeted activity: prospects, account signals, introductions, pro-markets, calls, emails, LinkedIn, and market intelligence.</em>
+                </div>
+                <div class="pipeline-stage engagement">
+                  <span>2</span>
+                  <b>Engagement</b>
+                  <em>Convert attention into conversations. Earn replies, meetings, referrals, and permission to diagnose a real business pressure.</em>
+                </div>
+                <div class="pipeline-stage job-reqs">
+                  <span>3</span>
+                  <b>Job Reqs</b>
+                  <em>Capture qualified requirements with manager, location, work model, rate, urgency, process, pain, and success criteria.</em>
+                </div>
+                <div class="pipeline-stage delivery">
+                  <span>4</span>
+                  <b>Delivery</b>
+                  <em>Align recruiting early, submit calibrated talent, manage interviews, debrief quickly, and keep JobDiva clean.</em>
+                </div>
+                <div class="pipeline-stage trust">
+                  <span>5</span>
+                  <b>Trust</b>
+                  <em>Close the loop, protect the start, communicate clearly, and turn one filled role into an ongoing partnership.</em>
+                </div>
+              </div>
+              <div class="pipeline-partnership">Partnerships</div>
+            </div>
+
+            <div class="sales-motion-board">
+              <div class="sales-motion-heading">
+                <p class="eyebrow">How MMI achieves sales</p>
+                <h3>Use multiple activity channels to create meaningful conversations</h3>
+                <p>The strongest reps do not rely on one motion. They combine networking, warm paths, references, meetings, and targeted calls so prospects experience MMI as visible, relevant, and useful before a requisition is live.</p>
+              </div>
+              <div class="sales-motion-grid">
+                <article class="motion-card events">
+                  <span>Events</span>
+                  <h4>Networking opportunities for meaningful conversations.</h4>
+                  <p>Use events to start relationships, gather market context, and create a natural reason to follow up.</p>
+                </article>
+                <article class="motion-card warm">
+                  <span>Warm Calls</span>
+                  <h4>Building on previous interactions to strengthen relationships.</h4>
+                  <p>Reference the prior touch, candidate conversation, meeting, referral, or account signal so the call feels earned.</p>
+                </article>
+                <article class="motion-card references">
+                  <span>References</span>
+                  <h4>Providing credibility and trust.</h4>
+                  <p>Use consultant, candidate, client, and peer references to create warmer paths into managers and decision makers.</p>
+                </article>
+                <article class="motion-card virtual">
+                  <span>Virtual Meetings</span>
+                  <h4>Facilitating connections across distances.</h4>
+                  <p>Use virtual meetings to move quickly, include delivery, clarify requirements, and keep momentum without waiting for travel.</p>
+                </article>
+                <article class="motion-card cold">
+                  <span>Cold Calls</span>
+                  <h4>Initiating contact with potential clients.</h4>
+                  <p>Lead with a specific reason, market signal, role angle, or pro-market candidate instead of a generic introduction.</p>
+                </article>
+                <article class="motion-card hot">
+                  <span>Hot Calls</span>
+                  <h4>Urgency leading to immediate results.</h4>
+                  <p>Use hot calls when timing matters: active openings, leadership changes, project deadlines, escalations, and urgent starts.</p>
+                </article>
+                <article class="motion-card in-person">
+                  <span>In-Person Meetings</span>
+                  <h4>Offering a personal touch.</h4>
+                  <p>Use in-person time for trust building, deeper discovery, account mapping, and expanding from one relationship to many.</p>
+                </article>
+              </div>
             </div>
           </section>
 
@@ -247,12 +523,15 @@
               </div>
 
               <div class="resource-callout">
-                <h3>Helpful resources</h3>
-                <p>Use pre-built Copilot agents to create client-ready market intelligence for Financial Services, Healthcare, and IT. Bring the insight into outreach so the message sounds consultative, not generic.</p>
-                <div>
-                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_3bd64108-82bc-9db6-9361-f1b187caa82d&source=embedded-builder" target="_blank" rel="noreferrer">Financial Services</a>
-                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_ac19b564-5a9b-6e66-be39-87ad84d02d48&source=embedded-builder" target="_blank" rel="noreferrer">Healthcare</a>
-                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_2a2f1beb-4ac6-addd-3de4-cb01b8009b20&source=embedded-builder" target="_blank" rel="noreferrer">IT</a>
+                <img class="copilot-logo" src="microsoft-copilot-logo.svg" alt="Microsoft Copilot">
+                <div class="resource-copy">
+                  <h3>Helpful resources</h3>
+                  <p>Use pre-built Copilot agents to create client-ready market intelligence for Financial Services, Healthcare, and IT. Bring the insight into outreach so the message sounds consultative, not generic.</p>
+                  <div>
+                    <a href="https://m365.cloud.microsoft/chat/?titleId=T_3bd64108-82bc-9db6-9361-f1b187caa82d&source=embedded-builder" target="_blank" rel="noreferrer">Financial Services</a>
+                    <a href="https://m365.cloud.microsoft/chat/?titleId=T_ac19b564-5a9b-6e66-be39-87ad84d02d48&source=embedded-builder" target="_blank" rel="noreferrer">Healthcare</a>
+                    <a href="https://m365.cloud.microsoft/chat/?titleId=T_2a2f1beb-4ac6-addd-3de4-cb01b8009b20&source=embedded-builder" target="_blank" rel="noreferrer">IT</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -329,7 +608,14 @@
                     <h3>Current Data Pull</h3>
                     <div class="intel-status" id="intelDataStatus">Ready to pull BLS data.</div>
                     <div class="metric-strip" id="intelMetrics"></div>
-                    <ul id="intelSources"></ul>
+                    <div>
+                      <h4 class="intel-subhead">Common Roles in Market</h4>
+                      <div class="role-market-list" id="intelRoles"></div>
+                    </div>
+                    <div>
+                      <h4 class="intel-subhead">Skill Signals to Search</h4>
+                      <div class="skill-chip-list" id="intelSkills"></div>
+                    </div>
                   </article>
                   <article>
                     <h3>Client Questions</h3>
@@ -362,7 +648,7 @@
             </div>
           </section>
 
-          <section class="playbook-section" id="strategy" data-title="Buyer Personas and Account Strategy" data-search="buyer persona account strategy CIO VP engineering director IT talent acquisition MSP PE backed private equity mid market value prop cadence">
+          <section class="playbook-section" id="strategy" data-title="Buyer Personas and Account Strategy" data-search="buyer persona account strategy DMU DMI decision maker user influencer CIO VP engineering director IT talent acquisition MSP VMS enterprise mid market PE backed private equity value prop cadence speed cost quality risk scalability pricing diversity compliance partner standards">
             <div class="section-heading">
               <p class="eyebrow">Buyer strategy</p>
               <h2>Match the sales motion to the account</h2>
@@ -382,9 +668,99 @@
                 <p>Relationship-building and education matter. These buyers may need help formalizing hiring process and interview discipline.</p>
               </article>
             </div>
+
+            <div class="market-segment-board">
+              <div class="market-segment-heading">
+                <p class="eyebrow">Enterprise vs. mid-market</p>
+                <h3>Different terrain, same discipline</h3>
+                <p>Enterprise and mid-market accounts buy differently. MMI sells both because each creates a different kind of opportunity: enterprise brings scale, structure, and recurring demand; mid-market brings access, speed, relationship depth, and room to shape the hiring motion.</p>
+              </div>
+              <div class="segment-compare">
+                <article>
+                  <span>Enterprise</span>
+                  <h4>Structured, layered, and volume-oriented</h4>
+                  <ul>
+                    <li>Often runs through MSP, VMS, procurement, legal, finance, and formal vendor rules.</li>
+                    <li>Decision cycles can be longer, but demand can repeat across teams, geographies, and programs.</li>
+                    <li>Performance is measured through compliance, speed, submittal quality, rate discipline, and program scorecards.</li>
+                    <li>The sales job is to understand the system, work the whitespace, and become reliable inside the process.</li>
+                  </ul>
+                </article>
+                <article>
+                  <span>Mid-Market</span>
+                  <h4>Relationship-led, flexible, and education-heavy</h4>
+                  <ul>
+                    <li>Access to hiring managers and executives is often more direct.</li>
+                    <li>Process may be less mature, which creates room to advise on requirements, speed, rates, and interview discipline.</li>
+                    <li>Deals may start smaller, but a strong first delivery can quickly expand the account.</li>
+                    <li>The sales job is to teach, diagnose, and build trust with the people closest to the work.</li>
+                  </ul>
+                </article>
+              </div>
+              <div class="why-both">
+                <article>
+                  <h4>Why MMI does enterprise</h4>
+                  <p>Enterprise accounts reward delivery consistency, specialized reach, compliance discipline, and the ability to support recurring demand at scale. They create durable account bases and give MMI room to prove value across multiple buying teams.</p>
+                </article>
+                <article>
+                  <h4>Why MMI does mid-market</h4>
+                  <p>Mid-market accounts reward consultative selling, speed, education, and strong relationships. They let MMI influence the hiring process earlier, become a trusted advisor faster, and grow from one urgent need into broader partnership.</p>
+                </article>
+                <article>
+                  <h4>Why the mix matters</h4>
+                  <p>A balanced book protects the business. Enterprise gives scale and repeatability; mid-market gives agility and margin opportunity. Together they create a healthier pipeline and more ways to win.</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="dmu-board">
+              <div class="dmu-heading">
+                <p class="eyebrow">Who buys your product?</p>
+                <h3>Map the DMU/I before you pitch</h3>
+                <p>Most staffing decisions involve more than one person. Separate the decision maker, day-to-day user, and influencer so your message matches what each person is responsible for.</p>
+              </div>
+              <div class="dmu-grid" aria-label="Decision maker user influencer buyer map">
+                <div class="dmu-row dmu-head">
+                  <div>Characteristic</div>
+                  <div>Decision Maker <span>(DM)</span></div>
+                  <div>User <span>(U)</span></div>
+                  <div>Influencer <span>(I)</span></div>
+                </div>
+                <div class="dmu-row who">
+                  <div>Who this is</div>
+                  <div>Final authority on using staffing firm</div>
+                  <div>Interacts most with firm and candidates</div>
+                  <div>Shapes decision but does not sign</div>
+                </div>
+                <div class="dmu-row titles">
+                  <div>Common titles</div>
+                  <div>VP of HR, Head of Talent</div>
+                  <div>Hiring Managers, Recruiters</div>
+                  <div>Finance, Procurement, Legal</div>
+                </div>
+                <div class="dmu-row cares">
+                  <div>What they care about</div>
+                  <div>Speed, cost, quality, risk, scalability</div>
+                  <div>Candidate quality, ease of use, speed</div>
+                  <div>Pricing, risk, diversity, compliance</div>
+                </div>
+                <div class="dmu-row questions">
+                  <div>Key questions they answer</div>
+                  <div>"Do we approve this partner?"</div>
+                  <div>"Does this firm make my job easier?"</div>
+                  <div>"Does this partner meet our standards?"</div>
+                </div>
+                <div class="dmu-row implication">
+                  <div>Sales implication</div>
+                  <div>Lead with outcomes and economics</div>
+                  <div>User satisfaction drives future business</div>
+                  <div>Address risks proactively to avoid delays</div>
+                </div>
+              </div>
+            </div>
           </section>
 
-          <section class="playbook-section" id="networking" data-title="Networking and Objections" data-search="networking charity events marketing team associations round tables webinars user groups LinkedIn alumni referrals current consultants past consultants conferences objection handling rebuttals">
+          <section class="playbook-section" id="networking" data-title="Networking and Objections" data-search="networking charity events marketing team associations round tables webinars user groups LinkedIn alumni referrals current consultants past consultants conferences objection handling rebuttals approved vendor vendor list MSP VMS HR hiring fees price high rate why MMI bad vendor experience happy current vendors diverse suppliers busy send email no needs budget not approved resume feedback more resumes start date timeslots">
             <div class="section-heading">
               <p class="eyebrow">Trust building</p>
               <h2>Network before the ask</h2>
@@ -405,38 +781,240 @@
                 <p>Prepare for pushback before the call. The goal is not to win a debate. It is to acknowledge the concern, add specific value, and earn the next step.</p>
               </article>
             </div>
+
+            <div class="objection-playbook">
+              <div class="objection-heading">
+                <p class="eyebrow">Objection resolution model</p>
+                <h3>Ask, acknowledge, reframe, advance</h3>
+                <p>Most objections are not final answers. Treat them as information about the buyer's process, risk, timing, or trust level. Slow down, ask a question, and move toward a useful next step.</p>
+              </div>
+              <div class="objection-model">
+                <article><b>Ask</b><span>Clarify what is really behind the objection before responding.</span></article>
+                <article><b>Acknowledge</b><span>Show you heard the concern without sounding defensive.</span></article>
+                <article><b>Reframe</b><span>Connect MMI to a gap, niche, benchmark, speed issue, or risk the buyer already has.</span></article>
+                <article><b>Advance</b><span>Earn the next step: a name, a meeting, a role, a follow-up date, or a test search.</span></article>
+              </div>
+              <div class="objection-coach" aria-labelledby="objectionCoachTitle">
+                <div class="objection-coach-copy">
+                  <p class="eyebrow">Objection coach</p>
+                  <h3 id="objectionCoachTitle">Turn pushback into a next step</h3>
+                  <p>Type the buyer's objection, then generate a response using the Ask, Acknowledge, Reframe, Advance model.</p>
+                </div>
+                <form class="objection-form" id="objectionForm">
+                  <label>
+                    <span>Buyer objection</span>
+                    <textarea id="objectionInput" rows="4" placeholder="Example: We already have vendors, just send me information, your price is too high..."></textarea>
+                  </label>
+                  <button type="submit">Generate Response</button>
+                </form>
+                <div class="objection-response" id="objectionResponse" aria-live="polite">
+                  <p>Enter an objection to build a response.</p>
+                </div>
+                <div class="objection-coach-guide">
+                  <span>Response space</span>
+                  <p>Your generated coaching plan appears here. Use it to guide the live call, then tighten the wording into your own voice.</p>
+                </div>
+              </div>
+              <div class="objection-grid">
+                <article>
+                  <h4>Approved vendor / vendor list</h4>
+                  <p>Ask how vendors get added, when reviews or QBRs happen, and whether niche partners are used for hard-to-fill roles.</p>
+                  <b>Try:</b>
+                  <span>"Are you asking about vendor status because you have a current opening that has been challenging to fill?"</span>
+                </article>
+                <article>
+                  <h4>MSP / VMS program</h4>
+                  <p>Respect the program, then learn the tool, program owner, review cycle, and whether managers can use niche support.</p>
+                  <b>Try:</b>
+                  <span>"We understand the VMS model. Which program are you using, and where do you see the biggest delivery gaps?"</span>
+                </article>
+                <article>
+                  <h4>HR owns all hiring</h4>
+                  <p>Work with HR, but confirm the manager's role in defining must-haves, pain, process, and contractor needs.</p>
+                  <b>Try:</b>
+                  <span>"So I do not waste HR's time, what must-haves should I reference when I reach out?"</span>
+                </article>
+                <article>
+                  <h4>Fees, rates, or price is too high</h4>
+                  <p>Shift from price to vacancy cost, market reality, contingent value, speed, quality, and what the buyer gets for the fee.</p>
+                  <b>Try:</b>
+                  <span>"How long has this role been open, and who is carrying the extra workload while it remains unfilled?"</span>
+                </article>
+                <article>
+                  <h4>Why MMI?</h4>
+                  <p>Lead with niche recruiting teams, passive candidate reach, research capability, delivery scale, references, and proven market access.</p>
+                  <b>Try:</b>
+                  <span>"It is not just who we find. It is how we qualify, manage, and deliver candidates against your environment."</span>
+                </article>
+                <article>
+                  <h4>Bad vendor experience</h4>
+                  <p>Do not defend the industry. Ask what happened, identify the service failure, then explain the MMI behavior that prevents it.</p>
+                  <b>Try:</b>
+                  <span>"What specifically made the experience bad? I want to make sure I respond to the real issue."</span>
+                </article>
+                <article>
+                  <h4>Happy with current vendors</h4>
+                  <p>Affirm it, then look for gaps: niche roles, time-to-fill, candidate quality, coverage, urgency, or comparison value.</p>
+                  <b>Try:</b>
+                  <span>"Where do your current vendors struggle when a role is niche, urgent, or hard to calibrate?"</span>
+                </article>
+                <article>
+                  <h4>Diverse suppliers only</h4>
+                  <p>Respect the requirement and position Dale Workforce Solutions or approved diversity partnerships as a path to help.</p>
+                  <b>Try:</b>
+                  <span>"We often partner through Dale Workforce Solutions. Would it help if I made an introduction?"</span>
+                </article>
+                <article>
+                  <h4>Too busy / send me information</h4>
+                  <p>Ask what would be useful, avoid generic collateral, and trade the email for a scheduled follow-up.</p>
+                  <b>Try:</b>
+                  <span>"Happy to send something. What information would actually be useful, and can we set 10 minutes to tailor it?"</span>
+                </article>
+                <article>
+                  <h4>No needs / budget not approved</h4>
+                  <p>Use timing questions to learn planning cycles, upcoming initiatives, likely skill needs, and when to reconnect.</p>
+                  <b>Try:</b>
+                  <span>"When budget is approved, what types of talent do you usually need first?"</span>
+                </article>
+                <article>
+                  <h4>Resume, feedback, or more candidates</h4>
+                  <p>Keep the process moving by anchoring review times, feedback owners, comparison criteria, and what "better" means.</p>
+                  <b>Try:</b>
+                  <span>"What would you need to see in the next candidate that this one does not show?"</span>
+                </article>
+                <article>
+                  <h4>Start date, rate, or interview logistics</h4>
+                  <p>Clarify urgency, consequences, decision makers, calendar blocks, and whether the market can support the timing or rate.</p>
+                  <b>Try:</b>
+                  <span>"What is driving the date or rate, and where do we have flexibility if the right person is available?"</span>
+                </article>
+              </div>
+            </div>
           </section>
 
-          <section class="playbook-section" id="meetings" data-title="Cold Calls Intro Meetings Job Orders" data-search="cold call voicemail preparation intro meeting rapport open ended questions actively listen job order intake delivery intake call pain points exclusive interview timeslots resume review">
+          <section class="playbook-section" id="meetings" data-title="Cold Calls Intro Meetings Job Orders" data-search="cold call voicemail script who you are where you are calling from specialize IT healthcare finance recruitment reason calling open question preparation intro meeting rapport open ended questions actively listen job order intake delivery qualified job order worksheet job entry process delivery Q&A pain points exclusive interview timeslots resume review bill rate salary immigration start date duration top requirements position remarks jobqueue contract perm">
             <div class="section-heading">
               <p class="eyebrow">Conversation craft</p>
               <h2>Move every conversation toward a calendar event</h2>
               <p>Preparation, specificity, open-ended questions, and clean next steps are the core behaviors.</p>
             </div>
             <div class="meeting-flow">
-              <article>
+              <button class="meeting-tile active" type="button" data-meeting-target="call-panel" aria-controls="call-panel" aria-expanded="true">
                 <span>Call</span>
                 <h3>Cold Call / Voicemail</h3>
                 <p>Quick intro, why you are calling, specific value, expected objections, and a clear ask for an intro meeting.</p>
-              </article>
-              <article>
+              </button>
+              <button class="meeting-tile" type="button" data-meeting-target="discover-panel" aria-controls="discover-panel" aria-expanded="false">
                 <span>Discover</span>
                 <h3>Intro Meeting</h3>
                 <p>Build rapport, transition smoothly, ask open-ended questions, learn role, initiatives, team, candidate preferences, process, firms, gaps, and pain.</p>
-              </article>
-              <article>
+              </button>
+              <button class="meeting-tile" type="button" data-meeting-target="intake-panel" aria-controls="intake-panel" aria-expanded="false">
                 <span>Intake</span>
                 <h3>Job Order</h3>
                 <p>Include delivery when possible. Confirm why the role is open, logistics, duties, technical skills, soft skills, top three requirements, and pain points.</p>
-              </article>
+              </button>
+            </div>
+
+            <div class="meeting-detail-panel active" id="call-panel">
+              <div class="call-script-board">
+                <div class="call-script-bubble">
+                  <p>Hi, this is <strong>NAME</strong>, calling from Mitchell Martin. We are a staffing company specializing in <strong>IT / Healthcare / Finance</strong> recruitment.</p>
+                  <p>The reason for my call is that I work with organizations like yours to help identify and secure top talent in the market.</p>
+                  <p>I wanted to introduce myself to learn more about you and your current hiring needs.</p>
+                  <p>What does your current hiring landscape look like?</p>
+                </div>
+                <div class="call-framework">
+                  <article><span>01</span><b>Who you are</b></article>
+                  <article><span>02</span><b>Where you're calling from</b></article>
+                  <article><span>03</span><b>What you specialize in</b></article>
+                  <article><span>04</span><b>The reason you're calling</b></article>
+                  <article><span>05</span><b>Open question</b></article>
+                </div>
+              </div>
+            </div>
+
+            <div class="meeting-detail-panel" id="discover-panel" hidden>
+              <div class="discover-board">
+                <article>
+                  <span>01</span>
+                  <h3>Open with context</h3>
+                  <p>Reference the trigger that earned the meeting: a role, initiative, referral, market signal, current consultant, or candidate conversation.</p>
+                </article>
+                <article>
+                  <span>02</span>
+                  <h3>Diagnose the buying situation</h3>
+                  <p>Learn who owns the work, who approves the spend, who uses the talent, where the process breaks, and what happens if the role stays open.</p>
+                </article>
+                <article>
+                  <span>03</span>
+                  <h3>Confirm next action</h3>
+                  <p>Leave with a calendar event: job-order intake, delivery calibration, market follow-up, manager introduction, or a specific send-date for talent.</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="meeting-detail-panel" id="intake-panel" hidden>
+              <div class="intake-workbench">
+                <div class="intake-heading">
+                  <p class="eyebrow">Qualified job order intake</p>
+                  <h3>Capture the details delivery needs before the search starts</h3>
+                  <p>A strong job order is specific enough for recruiting to act, clear enough for JobDiva entry, and honest about urgency, process, rate, and manager expectations.</p>
+                </div>
+                <div class="intake-grid">
+                  <article>
+                    <h4>Role context</h4>
+                    <ul>
+                      <li>Why is the position open, and how is the work currently being done?</li>
+                      <li>What are the project description and day-to-day job duties?</li>
+                      <li>What is the start date, duration, work hours, shift, and work model?</li>
+                      <li>Is the role contract, permanent, or contract-to-perm?</li>
+                    </ul>
+                  </article>
+                  <article>
+                    <h4>Candidate profile</h4>
+                    <ul>
+                      <li>Required skills, years of experience, education, certifications, and immigration constraints.</li>
+                      <li>Environment, soft skills, culture fit, and the top three must-have requirements.</li>
+                      <li>Bill rate, salary if C2H or full-time, and any flexibility around rate or compensation.</li>
+                    </ul>
+                  </article>
+                  <article>
+                    <h4>Process and close plan</h4>
+                    <ul>
+                      <li>Hiring manager or HR contact, optional reference number, number of openings, and assigned recruiter if known.</li>
+                      <li>Interview process, interview time blocks, follow-up day and time, and whether to ask for exclusivity.</li>
+                      <li>Company and contact must exist in JobDiva before entry.</li>
+                    </ul>
+                  </article>
+                  <article>
+                    <h4>Delivery alignment</h4>
+                    <ul>
+                      <li>Qualify the job with delivery early when possible.</li>
+                      <li>Clarify what makes this order assignable to a recruiter.</li>
+                      <li>Agree how long delivery has to produce candidates and what happens if the search stalls.</li>
+                    </ul>
+                  </article>
+                </div>
+                <div class="job-entry-strip">
+                  <article>
+                    <b>Job entry routing</b>
+                    <p>For new recs, fill out the job entry details and route contract roles to <strong>jobqueue.contract@itmmi.com</strong> and full-time roles to <strong>jobqueue.perm@itmmi.com</strong>. Add the job description at the bottom of the email or as an attachment.</p>
+                  </article>
+                  <article>
+                    <b>Position remarks</b>
+                    <p>Use notes to capture context that should be inserted in the Position Remarks section in JobDiva, including process nuance, manager preferences, risks, and delivery guidance.</p>
+                  </article>
+                </div>
+              </div>
             </div>
           </section>
 
-          <section class="playbook-section" id="close" data-title="Prep Debrief and Close" data-search="prep debrief close candidate client interview logistics pre close follow up time JobDiva candidate debrief client debrief feedback call">
+          <section class="playbook-section" id="close" data-title="Prep Debrief and Close" data-search="prep debrief close candidate client interview logistics pre close follow up time JobDiva candidate debrief client debrief feedback call onboarding assignment record bill side pay side start date manager work location remote onsite direct placement invoice placement subcontract independent contractor third party IC TaxID CDM support extension rate change COB">
             <div class="section-heading">
               <p class="eyebrow">Advance the deal</p>
               <h2>Prep, debrief, and close as one loop</h2>
-              <p>Interview management is where sales strategy becomes visible. Capture facts, set follow-up times, and document in JobDiva.</p>
+              <p>Interview management is where sales strategy becomes visible. Capture facts, set follow-up times, document in JobDiva, and make the post-close handoff clean enough that onboarding can move without rework.</p>
             </div>
             <div class="loop-diagram">
               <article>
@@ -452,39 +1030,210 @@
                 <p>Debrief candidate first, use that intel for the client close, then document the path forward.</p>
               </article>
             </div>
+
+            <div class="deal-handoff-board">
+              <div class="deal-handoff-intro">
+                <p class="eyebrow">JobDiva deal handoff</p>
+                <h3>Close the win, then protect the start</h3>
+                <p>Once the deal is moving toward onboarding, sales and recruiting each own specific JobDiva checks. The goal is simple: the assignment record should match the real-world deal before onboarding, payroll, billing, or a client manager has to depend on it.</p>
+              </div>
+              <div class="deal-check-grid">
+                <article>
+                  <span>Sales check</span>
+                  <h4>Confirm the job record</h4>
+                  <ul>
+                    <li>Job title mirrors the consultant contract.</li>
+                    <li>Location reflects the correct work location.</li>
+                    <li>Contact is the correct manager.</li>
+                    <li>Remote, onsite, or hybrid status is accurate.</li>
+                  </ul>
+                </article>
+                <article>
+                  <span>Recruiting check</span>
+                  <h4>Confirm candidate details</h4>
+                  <ul>
+                    <li>Candidate information is corrected before onboarding starts.</li>
+                    <li>Start date is set in JobDiva.</li>
+                    <li>Users on the start are emailed after the start date is entered.</li>
+                  </ul>
+                </article>
+                <article>
+                  <span>Assignment record</span>
+                  <h4>Complete bill and pay sides</h4>
+                  <ul>
+                    <li>Sales completes the bill side after the JobDiva start-record email.</li>
+                    <li>Recruiting completes the pay side after bill side completion notification.</li>
+                    <li>Direct placements use the Invoice Placement tab.</li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+
+            <div class="assignment-flow">
+              <article>
+                <b>1</b>
+                <h3>Start record created</h3>
+                <p>Watch for the JobDiva notification that the start record has been created.</p>
+              </article>
+              <article>
+                <b>2</b>
+                <h3>Bill side completed</h3>
+                <p>Sales enters the bill-side assignment details so client-facing terms line up with the deal.</p>
+              </article>
+              <article>
+                <b>3</b>
+                <h3>Pay side completed</h3>
+                <p>Recruiting enters the pay-side assignment details after the bill side is complete.</p>
+              </article>
+              <article>
+                <b>4</b>
+                <h3>Route for onboarding</h3>
+                <p>Send new deals to <strong>itonboarding@itmmi.com</strong> or <strong>hconboarding@hcmmi.com</strong>. If CDM is involved, send to CDM first.</p>
+              </article>
+            </div>
+
+            <div class="special-case-panel">
+              <article>
+                <p class="eyebrow">Special case</p>
+                <h3>3rd parties and ICs on the assignment record</h3>
+                <div class="special-case-grid">
+                  <section>
+                    <h4>3rd party</h4>
+                    <p>First add the 3rd party as a company in JobDiva and classify it as a 3rd Party. On the pay side, set employment category to subcontract, add the corp name, and enter the TaxID.</p>
+                  </section>
+                  <section>
+                    <h4>Independent contractor</h4>
+                    <p>On the pay side, set employment category to independent contractor, add the IC's name under corp, and enter the TaxID.</p>
+                  </section>
+                </div>
+              </article>
+              <article>
+                <p class="eyebrow">After start</p>
+                <h3>Changes, extensions, and rate changes</h3>
+                <p>Any assignment record changes, extensions, or rate changes should be sent to <strong>support@itmmi.com</strong>. For untraditional deals, reach out to Jordan or Haley before guessing the workflow.</p>
+              </article>
+            </div>
           </section>
 
-          <section class="playbook-section" id="technology" data-title="Technology SOP" data-search="LinkedIn Apollo LinkedIn Recruiter Talent Insights JobDiva AI tools ChatGPT Copilot Claude sales tech SOP hotlists projects sequences market data dashboards">
+          <section class="playbook-section" id="technology" data-title="Technology SOP" data-search="LinkedIn Apollo LinkedIn Recruiter Talent Insights JobDiva Companion Ropes.ai Ropes AI tools ChatGPT Copilot Claude sales tech SOP hotlists projects sequences market data dashboards candidate fraud skills assessment scorecards">
             <div class="section-heading">
               <p class="eyebrow">Technology SOP</p>
               <h2>Use the stack with intent</h2>
               <p>Each tool has a job. The operating habit is to connect research, outreach, tracking, and market intelligence.</p>
             </div>
-            <div class="tool-table" role="table" aria-label="Sales technology playbook">
-              <div role="row">
-                <b role="cell">LinkedIn</b>
-                <span role="cell">Connect with target managers, track moves, find hiring posts, warm up outreach, and post anonymized pro-markets.</span>
-              </div>
-              <div role="row">
-                <b role="cell">Apollo</b>
-                <span role="cell">Build GTM lists, launch sequences, support pro-marketing, and upload organized hotlists into JobDiva through Support.</span>
-              </div>
-              <div role="row">
-                <b role="cell">LinkedIn Recruiter</b>
-                <span role="cell">Create prospect projects, identify open-to-work managers, start candidate conversations, and flip qualified intel into sales calls.</span>
-              </div>
-              <div role="row">
-                <b role="cell">Talent Insights</b>
-                <span role="cell">Find live market data by geography, niche, growth, openings, companies, and skill pools.</span>
-              </div>
-              <div role="row">
-                <b role="cell">JobDiva</b>
-                <span role="cell">System of record for contacts, hotlists, click-to-dial, job orders, candidate data, notes, and metric reporting.</span>
-              </div>
-              <div role="row">
-                <b role="cell">AI Tools</b>
-                <span role="cell">Draft messaging, job descriptions, account research, hiring-manager discovery, and market-data starting points.</span>
-              </div>
+            <div class="tool-accordion" aria-label="Sales technology playbook">
+              <details open>
+                <summary>
+                  <span>LinkedIn</span>
+                  <small>Relationship warm-up and market monitoring</small>
+                </summary>
+                <div class="tool-detail">
+                  <p>Use LinkedIn to connect with target managers, track role changes, find hiring posts, warm up outreach, and post anonymized pro-markets.</p>
+                  <ul>
+                    <li>Watch for new leaders, team growth, project posts, and hiring signals.</li>
+                    <li>Use profile context to make cold calls and emails feel specific.</li>
+                    <li>Connect with leaders in the niche before asking for a meeting.</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>
+                  <span>Apollo</span>
+                  <small>Prospecting lists, sequences, and campaigns</small>
+                </summary>
+                <div class="tool-detail">
+                  <p>Use Apollo to build GTM lists, launch outreach sequences, support pro-marketing, and organize hotlists that Support can upload into JobDiva.</p>
+                  <ul>
+                    <li>Start with a clear account, persona, or role-based strategy.</li>
+                    <li>Sequence email, call reminders, LinkedIn touches, and follow-up timing.</li>
+                    <li>Keep lists clean enough to match against ownership rules.</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>
+                  <span>LinkedIn Recruiter</span>
+                  <small>Prospect projects and candidate-to-sales insight</small>
+                </summary>
+                <div class="tool-detail">
+                  <p>Create projects around your go-to-market strategy, identify managers and candidates in motion, and flip useful candidate conversations into sales intelligence.</p>
+                  <ul>
+                    <li>Search for managers, directors, VPs, and open-to-work leaders in your niche.</li>
+                    <li>Save prospects to projects that map to hotlists or campaigns.</li>
+                    <li>Use candidate calls to uncover teams, initiatives, managers, and hiring pain.</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>
+                  <span>Talent Insights</span>
+                  <small>Market data and account planning</small>
+                </summary>
+                <div class="tool-detail">
+                  <p>Use Talent Insights to understand company growth, skill pools, geography, openings, talent availability, and hiring pressure.</p>
+                  <ul>
+                    <li>Bring data into client conversations before pitching a solution.</li>
+                    <li>Use market evidence to justify rate, scarcity, and speed-to-submit.</li>
+                    <li>Compare talent pools before choosing the account or persona angle.</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>
+                  <span>JobDiva</span>
+                  <small>System of record and sales discipline</small>
+                </summary>
+                <div class="tool-detail">
+                  <p>JobDiva is the system of record for companies, contacts, notes, hotlists, job orders, candidates, activity, and reporting.</p>
+                  <ul>
+                    <li>Log outreach, ownership context, call notes, job-order details, and next steps.</li>
+                    <li>Use historical contacts and candidate data to warm up prospecting.</li>
+                    <li>If it is not logged, the team cannot act on it reliably.</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>
+                  <span>Companion</span>
+                  <small>Sales prep, drafting, and follow-up support</small>
+                </summary>
+                <div class="tool-detail">
+                  <p>Use Companion as a workflow assistant for preparing smarter outreach, summarizing context, drafting first-pass messaging, and tightening next steps.</p>
+                  <ul>
+                    <li>Prepare account notes before call blocks or intro meetings.</li>
+                    <li>Turn raw research into buyer-specific talk tracks and email drafts.</li>
+                    <li>Summarize meetings into clean follow-up actions that can be logged in JobDiva.</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>
+                  <span>Ropes.ai</span>
+                  <small>Candidate trust, fraud defense, and skills proof</small>
+                </summary>
+                <div class="tool-detail">
+                  <p>Use Ropes.ai when a role needs stronger proof that a candidate is authentic, technically credible, and ready to present with confidence.</p>
+                  <ul>
+                    <li>Validate identity, location signals, and candidate authenticity before submission risk reaches the client.</li>
+                    <li>Create job-specific simulations or assessments from client requirements.</li>
+                    <li>Use scorecards and proof of work to help hiring managers see how candidates actually solve problems.</li>
+                  </ul>
+                </div>
+              </details>
+              <details>
+                <summary>
+                  <span>AI Tools</span>
+                  <small>Messaging, research, and first drafts</small>
+                </summary>
+                <div class="tool-detail">
+                  <p>Use tools like ChatGPT, Copilot, Claude, and related AI assistants to speed up drafting and thinking, while still validating anything client-facing.</p>
+                  <ul>
+                    <li>Draft messaging, job descriptions, call scripts, and recap notes.</li>
+                    <li>Create account research summaries and buyer-persona angles.</li>
+                    <li>Check facts, rates, market claims, and client-sensitive details before use.</li>
+                  </ul>
+                </div>
+              </details>
             </div>
           </section>
 
@@ -507,6 +1256,6 @@
     </main>
 
     <button class="back-top" type="button" id="backTop" aria-label="Back to top">&uarr;</button>
-    <script src="app.js"></script>
+    <script src="app.js?v=20260513-objection-coach-clean"></script>
   </body>
 </html>

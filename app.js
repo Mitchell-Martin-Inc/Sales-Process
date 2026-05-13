@@ -1,7 +1,12 @@
 const searchInput = document.querySelector("#searchInput");
 const searchResults = document.querySelector("#searchResults");
+const resourceTitle = document.querySelector("#resourceTitle");
+const resourceList = document.querySelector("#resourceList");
+const topbar = document.querySelector(".topbar");
+const searchBand = document.querySelector(".search-band");
 const sections = Array.from(document.querySelectorAll(".playbook-section"));
-const navLinks = Array.from(document.querySelectorAll(".sidenav a"));
+const navLinks = Array.from(document.querySelectorAll(".toplinks a[href^='#']"));
+const pageLinks = Array.from(document.querySelectorAll(".toplinks a[href^='#'], .home-play-grid a[href^='#']"));
 const backTop = document.querySelector("#backTop");
 const intelForm = document.querySelector("#intelForm");
 const intelVertical = document.querySelector("#intelVertical");
@@ -11,16 +16,24 @@ const intelSignal = document.querySelector("#intelSignal");
 const intelRole = document.querySelector("#intelRole");
 const intelHeadline = document.querySelector("#intelHeadline");
 const intelNarrative = document.querySelector("#intelNarrative");
-const intelSources = document.querySelector("#intelSources");
 const intelQuestions = document.querySelector("#intelQuestions");
 const intelTalkTrack = document.querySelector("#intelTalkTrack");
 const intelOutreach = document.querySelector("#intelOutreach");
 const intelDataStatus = document.querySelector("#intelDataStatus");
 const intelMetrics = document.querySelector("#intelMetrics");
+const intelRoles = document.querySelector("#intelRoles");
+const intelSkills = document.querySelector("#intelSkills");
+const backPage = document.querySelector("#backPage");
+const homePage = document.querySelector("#homePage");
 const pullBlsData = document.querySelector("#pullBlsData");
 const copyIntel = document.querySelector("#copyIntel");
 const copyAgentPrompt = document.querySelector("#copyAgentPrompt");
 const refreshIntel = document.querySelector("#refreshIntel");
+const meetingTiles = Array.from(document.querySelectorAll(".meeting-tile"));
+const meetingPanels = Array.from(document.querySelectorAll(".meeting-detail-panel"));
+const objectionForm = document.querySelector("#objectionForm");
+const objectionInput = document.querySelector("#objectionInput");
+const objectionResponse = document.querySelector("#objectionResponse");
 
 const verticalIntel = {
   healthcare: {
@@ -28,8 +41,32 @@ const verticalIntel = {
     blsIndustry: "Health care and social assistance",
     blsPrefix: "JTS620000000000000",
     pressure: "patient access, clinical capacity, revenue-cycle execution, and digital health modernization",
+    hardReality: "qualified healthcare talent is often already assigned, tied to a system-specific environment, or unwilling to move without a clear schedule, rate, and clinical impact story",
     roles: "clinical systems analysts, Epic and EHR talent, revenue-cycle specialists, care operations leaders, data analysts, and healthcare IT project teams",
     proof: "compare health care hiring momentum, local wage bands, hospital demand signals, and active openings before the call",
+    marketRoles: [
+      {
+        title: "Epic / EHR Analysts",
+        why: "Commonly needed for optimization, upgrades, integrations, reporting, and go-live support.",
+        angle: "Ask which clinical or revenue-cycle workflows are still creating ticket volume."
+      },
+      {
+        title: "Revenue Cycle & Billing Talent",
+        why: "Denials, coding, prior authorization, and collections pressure keep contract support relevant.",
+        angle: "Lead with cash acceleration, backlog reduction, and clean handoffs between operations and IT."
+      },
+      {
+        title: "Healthcare Data Analysts",
+        why: "Quality reporting, population health, dashboards, and payer/provider analytics need domain context.",
+        angle: "Ask where reporting delays are slowing decisions or reimbursement work."
+      },
+      {
+        title: "Clinical Operations Support",
+        why: "Capacity gaps show up fast in scheduling, care coordination, case management, and access teams.",
+        angle: "Connect staffing directly to patient access, manager bandwidth, and service-level risk."
+      }
+    ],
+    skills: ["Epic", "Cerner", "Revenue Cycle", "Claims", "Denials", "HL7/FHIR", "SQL", "Tableau", "Power BI", "Care Coordination"],
     questions: [
       "Which clinical, revenue-cycle, or healthcare IT teams are carrying the most backlog right now?",
       "Where are vacancies affecting patient access, implementation timelines, or manager bandwidth?",
@@ -41,8 +78,32 @@ const verticalIntel = {
     blsIndustry: "Information",
     blsPrefix: "JTS510000000000000",
     pressure: "modernization roadmaps, cybersecurity exposure, cloud migration, data programs, AI adoption, and delivery velocity",
+    hardReality: "the strongest IT candidates are usually heads-down on active delivery, entertaining multiple opportunities, and judging roles by stack, flexibility, manager credibility, and speed of process",
     roles: "cloud engineers, cybersecurity specialists, data engineers, application developers, ERP/CRM talent, project managers, and product teams",
     proof: "compare information and professional-services hiring, skill availability, remote/on-site constraints, and market pay movement",
+    marketRoles: [
+      {
+        title: "Cloud & Infrastructure Engineers",
+        why: "Migration, cost optimization, security hardening, and hybrid environment work often need project capacity.",
+        angle: "Ask what is delayed because internal teams are split between operations and transformation."
+      },
+      {
+        title: "Cybersecurity Specialists",
+        why: "Security, identity, compliance, vulnerability management, and incident response remain high-stakes needs.",
+        angle: "Lead with risk exposure and time-to-productivity for niche security skill sets."
+      },
+      {
+        title: "Data Engineers & BI Developers",
+        why: "Companies need clean pipelines, analytics layers, dashboards, and AI-ready data foundations.",
+        angle: "Ask which business decisions are waiting on better data availability or reporting."
+      },
+      {
+        title: "ERP / CRM / Business Systems Talent",
+        why: "Salesforce, SAP, Workday, ServiceNow, and related platforms create recurring admin, integration, and project needs.",
+        angle: "Position contract talent as a way to protect release timelines and business adoption."
+      }
+    ],
+    skills: ["AWS", "Azure", "Cybersecurity", "IAM", "Data Engineering", "Python", "SQL", "Salesforce", "SAP", "ServiceNow", "Agile", "PMO"],
     questions: [
       "Which transformation work is slipping because permanent hiring cannot keep pace?",
       "Where are niche skills creating the biggest delivery or security risk?",
@@ -54,8 +115,32 @@ const verticalIntel = {
     blsIndustry: "Finance and insurance",
     blsPrefix: "JTS520000000000000",
     pressure: "close cycles, regulatory reporting, audit readiness, transformation programs, cost control, and financial planning discipline",
+    hardReality: "proven finance candidates are difficult to move during close, audit, budget, and reporting cycles unless the role has clear scope, urgency, rate alignment, and a quick decision path",
     roles: "FP&A analysts, accountants, controllers, audit consultants, risk and compliance talent, finance systems analysts, and banking operations specialists",
     proof: "compare financial-activities employment, wage benchmarks, regulatory change, and accounting or finance openings by market",
+    marketRoles: [
+      {
+        title: "FP&A Analysts",
+        why: "Budgeting, forecasting, scenario modeling, and board reporting create recurring demand for analytical finance talent.",
+        angle: "Ask where leadership needs faster visibility into margin, spend, or forecast variance."
+      },
+      {
+        title: "Accountants & Senior Accountants",
+        why: "Month-end close, reconciliations, audit prep, and turnover backfill are steady contract triggers.",
+        angle: "Lead with close-cycle protection and the cost of overloading permanent staff."
+      },
+      {
+        title: "Controllers & Accounting Managers",
+        why: "Leadership gaps can stall process discipline, controls, reporting cadence, and team development.",
+        angle: "Ask which finance processes depend on one person and where interim leadership would reduce risk."
+      },
+      {
+        title: "Risk, Compliance & Audit Talent",
+        why: "Regulatory pressure, internal controls, SOX, banking operations, and audit readiness create specialized needs.",
+        angle: "Position vetted specialists as a way to meet deadlines without adding permanent overhead."
+      }
+    ],
+    skills: ["FP&A", "Forecasting", "Month-End Close", "GAAP", "SOX", "Audit", "Risk", "Compliance", "Excel", "Power BI", "NetSuite", "Workday"],
     questions: [
       "Which finance deadlines would be at risk if the current team lost one key person?",
       "Where are audit, reporting, close, or transformation needs creating temporary capacity gaps?",
@@ -80,15 +165,6 @@ const signalIntel = {
   "turnover risk": "Use quits, layoffs, and retention signals as the trigger. The sales point is continuity planning before a vacancy becomes urgent."
 };
 
-const sourceLinks = [
-  { label: "BLS Public Data API", value: "Pull the latest JOLTS series directly into this page for a fast national demand snapshot." },
-  { label: "BLS JOLTS", value: "Check job openings, hires, quits, and separations for the latest monthly labor-demand signal." },
-  { label: "BLS Employment Situation", value: "Check industry job gains or losses and whether the vertical is expanding, flat, or contracting." },
-  { label: "BLS OEWS", value: "Pull wage benchmarks for the role, state, and metro so rate guidance is grounded in public data." },
-  { label: "LinkedIn Talent Insights", value: "Validate talent supply, employer competition, skill concentration, and location constraints." },
-  { label: "Apollo / JobDiva", value: "Confirm account hiring managers, active openings, past submissions, MSA status, and ownership rules." }
-];
-
 const blsMeasures = [
   { code: "JOL", label: "Openings", suffix: "K", description: "job openings" },
   { code: "JOR", label: "Openings Rate", suffix: "%", description: "job openings rate" },
@@ -96,7 +172,176 @@ const blsMeasures = [
   { code: "QUR", label: "Quits Rate", suffix: "%", description: "quits rate" }
 ];
 
+const objectionPatterns = [
+  {
+    match: ["vendor", "approved", "list", "preferred"],
+    title: "Approved vendor / vendor list",
+    ask: "What is the process for adding a vendor, and when do you review vendor performance?",
+    acknowledge: "That makes sense. A company with your scale usually has a defined vendor process.",
+    reframe: "MMI can still be useful where current vendors are underperforming, especially on niche or hard-to-fill roles.",
+    advance: "Ask for the program owner, next QBR date, or one difficult role where a niche partner could prove value."
+  },
+  {
+    match: ["msp", "vms", "fieldglass", "beeline", "program"],
+    title: "MSP / VMS program",
+    ask: "Which MSP or VMS do you use, and where do managers still feel gaps in candidate quality or speed?",
+    acknowledge: "Understood. Many enterprise clients use that model and need partners who respect the process.",
+    reframe: "MMI works successfully inside VMS environments and can also support niche searches through approved channels.",
+    advance: "Ask for the program contact, tool name, review timing, or a role that has not produced strong candidates."
+  },
+  {
+    match: ["price", "fee", "fees", "rate", "expensive", "cost", "budget"],
+    title: "Price / rate / budget concern",
+    ask: "How long has the role been open, and what is the business cost of keeping it unfilled?",
+    acknowledge: "I understand being cost conscious. Budget and rate discipline matter.",
+    reframe: "Because MMI is contingent, the buyer can compare our candidates before paying anything, while also seeing market reality around scarce talent.",
+    advance: "Ask for the target range, must-have skills, and whether a calibrated market snapshot would help reset expectations."
+  },
+  {
+    match: ["hr", "talent acquisition", "recruiting handles", "internal"],
+    title: "HR owns hiring",
+    ask: "How does HR partner with you when the role requires niche skills or contractor support?",
+    acknowledge: "That is completely fair. HR and Talent Acquisition should be part of the process.",
+    reframe: "MMI can make HR's job easier by bringing calibrated market context and qualified talent against the manager's must-haves.",
+    advance: "Ask who in HR owns the process and what requirements you should reference so outreach is useful."
+  },
+  {
+    match: ["happy", "current vendor", "vendors", "covered", "favorite"],
+    title: "Happy with current vendors",
+    ask: "Where do your current vendors perform well, and where do they struggle on niche or urgent roles?",
+    acknowledge: "It is good that you have partners you trust.",
+    reframe: "MMI does not need to replace them to be valuable. We can be a comparison point or niche option when the current bench is not enough.",
+    advance: "Ask for one hard-to-fill role, a future check-in, or permission to send a relevant market profile."
+  },
+  {
+    match: ["bad experience", "burned", "vendor issue", "poor vendor", "bad vendor"],
+    title: "Bad vendor experience",
+    ask: "What specifically happened, and what would a better partner need to do differently?",
+    acknowledge: "I can understand why that would make you cautious.",
+    reframe: "The only useful response is to solve the service failure directly: communication, calibration, candidate quality, speed, or follow-through.",
+    advance: "Ask for the hardest current pain point and offer a low-risk calibration conversation before asking for a requisition."
+  },
+  {
+    match: ["diverse", "diversity", "minority", "wmbe", "women owned", "supplier"],
+    title: "Diverse supplier requirement",
+    ask: "Is the requirement for all staffing partners, or are niche partners allowed through approved diversity channels?",
+    acknowledge: "That priority makes sense and is important to respect.",
+    reframe: "MMI can often support through Dale Workforce Solutions or approved diversity partner paths.",
+    advance: "Ask whether an introduction to Dale Workforce Solutions would be helpful."
+  },
+  {
+    match: ["busy", "no time", "send email", "send information", "send info"],
+    title: "Too busy / send information",
+    ask: "What information would actually be useful enough to make the follow-up worth your time?",
+    acknowledge: "I know your calendar is packed, and I do not want to send generic material.",
+    reframe: "A short conversation lets MMI tailor the information to the roles, teams, or market pressures that matter to you.",
+    advance: "Ask for 10 minutes, a preferred time window, and permission to send one relevant note before the meeting."
+  },
+  {
+    match: ["no needs", "not hiring", "nothing open", "no openings"],
+    title: "No current needs",
+    ask: "Is that because roles were recently filled, or is hiring likely to pick up later in the quarter or year?",
+    acknowledge: "No problem. Timing matters.",
+    reframe: "The best time to learn the team is before the need becomes urgent, so MMI can respond faster when something changes.",
+    advance: "Ask for a future check-in date, upcoming initiatives, or another team that may have a hiring need."
+  }
+];
+
+const pageResources = {
+  home: {
+    title: "MMI Playbook Resources",
+    items: [
+      { label: "Start with Foundation", type: "link", href: "#foundation" },
+      { label: "Open Pitching MMI", type: "link", href: "#pitch" },
+      { label: "Sales lifecycle map", type: "link", href: "#lifecycle" }
+    ]
+  },
+  foundation: {
+    title: "MMI Foundation Resources",
+    items: [
+      { label: "Company story notes", type: "download", filename: "mmi-foundation-notes.txt", content: "MMI Foundation Notes\n\nCore Story: Mitchell Martin is a people-first, employee-owned staffing and talent solutions company founded in 1984. The sales story should connect relationships, specialized recruiting expertise, market context, and smart technology.\n\nPositioning: We help organizations build capable teams by combining human insight, long-term candidate relationships, disciplined delivery, and technology-supported staffing workflows.\n\nProof Points:\n- Founded by Eugene Holtzman in 1984\n- Employee-owned company\n- Teams across the United States, India, and the Philippines\n- Specialized support across IT, healthcare, healthcare IT, and professional services\n\nShared Values:\n- People first, always: Every decision starts with people in mind, whether it is a consultant, client, or team member.\n- Act like an owner: We take responsibility and care about the long term because this company belongs to all of us.\n- Stay hungry, stay human: We are ambitious, competitive, and growth-minded, but never at the cost of integrity, kindness, or empathy.\n- Move with purpose: We are always agile, with smart technology supporting our speed and people leading our purpose.\n- Stronger together: Success is shared. We support one another and give back wherever we can because we are stronger together.\n\nTalk Track: Mitchell Martin helps organizations build capable teams by combining specialized recruiting expertise, long-term candidate relationships, market context, and technology-supported delivery. We look beyond keyword matching to qualify for the role, environment, manager expectations, schedule, compliance needs, and what will make the person successful after day one." },
+      { label: "Go to Pitching MMI", type: "link", href: "#pitch" }
+    ]
+  },
+  pitch: {
+    title: "MMI Pitch Resources",
+    items: [
+      { label: "Download pitch talk tracks", type: "download", filename: "mmi-pitch-talk-tracks.txt", content: "MMI Pitch Talk Tracks\n\nRisk: We reduce uncertainty by validating talent before it reaches your team, then using AI-supported insight to keep hiring and execution decisions sharper.\n\nSpeed: The value is not just more resumes. It is proven, ready-to-perform talent delivered quickly enough to protect project timelines and operating plans.\n\nCost: We help leaders move work into the right operating model without trading away quality, compliance, or manager confidence." },
+      { label: "Download proof points", type: "download", filename: "mmi-proof-of-partnerships.txt", content: "MMI Proof of Partnerships\n\nStrategic partner, not transactional staffing provider.\n\nInvestment bank example: MMI helped validate and de-risk a long-term staffing strategy under intense regulatory pressure and cost constraints.\n\nResults:\n- 50%+ interview progression rate vs. 10% internal success rate\n- 105 total placements\n- 80 converted to full-time employees\n- Resume delivery in under one week" },
+      { label: "Market intelligence support", type: "link", href: "#market-intel" }
+    ]
+  },
+  lifecycle: {
+    title: "MMI Lifecycle Resources",
+    items: [
+      { label: "Download lifecycle checklist", type: "download", filename: "mmi-sales-lifecycle-checklist.txt", content: "MMI Sales Lifecycle Checklist\n\nOperating Path:\n1. Research: Find signals, names, referrals, and timing.\n2. Engage: Use calls, email, LinkedIn, pro-marketing, and events.\n3. Diagnose: Map buyer type, pain, team, process, and urgency.\n4. Capture: Take a job order with delivery aligned early.\n5. Advance: Prep, debrief, close, document, and redeploy.\n\nSales Pipeline:\n1. Awareness: Keep high-volume targeted activity at the top of the funnel through prospects, account signals, introductions, pro-markets, calls, emails, LinkedIn, and market intelligence.\n2. Engagement: Convert attention into conversations, meetings, referrals, and permission to diagnose a real business pressure.\n3. Job Reqs: Capture qualified requirements with manager, location, work model, rate, urgency, process, pain, and success criteria.\n4. Delivery: Align recruiting early, submit calibrated talent, manage interviews, debrief quickly, and keep JobDiva clean.\n5. Trust: Close the loop, protect the start, communicate clearly, and turn one filled role into an ongoing partnership.\n\nHow MMI Achieves Sales:\n- Events: Networking opportunities for meaningful conversations.\n- Warm Calls: Building on previous interactions to strengthen relationships.\n- References: Providing credibility and trust.\n- Virtual Meetings: Facilitating connections across distances.\n- Cold Calls: Initiating contact with potential clients.\n- Hot Calls: Urgency leading to immediate results.\n- In-Person Meetings: Offering a personal touch." },
+      { label: "Calls and meetings", type: "link", href: "#meetings" }
+    ]
+  },
+  prospecting: {
+    title: "MMI Prospecting Resources",
+    items: [
+      { label: "Download prospecting prompts", type: "download", filename: "mmi-prospecting-prompts.txt", content: "MMI Prospecting Prompts\n\nSignals to check: referrals, candidates, consultants, current clients, new executives, news, job boards, MSA accounts.\n\nWeekly motion: combine warm network moves, market triggers, data-backed campaigns, and disciplined call blocks." },
+      { label: "Buyer strategy", type: "link", href: "#strategy" }
+    ]
+  },
+  "market-intel": {
+    title: "MMI Market Intel Resources",
+    items: [
+      { label: "Use market intel workbench", type: "link", href: "#market-intel" },
+      { label: "Download call prep prompts", type: "download", filename: "mmi-market-intel-call-prep.txt", content: "MMI Market Intel Call Prep\n\nBring hiring trends, compensation benchmarks, skill availability, time-to-fill, and interview-to-offer data into the sales conversation.\n\nFrame the market around the buyer's pressure: speed, quality, cost, risk, or continuity." }
+    ]
+  },
+  strategy: {
+    title: "MMI Buyer Strategy Resources",
+    items: [
+      { label: "Download buyer questions", type: "download", filename: "mmi-buyer-strategy-questions.txt", content: "MMI Buyer Strategy Questions\n\nCore Questions:\n- What business outcome is at risk if this role stays open?\n- Who owns the decision, budget, process, and final yes?\n- Where has the current hiring motion broken down?\n- What would make a staffing partner strategically useful instead of transactional?\n\nEnterprise vs. Mid-Market:\n- Enterprise accounts are structured, layered, and volume-oriented. They often involve MSP, VMS, procurement, legal, finance, and formal vendor rules. Decision cycles can be longer, but demand can repeat across teams, geographies, and programs. Sell enterprise by understanding the system, respecting process, working whitespace, and proving reliability through compliance, speed, submittal quality, rate discipline, and scorecard performance.\n- Mid-market accounts are relationship-led, flexible, and education-heavy. Access to hiring managers and executives is often more direct. Process may be less mature, which creates room to advise on requirements, speed, rates, and interview discipline. Sell mid-market by teaching, diagnosing, building trust, and expanding after strong first delivery.\n- MMI does both because enterprise creates scale, structure, and recurring demand, while mid-market creates access, speed, relationship depth, and room to shape the hiring motion. A balanced book gives the business repeatability, agility, margin opportunity, and more ways to win.\n\nDMU/I Buyer Map:\n- Decision Maker: Final authority on using a staffing firm. Common titles include VP of HR and Head of Talent. Cares about speed, cost, quality, risk, and scalability. Key question: Do we approve this partner? Sales implication: Lead with outcomes and economics.\n- User: Interacts most with the firm and candidates. Common titles include hiring managers and recruiters. Cares about candidate quality, ease of use, and speed. Key question: Does this firm make my job easier? Sales implication: User satisfaction drives future business.\n- Influencer: Shapes the decision but does not sign. Common groups include finance, procurement, and legal. Cares about pricing, risk, diversity, and compliance. Key question: Does this partner meet our standards? Sales implication: Address risks proactively to avoid delays." },
+      { label: "Meeting prep", type: "link", href: "#meetings" }
+    ]
+  },
+  networking: {
+    title: "MMI Networking Resources",
+    items: [
+      { label: "Download objection guide", type: "file", href: "resources/Objection-Handling-Guide.pdf", filename: "Objection-Handling-Guide.pdf" },
+      { label: "Download referral prompts", type: "download", filename: "mmi-networking-referral-prompts.txt", content: "MMI Networking Referral Prompts\n\nWho in your network is hiring, expanding, transforming, or frustrated with hiring velocity?\nWho recently changed roles and may be rebuilding a team?\nWhich candidate, consultant, or client relationship can create a warm path?" },
+      { label: "Prospecting plays", type: "link", href: "#prospecting" }
+    ]
+  },
+  meetings: {
+    title: "MMI Meeting Resources",
+    items: [
+      { label: "Download job order worksheet", type: "file", href: "resources/MMI-Job-Order-Worksheet.docx", filename: "MMI-Job-Order-Worksheet.docx" },
+      { label: "Download meeting checklist", type: "download", filename: "mmi-meeting-checklist.txt", content: "MMI Meeting Checklist\n\nBefore: research buyer, business pressure, market signals, likely roles, and proof points.\nDuring: diagnose pain, urgency, process, decision path, and success criteria.\nAfter: recap, assign next steps, align delivery, and document the opportunity.\n\nCold Call / Voicemail Structure:\n1. Who you are.\n2. Where you are calling from.\n3. What you specialize in.\n4. The reason you are calling.\n5. Open question.\n\nSample Script:\nHi, this is NAME, calling from Mitchell Martin. We are a staffing company specializing in IT / Healthcare / Finance recruitment.\n\nThe reason for my call is that I work with organizations like yours to help identify and secure top talent in the market.\n\nI wanted to introduce myself to learn more about you and your current hiring needs.\n\nWhat does your current hiring landscape look like?\n\nQualified Job Order Intake:\n- Why is the position open, and how is the work currently being done?\n- Confirm remote, hybrid, onsite, immigration, work hours, shift, start date, duration, project description, and job duties.\n- Capture skills, years of experience, education, certifications, environment, soft skills, culture, and top three requirements.\n- Confirm bill rate, salary if C2H or full-time, follow-up day/time, exclusivity ask, interview time blocks, and interview process.\n- For job entry, confirm company name, job title, hiring manager or HR, optional reference number, number of openings, salary/rate, location, job type, start date, job length, job rank, recruiter, and notes for Position Remarks.\n- Route contract roles to jobqueue.contract@itmmi.com and full-time roles to jobqueue.perm@itmmi.com.\n- Company and contact or hiring manager must exist in JobDiva before entry.\n- Align with delivery on what makes the order assignable, how long recruiting has to produce candidates, and what to do if the search stalls." },
+      { label: "Prep, debrief, close", type: "link", href: "#close" }
+    ]
+  },
+  close: {
+    title: "MMI Close Resources",
+    items: [
+      { label: "Download closeout checklist", type: "download", filename: "mmi-closeout-checklist.txt", content: "MMI Closeout Checklist\n\nInterview Debrief:\n- What did the client like?\n- What concerns remain?\n- Who else is involved in the decision?\n- What is the next step and date?\n- What can delivery adjust before the next submittal?\n\nBefore Onboarding:\n- Confirm the JobDiva job title mirrors the consultant contract.\n- Confirm location is the correct work location.\n- Confirm the contact is the correct manager.\n- Confirm remote, onsite, or hybrid status is accurate.\n- Recruiting confirms/corrects candidate information before onboarding starts.\n- Recruiting sets the start date in JobDiva and emails users on the start.\n\nAssignment Record Flow:\n- Sales completes the bill side after receiving the JobDiva start-record notification.\n- Recruiting completes the pay side after receiving notice that the bill side is complete.\n- Direct placements go to the Invoice Placement tab.\n- Send new deals to itonboarding@itmmi.com or hconboarding@hcmmi.com.\n- If CDM is involved, send to CDM first.\n\n3rd Parties and ICs:\n- For a 3rd party, first add the company in JobDiva and classify it as a 3rd Party.\n- On the pay side for a 3rd party, classify employment category as subcontract, add corp name, and enter the TaxID.\n- For an independent contractor, classify employment category as independent contractor, add the IC's name under corp, and enter the TaxID.\n\nAfter Start:\n- Send assignment record changes, extensions, and rate changes to support@itmmi.com.\n- For untraditional deals, reach out to Jordan or Haley before guessing the workflow." },
+      { label: "First deal path", type: "link", href: "#first-deal" }
+    ]
+  },
+  technology: {
+    title: "MMI Tech SOP Resources",
+    items: [
+      { label: "Download tech usage checklist", type: "download", filename: "mmi-tech-sop-checklist.txt", content: "MMI Tech SOP Checklist\n\nUse the sales stack to support research, sourcing context, outreach, communication, market intelligence, and follow-up discipline. Keep tools clean enough that the next action is obvious." },
+      { label: "Market intelligence", type: "link", href: "#market-intel" }
+    ]
+  },
+  "first-deal": {
+    title: "MMI First Deal Resources",
+    items: [
+      { label: "Download first deal checklist", type: "download", filename: "mmi-first-deal-checklist.txt", content: "MMI First Deal Checklist\n\nConfirm account context, buyer pressure, job order quality, delivery alignment, candidate prep, client feedback, close plan, and redeployment opportunities." },
+      { label: "Review sales lifecycle", type: "link", href: "#lifecycle" }
+    ]
+  }
+};
+
 let currentBlsData = [];
+let pageHistory = [];
+let currentPageId = "home";
+let activeSearchTerms = [];
 
 const sectionIndex = sections.map((section) => ({
   id: section.id,
@@ -107,6 +352,10 @@ const sectionIndex = sections.map((section) => ({
 searchInput.addEventListener("input", handleSearch);
 backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 window.addEventListener("scroll", updatePageState, { passive: true });
+window.addEventListener("resize", updateStickyMetrics);
+pageLinks.forEach((link) => {
+  link.addEventListener("click", handleAnchorClick);
+});
 intelForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   generateIntel();
@@ -121,6 +370,17 @@ intelVertical?.addEventListener("change", () => {
 pullBlsData?.addEventListener("click", fetchBlsData);
 copyIntel?.addEventListener("click", copyIntelBrief);
 copyAgentPrompt?.addEventListener("click", copyMarketAgentPrompt);
+backPage?.addEventListener("click", goBackPage);
+homePage?.addEventListener("click", () => showPage("home"));
+meetingTiles.forEach((tile) => {
+  tile.addEventListener("click", () => setMeetingPanel(tile.dataset.meetingTarget));
+});
+objectionForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  generateObjectionResponse();
+});
+updateStickyMetrics();
+showPage(getInitialPageId(), false);
 updatePageState();
 generateIntel();
 fetchBlsData();
@@ -128,10 +388,11 @@ fetchBlsData();
 function handleSearch() {
   const query = searchInput.value.trim().toLowerCase();
   searchResults.innerHTML = "";
+  activeSearchTerms = query.split(/\s+/).filter(Boolean);
 
   if (!query) {
     searchResults.classList.remove("active");
-    sections.forEach((section) => section.removeAttribute("hidden"));
+    clearHighlights();
     return;
   }
 
@@ -145,11 +406,6 @@ function handleSearch() {
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
 
-  sections.forEach((section) => {
-    const isMatch = matches.some((match) => match.id === section.id);
-    section.hidden = !isMatch;
-  });
-
   if (!matches.length) {
     searchResults.classList.add("active");
     searchResults.innerHTML = '<p class="empty-state">No matching playbook sections yet.</p>';
@@ -162,30 +418,232 @@ function handleSearch() {
     link.className = "result-link";
     link.href = `#${match.id}`;
     link.innerHTML = `<span>${escapeHtml(match.title)}</span><small>${match.score} match${match.score === 1 ? "" : "es"}</small>`;
-    link.addEventListener("click", () => {
-      sections.forEach((section) => section.removeAttribute("hidden"));
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
       searchResults.classList.remove("active");
       searchInput.value = "";
+      showPage(match.id, true, terms);
     });
     searchResults.append(link);
   });
 }
 
-function updatePageState() {
-  const scrollPosition = window.scrollY + 140;
-  let currentId = sections[0]?.id;
+function handleAnchorClick(event) {
+  const id = event.currentTarget.getAttribute("href")?.slice(1);
+  if (!id) return;
 
-  for (const section of sections) {
-    if (!section.hidden && section.offsetTop <= scrollPosition) {
-      currentId = section.id;
-    }
+  event.preventDefault();
+  searchResults.classList.remove("active");
+  searchInput.value = "";
+  showPage(id);
+}
+
+function showPage(id, updateHash = true, highlightTerms = []) {
+  const target = document.getElementById(id);
+  if (!target) return;
+
+  if (currentPageId && currentPageId !== id && updateHash) {
+    pageHistory.push(currentPageId);
   }
+
+  clearHighlights();
+  sections.forEach((section) => {
+    section.hidden = section.id !== id;
+  });
+  currentPageId = id;
+
+  updateStickyMetrics();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (updateHash) {
+    history.pushState(null, "", `#${id}`);
+  }
+
+  if (highlightTerms.length) {
+    window.requestAnimationFrame(() => highlightMatches(target, highlightTerms));
+  }
+
+  updatePageState(id);
+  renderResources(id);
+}
+
+function goBackPage() {
+  const previous = pageHistory.pop();
+  showPage(previous || "home", Boolean(previous));
+}
+
+function clearHighlights() {
+  document.querySelectorAll("mark.search-highlight").forEach((mark) => {
+    mark.replaceWith(document.createTextNode(mark.textContent));
+  });
+}
+
+function highlightMatches(section, terms) {
+  const cleanTerms = [...new Set(terms.map((term) => term.trim()).filter((term) => term.length > 1))];
+  if (!cleanTerms.length) return;
+
+  const pattern = new RegExp(`(${cleanTerms.map(escapeRegExp).join("|")})`, "gi");
+  const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      const parent = node.parentElement;
+      if (!parent || parent.closest("script, style, mark")) return NodeFilter.FILTER_REJECT;
+      pattern.lastIndex = 0;
+      return pattern.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+
+  const nodes = [];
+  while (walker.nextNode()) {
+    nodes.push(walker.currentNode);
+  }
+
+  nodes.forEach((node) => {
+    const fragment = document.createDocumentFragment();
+    pattern.lastIndex = 0;
+    node.nodeValue.split(pattern).forEach((part) => {
+      if (!part) return;
+      if (cleanTerms.some((term) => part.toLowerCase() === term.toLowerCase())) {
+        const mark = document.createElement("mark");
+        mark.className = "search-highlight";
+        mark.textContent = part;
+        fragment.append(mark);
+      } else {
+        fragment.append(document.createTextNode(part));
+      }
+    });
+    node.replaceWith(fragment);
+  });
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getStickyOffset() {
+  const headerHeight = topbar?.offsetHeight || 0;
+  const searchHeight = searchBand?.offsetHeight || 0;
+  return headerHeight + searchHeight + 18;
+}
+
+function updateStickyMetrics() {
+  const root = document.documentElement;
+  const headerHeight = topbar?.offsetHeight || 0;
+  const searchHeight = searchBand?.offsetHeight || 0;
+
+  root.style.setProperty("--topbar-height", `${headerHeight}px`);
+  root.style.setProperty("--search-height", `${searchHeight}px`);
+}
+
+function updatePageState(currentId = getVisiblePageId()) {
+  updateStickyMetrics();
 
   navLinks.forEach((link) => {
     link.classList.toggle("active", link.getAttribute("href") === `#${currentId}`);
   });
 
-  backTop.classList.toggle("visible", window.scrollY > 680);
+  backTop.classList.remove("visible");
+  document.body.classList.remove("search-compact");
+  renderResources(currentId);
+}
+
+function renderResources(id) {
+  if (!resourceTitle || !resourceList) return;
+
+  const visibleId = sections.find((section) => !section.hidden)?.id;
+  const resourceId = pageResources[id] ? id : visibleId;
+  const section = sections.find((item) => item.id === resourceId || item.id === id);
+  const fallbackTitle = section?.dataset.title ? `MMI ${section.dataset.title} Resources` : "MMI Playbook Resources";
+  const resources = pageResources[resourceId] || {
+    title: fallbackTitle,
+    items: [
+      { label: "Return home", type: "link", href: "#home" },
+      { label: "Open Pitching MMI", type: "link", href: "#pitch" }
+    ]
+  };
+
+  resourceTitle.textContent = resources.title;
+  resourceList.innerHTML = "";
+
+  resources.items.forEach((item) => {
+    const link = document.createElement("a");
+    link.className = `resource-link ${item.type === "download" || item.type === "file" ? "download" : "standard"}`;
+    link.textContent = item.label;
+
+    if (item.type === "download") {
+      const blob = new Blob([item.content], { type: "text/plain" });
+      link.href = URL.createObjectURL(blob);
+      link.download = item.filename;
+    } else if (item.type === "file") {
+      link.href = item.href;
+      link.download = item.filename || "";
+    } else {
+      link.href = item.href;
+      link.addEventListener("click", handleAnchorClick);
+    }
+
+    resourceList.append(link);
+  });
+}
+
+function setMeetingPanel(targetId) {
+  if (!targetId) return;
+
+  meetingTiles.forEach((tile) => {
+    const isActive = tile.dataset.meetingTarget === targetId;
+    tile.classList.toggle("active", isActive);
+    tile.setAttribute("aria-expanded", String(isActive));
+  });
+
+  meetingPanels.forEach((panel) => {
+    const isActive = panel.id === targetId;
+    panel.hidden = !isActive;
+    panel.classList.toggle("active", isActive);
+  });
+}
+
+function generateObjectionResponse() {
+  if (!objectionInput || !objectionResponse) return;
+
+  const raw = objectionInput.value.trim();
+  if (!raw) {
+    objectionResponse.innerHTML = "<p>Enter an objection to build a response.</p>";
+    return;
+  }
+
+  const normalized = raw.toLowerCase();
+  const pattern = objectionPatterns.find((item) => item.match.some((term) => normalized.includes(term))) || {
+    title: "General objection",
+    ask: "Can you help me understand what is driving that concern?",
+    acknowledge: "I appreciate you being direct. That is a fair concern to raise.",
+    reframe: "The goal is not to force a fit. It is to see whether MMI can solve a real gap around speed, quality, niche reach, risk, or process.",
+    advance: "Ask for one next step that lowers commitment: a follow-up date, one role to benchmark, a stakeholder name, or permission to send targeted context."
+  };
+
+  objectionResponse.innerHTML = `
+    <div class="objection-response-heading">
+      <span>Matched angle</span>
+      <h4>${escapeHtml(pattern.title)}</h4>
+    </div>
+    <div class="objection-response-grid">
+      <article><b>Ask</b><p>${escapeHtml(pattern.ask)}</p></article>
+      <article><b>Acknowledge</b><p>${escapeHtml(pattern.acknowledge)}</p></article>
+      <article><b>Reframe</b><p>${escapeHtml(pattern.reframe)}</p></article>
+      <article><b>Advance</b><p>${escapeHtml(pattern.advance)}</p></article>
+    </div>
+    <div class="objection-response-script">
+      <b>Talk track</b>
+      <p>${escapeHtml(pattern.acknowledge)} ${escapeHtml(pattern.ask)} ${escapeHtml(pattern.reframe)} ${escapeHtml(pattern.advance)}</p>
+    </div>
+  `;
+}
+
+function getVisiblePageId() {
+  return sections.find((section) => !section.hidden)?.id || currentPageId || "home";
+}
+
+function getInitialPageId() {
+  const hashId = window.location.hash.slice(1);
+  return sections.some((section) => section.id === hashId) ? hashId : "home";
 }
 
 function escapeHtml(value) {
@@ -205,18 +663,20 @@ function generateIntel() {
   const region = intelRegion.value;
   const signal = intelSignal.value;
   const role = intelRole.value.trim() || "specialized contract talent";
+  const roleDemand = getRoleDemandSummary(vertical, role);
 
   intelHeadline.textContent = `${vertical.label} staffing brief for ${region}`;
   intelNarrative.textContent = `${vertical.label} buyers are balancing ${vertical.pressure}. For ${role}, lead with a ${signal} point of view: ${signalIntel[signal]} ${buyer}`;
-  intelTalkTrack.textContent = `The market story is not "we have resumes." It is "we can show you where demand, pay, availability, and timing are moving, then use that evidence to build a faster hiring path for ${role}."`;
-  intelOutreach.textContent = `I am tracking ${vertical.label.toLowerCase()} hiring signals in ${region}, especially around ${role}. A few indicators suggest teams may need flexible capacity before internal hiring catches up. Worth comparing notes for 15 minutes this week?`;
+  intelTalkTrack.textContent = `${roleDemand} The hard part is not finding names; it is finding available people who match the environment, rate, timeline, and manager expectations. ${capitalizeSentence(vertical.hardReality)}.`;
+  intelOutreach.textContent = `I am seeing demand for ${role} in ${region}, but the candidate pool is tight. The strongest people are moving quickly and usually need a clear role story, fast interview path, and realistic rate. Open to comparing what you are seeing against the market?`;
 
-  renderList(intelSources, sourceLinks.map((source) => `${source.label}: ${source.value}`));
   renderList(intelQuestions, [
     ...vertical.questions,
     `What would a credible ${region} market snapshot need to show before you would adjust process, pay, or supplier coverage?`
   ]);
   renderMetrics(currentBlsData);
+  renderMarketRoles(vertical.marketRoles);
+  renderSkillSignals(vertical.skills);
 }
 
 function renderList(container, items) {
@@ -236,7 +696,12 @@ async function copyIntelBrief() {
     "",
     "Current data pull:",
     ...formatBlsLines(),
-    ...Array.from(intelSources.querySelectorAll("li")).map((item) => `- ${item.textContent}`),
+    "",
+    "Common roles in market:",
+    ...formatMarketRoleLines(),
+    "",
+    "Skill signals to search:",
+    `- ${verticalIntel[intelVertical.value].skills.join(", ")}`,
     "",
     "Client questions:",
     ...Array.from(intelQuestions.querySelectorAll("li")).map((item) => `- ${item.textContent}`),
@@ -317,6 +782,33 @@ function renderMetrics(items) {
   });
 }
 
+function renderMarketRoles(roles) {
+  if (!intelRoles) return;
+  intelRoles.innerHTML = "";
+
+  roles.forEach((role) => {
+    const item = document.createElement("article");
+    item.className = "role-market-card";
+    item.innerHTML = `
+      <b>${escapeHtml(role.title)}</b>
+      <span>${escapeHtml(role.why)}</span>
+      <small>${escapeHtml(role.angle)}</small>
+    `;
+    intelRoles.append(item);
+  });
+}
+
+function renderSkillSignals(skills) {
+  if (!intelSkills) return;
+  intelSkills.innerHTML = "";
+
+  skills.forEach((skill) => {
+    const chip = document.createElement("span");
+    chip.textContent = skill;
+    intelSkills.append(chip);
+  });
+}
+
 function formatMetricValue(item) {
   return item.suffix === "%" ? `${item.value}%` : `${Number(item.value).toLocaleString()}${item.suffix}`;
 }
@@ -324,6 +816,23 @@ function formatMetricValue(item) {
 function formatBlsLines() {
   if (!currentBlsData.length) return ["- BLS data not pulled yet."];
   return currentBlsData.map((item) => `- BLS ${item.description}: ${formatMetricValue(item)} for ${item.period}${item.preliminary ? " (preliminary)" : ""}. Series: ${item.id}.`);
+}
+
+function formatMarketRoleLines() {
+  return verticalIntel[intelVertical.value].marketRoles.map((role) => `- ${role.title}: ${role.why} Sales angle: ${role.angle}`);
+}
+
+function getRoleDemandSummary(vertical, role) {
+  const normalizedRole = role.toLowerCase();
+  const matchedRole = vertical.marketRoles.find((item) => normalizedRole.includes(item.title.toLowerCase().split(" ")[0]));
+  const roleLabel = matchedRole?.title || role;
+  const roleReason = matchedRole?.why || `Demand is showing up around ${role} because teams need proven capacity without waiting on a long permanent hiring cycle.`;
+
+  return `${roleLabel} is a practical demand signal. ${roleReason}`;
+}
+
+function capitalizeSentence(value) {
+  return `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
 }
 
 async function copyMarketAgentPrompt() {
@@ -341,8 +850,9 @@ async function copyMarketAgentPrompt() {
     "Current data:",
     ...formatBlsLines(),
     "",
-    "Use these sources and validation steps:",
-    ...Array.from(intelSources.querySelectorAll("li")).map((item) => `- ${item.textContent}`),
+    "Common roles and skill signals:",
+    ...formatMarketRoleLines(),
+    `- Skills/keywords to validate in LinkedIn, Apollo, JobDiva, and postings: ${vertical.skills.join(", ")}`,
     "",
     "Output:",
     "- Three market observations",
