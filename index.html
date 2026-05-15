@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mitchell Martin Sales Playbook</title>
-    <link rel="stylesheet" href="styles.css?v=20260513-objection-coach-clean">
+    <link rel="stylesheet" href="styles.css?v=20260515-call-coach-no-worksheet">
   </head>
   <body>
     <header class="topbar">
@@ -24,6 +24,7 @@
         <a href="#close">Prep, Debrief, Close</a>
         <a href="#technology">Tech SOP</a>
         <a href="#first-deal">First Deal</a>
+        <a href="resources.html">Resources</a>
       </nav>
     </header>
 
@@ -70,6 +71,7 @@
               <a href="#close"><span>09</span><img src="icon_09.png" alt=""><b>Prep, Debrief, Close</b><em>Advance the deal cleanly.</em></a>
               <a href="#technology"><span>10</span><img src="icon_10.png" alt=""><b>Technology SOP</b><em>Use the sales stack well.</em></a>
               <a href="#first-deal"><span>11</span><img src="icon_11.png" alt=""><b>First Deal</b><em>Keep wins repeatable.</em></a>
+              <a href="resources.html"><span>12</span><img src="mmi-playbook-logo.png" alt=""><b>Resources</b><em>All tools, files, and prompts.</em></a>
             </div>
           </section>
 
@@ -313,7 +315,12 @@
               <article><b>Advance</b><span>Prep, debrief, close, document, and redeploy.</span></article>
             </div>
 
-            <div class="pipeline-board">
+            <div class="section-tabs" role="tablist" aria-label="Sales lifecycle detail views">
+              <button class="section-tab active" type="button" role="tab" aria-selected="true" aria-controls="lifecycle-pipeline" data-tab-target="lifecycle-pipeline">Sales Pipeline</button>
+              <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="lifecycle-motion" data-tab-target="lifecycle-motion">How MMI Achieves Sales</button>
+            </div>
+
+            <div class="pipeline-board section-tab-panel active" id="lifecycle-pipeline" role="tabpanel">
               <div class="pipeline-heading">
                 <p class="eyebrow">Sales pipeline</p>
                 <h3>Lots of activity at the top creates partnerships at the bottom</h3>
@@ -349,7 +356,7 @@
               <div class="pipeline-partnership">Partnerships</div>
             </div>
 
-            <div class="sales-motion-board">
+            <div class="sales-motion-board section-tab-panel" id="lifecycle-motion" role="tabpanel" hidden>
               <div class="sales-motion-heading">
                 <p class="eyebrow">How MMI achieves sales</p>
                 <h3>Use multiple activity channels to create meaningful conversations</h3>
@@ -401,6 +408,11 @@
               <h2>Build pipeline from multiple signal streams</h2>
               <p>Prospecting works best when each week combines warm network moves, market triggers, data-backed campaigns, and disciplined call blocks.</p>
             </div>
+            <div class="section-tabs" role="tablist" aria-label="Prospecting detail views">
+              <button class="section-tab active" type="button" role="tab" aria-selected="true" aria-controls="prospecting-signals" data-tab-target="prospecting-signals">Signals & Tactics</button>
+              <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="prospecting-promarket" data-tab-target="prospecting-promarket">Pro-Marketing Cadence</button>
+            </div>
+            <div class="section-tab-panel active" id="prospecting-signals" role="tabpanel">
             <div class="source-wheel" aria-label="Prospecting source map">
               <div class="wheel-center">Opportunity Signals</div>
               <span>Referrals</span>
@@ -438,8 +450,9 @@
                 <p>Share relevant content, white papers, event notes, and thoughtful handwritten cards so the first ask has context.</p>
               </article>
             </div>
+            </div>
 
-            <div class="pro-market-system">
+            <div class="pro-market-system section-tab-panel" id="prospecting-promarket" role="tabpanel" hidden>
               <div class="pro-market-heading">
                 <div>
                   <p class="eyebrow">Pro-marketing strategy</p>
@@ -521,19 +534,6 @@
                   </article>
                 </div>
               </div>
-
-              <div class="resource-callout">
-                <img class="copilot-logo" src="microsoft-copilot-logo.svg" alt="Microsoft Copilot">
-                <div class="resource-copy">
-                  <h3>Helpful resources</h3>
-                  <p>Use pre-built Copilot agents to create client-ready market intelligence for Financial Services, Healthcare, and IT. Bring the insight into outreach so the message sounds consultative, not generic.</p>
-                  <div>
-                    <a href="https://m365.cloud.microsoft/chat/?titleId=T_3bd64108-82bc-9db6-9361-f1b187caa82d&source=embedded-builder" target="_blank" rel="noreferrer">Financial Services</a>
-                    <a href="https://m365.cloud.microsoft/chat/?titleId=T_ac19b564-5a9b-6e66-be39-87ad84d02d48&source=embedded-builder" target="_blank" rel="noreferrer">Healthcare</a>
-                    <a href="https://m365.cloud.microsoft/chat/?titleId=T_2a2f1beb-4ac6-addd-3de4-cb01b8009b20&source=embedded-builder" target="_blank" rel="noreferrer">IT</a>
-                  </div>
-                </div>
-              </div>
             </div>
           </section>
 
@@ -542,6 +542,19 @@
               <p class="eyebrow">Market intelligence</p>
               <h2>Generate a sales-ready market brief</h2>
               <p>Build a current, evidence-led point of view for Healthcare, IT, or Finance staffing conversations. Use it before prospecting, intro meetings, pro-marketing, and job-order intake.</p>
+            </div>
+
+            <div class="resource-callout market-intel-callout">
+              <img class="copilot-logo" src="microsoft-copilot-logo.svg" alt="Microsoft Copilot">
+              <div class="resource-copy">
+                <h3>Helpful resources</h3>
+                <p>Use pre-built Copilot agents to create client-ready market intelligence for Financial Services, Healthcare, and IT. Bring the insight into outreach so the message sounds consultative, not generic.</p>
+                <div>
+                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_3bd64108-82bc-9db6-9361-f1b187caa82d&source=embedded-builder" target="_blank" rel="noreferrer">Financial Services</a>
+                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_ac19b564-5a9b-6e66-be39-87ad84d02d48&source=embedded-builder" target="_blank" rel="noreferrer">Healthcare</a>
+                  <a href="https://m365.cloud.microsoft/chat/?titleId=T_2a2f1beb-4ac6-addd-3de4-cb01b8009b20&source=embedded-builder" target="_blank" rel="noreferrer">IT</a>
+                </div>
+              </div>
             </div>
 
             <div class="intel-workbench">
@@ -654,7 +667,12 @@
               <h2>Match the sales motion to the account</h2>
               <p>Buyer personas define the person. Account strategy defines the terrain. Strong selling aligns both.</p>
             </div>
-            <div class="persona-board">
+            <div class="section-tabs" role="tablist" aria-label="Buyer strategy detail views">
+              <button class="section-tab active" type="button" role="tab" aria-selected="true" aria-controls="buyer-account-types" data-tab-target="buyer-account-types">Account Types</button>
+              <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="buyer-segments" data-tab-target="buyer-segments">Enterprise vs. Mid-Market</button>
+              <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="buyer-dmu" data-tab-target="buyer-dmu">DMU/I Map</button>
+            </div>
+            <div class="persona-board section-tab-panel active" id="buyer-account-types" role="tabpanel">
               <article>
                 <h3>MSP / VMS</h3>
                 <p>Know program rules, submission windows, response time metrics, ratios, and the program manager's expectations.</p>
@@ -669,7 +687,7 @@
               </article>
             </div>
 
-            <div class="market-segment-board">
+            <div class="market-segment-board section-tab-panel" id="buyer-segments" role="tabpanel" hidden>
               <div class="market-segment-heading">
                 <p class="eyebrow">Enterprise vs. mid-market</p>
                 <h3>Different terrain, same discipline</h3>
@@ -713,7 +731,7 @@
               </div>
             </div>
 
-            <div class="dmu-board">
+            <div class="dmu-board section-tab-panel" id="buyer-dmu" role="tabpanel" hidden>
               <div class="dmu-heading">
                 <p class="eyebrow">Who buys your product?</p>
                 <h3>Map the DMU/I before you pitch</h3>
@@ -766,7 +784,11 @@
               <h2>Network before the ask</h2>
               <p>Use events, associations, user groups, consultants, and LinkedIn to create warmer paths to decision makers.</p>
             </div>
-            <div class="split-panel">
+            <div class="section-tabs" role="tablist" aria-label="Networking detail views">
+              <button class="section-tab active" type="button" role="tab" aria-selected="true" aria-controls="networking-plays" data-tab-target="networking-plays">Networking Plays</button>
+              <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="networking-objections" data-tab-target="networking-objections">Objection Handling</button>
+            </div>
+            <div class="split-panel section-tab-panel active" id="networking-plays" role="tabpanel">
               <article>
                 <h3>Networking Plays</h3>
                 <ul>
@@ -782,7 +804,7 @@
               </article>
             </div>
 
-            <div class="objection-playbook">
+            <div class="objection-playbook section-tab-panel" id="networking-objections" role="tabpanel" hidden>
               <div class="objection-heading">
                 <p class="eyebrow">Objection resolution model</p>
                 <h3>Ask, acknowledge, reframe, advance</h3>
@@ -892,7 +914,7 @@
             </div>
           </section>
 
-          <section class="playbook-section" id="meetings" data-title="Cold Calls Intro Meetings Job Orders" data-search="cold call voicemail script who you are where you are calling from specialize IT healthcare finance recruitment reason calling open question preparation intro meeting rapport open ended questions actively listen job order intake delivery qualified job order worksheet job entry process delivery Q&A pain points exclusive interview timeslots resume review bill rate salary immigration start date duration top requirements position remarks jobqueue contract perm">
+          <section class="playbook-section" id="meetings" data-title="Cold Calls Intro Meetings Job Orders" data-search="cold call voicemail script who you are where you are calling from specialize IT healthcare finance recruitment reason calling open question preparation build rapport relationships CORP contact organization recruitment projects awareness credibility trust partnership intro meeting prepare agenda focus areas staffing partner client manager first impression open ended questions pain points speed quality cost reliability flexibility second date thank you email actively listen job order intake delivery qualified job order worksheet job entry process delivery Q&A pain points exclusive interview timeslots resume review bill rate salary immigration start date duration top requirements position remarks jobqueue contract perm">
             <div class="section-heading">
               <p class="eyebrow">Conversation craft</p>
               <h2>Move every conversation toward a calendar event</h2>
@@ -917,40 +939,358 @@
             </div>
 
             <div class="meeting-detail-panel active" id="call-panel">
-              <div class="call-script-board">
-                <div class="call-script-bubble">
-                  <p>Hi, this is <strong>NAME</strong>, calling from Mitchell Martin. We are a staffing company specializing in <strong>IT / Healthcare / Finance</strong> recruitment.</p>
-                  <p>The reason for my call is that I work with organizations like yours to help identify and secure top talent in the market.</p>
-                  <p>I wanted to introduce myself to learn more about you and your current hiring needs.</p>
-                  <p>What does your current hiring landscape look like?</p>
+              <div class="section-tabs call-subtabs" role="tablist" aria-label="Call detail views">
+                <button class="section-tab active" type="button" role="tab" aria-selected="true" aria-controls="call-cold-structure" data-tab-target="call-cold-structure">Cold Call Structure</button>
+                <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="call-voicemail" data-tab-target="call-voicemail">Voicemail</button>
+              </div>
+              <div class="call-subpage section-tab-panel active" id="call-cold-structure" role="tabpanel">
+              <div class="bd-call-structure bd-call-coach" aria-label="Interactive business development call coach">
+                <div class="bd-call-heading">
+                  <p class="eyebrow">Business development call</p>
+                  <h3>Business development call coach</h3>
+                  <p>Use the stepper during a live call. Each step gives the objective, language to try, questions to ask, and the mistake to avoid.</p>
                 </div>
-                <div class="call-framework">
-                  <article><span>01</span><b>Who you are</b></article>
-                  <article><span>02</span><b>Where you're calling from</b></article>
-                  <article><span>03</span><b>What you specialize in</b></article>
-                  <article><span>04</span><b>The reason you're calling</b></article>
-                  <article><span>05</span><b>Open question</b></article>
+                <div class="bd-call-track" role="tablist" aria-label="Business development call steps">
+                  <button class="active" type="button" role="tab" data-call-step-target="call-introduction-step" aria-controls="call-introduction-step" aria-selected="true">
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6A2 2 0 0 1 22 16.9Z" />
+                      <path d="M14 2c2.9.6 5.4 3.1 6 6" />
+                    </svg>
+                    <span>01</span>
+                    <b>Introduction</b>
+                  </button>
+                  <button type="button" role="tab" data-call-step-target="call-question-step" aria-controls="call-question-step" aria-selected="false">
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M11 4a7 7 0 1 0 4.9 12" />
+                      <path d="m16 16 5 5" />
+                      <path d="M9.5 9a2.5 2.5 0 1 1 4.2 1.8c-.8.6-1.2 1-1.2 2" />
+                      <path d="M12.5 16h.01" />
+                    </svg>
+                    <span>02</span>
+                    <b>Question</b>
+                  </button>
+                  <button type="button" role="tab" data-call-step-target="call-sell-step" aria-controls="call-sell-step" aria-selected="false">
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M3 17h4l10-10a2.1 2.1 0 0 1 3 3L10 20H6v-4" />
+                      <path d="M14 6l4 4" />
+                      <path d="M4 7h7" />
+                      <path d="M4 11h5" />
+                    </svg>
+                    <span>03</span>
+                    <b>Sell</b>
+                  </button>
+                  <button type="button" role="tab" data-call-step-target="call-action-step" aria-controls="call-action-step" aria-selected="false">
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M9 5h11" />
+                      <path d="M9 12h11" />
+                      <path d="M9 19h11" />
+                      <path d="m3.5 5 1 1 2-2" />
+                      <path d="m3.5 12 1 1 2-2" />
+                      <path d="m3.5 19 1 1 2-2" />
+                    </svg>
+                    <span>04</span>
+                    <b>Action Plan</b>
+                  </button>
+                  <button type="button" role="tab" data-call-step-target="call-next-step" aria-controls="call-next-step" aria-selected="false">
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M7 2v4" />
+                      <path d="M17 2v4" />
+                      <path d="M3 9h18" />
+                      <path d="M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+                      <path d="m9 15 2 2 4-5" />
+                    </svg>
+                    <span>05</span>
+                    <b>Next Steps</b>
+                  </button>
+                  <button type="button" role="tab" data-call-step-target="call-close-step" aria-controls="call-close-step" aria-selected="false">
+                    <svg aria-hidden="true" viewBox="0 0 24 24">
+                      <path d="M8 11 4.5 14.5a2.1 2.1 0 0 0 3 3L10 15" />
+                      <path d="M16 11l3.5 3.5a2.1 2.1 0 0 1-3 3L14 15" />
+                      <path d="M8 11l2-2 2 2 2-2 2 2" />
+                      <path d="M12 13v6" />
+                      <path d="m9 16 3 3 3-3" />
+                    </svg>
+                    <span>06</span>
+                    <b>Close</b>
+                  </button>
+                </div>
+              </div>
+              <div class="call-step-panel active" id="call-introduction-step" role="tabpanel">
+                <div class="call-coach-panel">
+                  <div class="call-coach-main">
+                    <span class="coach-step-number">01</span>
+                    <h3>Introduction</h3>
+                    <p>Earn permission to continue. Be clear, relevant, and brief before you start discovery.</p>
+                    <div class="coach-script">
+                      <b>Try this</b>
+                      <p>"Hi, this is NAME from Mitchell Martin. We specialize in IT, Healthcare, and Finance staffing. The reason I am calling is that I work with organizations like yours on hard-to-fill roles and wanted to understand where hiring support may be useful."</p>
+                    </div>
+                  </div>
+                  <div class="coach-grid">
+                    <article><b>Objective</b><p>Establish who you are, why you called, and why the conversation is relevant.</p></article>
+                    <article><b>Ask</b><p>"Is now a terrible time for a quick question?"</p></article>
+                    <article><b>Avoid</b><p>Do not launch into a full pitch before the buyer gives you a reason to continue.</p></article>
+                  </div>
+                </div>
+              </div>
+              <div class="call-step-panel" id="call-question-step" role="tabpanel" hidden>
+                <div class="call-coach-panel">
+                  <div class="call-coach-main">
+                    <span class="coach-step-number">02</span>
+                    <h3>Question</h3>
+                    <p>Use CORP to move from surface-level contact into useful context: Contact, Organization, Recruitment, Projects.</p>
+                    <div class="coach-script">
+                      <b>Try this</b>
+                      <p>"What does your current hiring landscape look like, and where does the process tend to slow down?"</p>
+                    </div>
+                  </div>
+                  <div class="coach-grid four">
+                    <article><b>Contact</b><p>Role, team, priorities, influence.</p></article>
+                    <article><b>Organization</b><p>Business, location, growth, pressure.</p></article>
+                    <article><b>Recruitment</b><p>Hiring process, candidate flow, challenges.</p></article>
+                    <article><b>Projects</b><p>Upcoming work, skills needed, timing.</p></article>
+                  </div>
+                </div>
+              </div>
+              <div class="call-step-panel" id="call-sell-step" role="tabpanel" hidden>
+                <div class="call-coach-panel">
+                  <div class="call-coach-main">
+                    <span class="coach-step-number">03</span>
+                    <h3>Sell</h3>
+                    <p>Connect Mitchell Martin to what they just told you. Sell to the specific pain, not to a generic capability list.</p>
+                    <div class="coach-script">
+                      <b>Try this</b>
+                      <p>"That is exactly where we can be useful. We specialize in finding qualified talent for teams that need speed without lowering the bar."</p>
+                    </div>
+                  </div>
+                  <div class="coach-grid">
+                    <article><b>Anchor to pain</b><p>Repeat the problem in their words before positioning MMI.</p></article>
+                    <article><b>Proof point</b><p>Mention market reach, speed, quality, specialization, or relevant delivery experience.</p></article>
+                    <article><b>Avoid</b><p>Do not over-explain every service. Keep the value tied to their situation.</p></article>
+                  </div>
+                </div>
+              </div>
+              <div class="call-step-panel" id="call-action-step" role="tabpanel" hidden>
+                <div class="call-coach-panel">
+                  <div class="call-coach-main">
+                    <span class="coach-step-number">04</span>
+                    <h3>Action Plan</h3>
+                    <p>Translate the conversation into movement. Name what you will do, what you need, and what the buyer should expect.</p>
+                    <div class="coach-script">
+                      <b>Try this</b>
+                      <p>"I can pull together relevant market points and examples of talent we are seeing. Who else should be part of that discussion?"</p>
+                    </div>
+                  </div>
+                  <div class="coach-grid">
+                    <article><b>Your action</b><p>Market data, candidate examples, intro meeting, follow-up email, or job intake.</p></article>
+                    <article><b>Their action</b><p>Confirm stakeholders, send role details, share timing, or approve a meeting.</p></article>
+                    <article><b>Avoid</b><p>Do not leave ownership unclear. Every action should have a person and purpose.</p></article>
+                  </div>
+                </div>
+              </div>
+              <div class="call-step-panel" id="call-next-step" role="tabpanel" hidden>
+                <div class="call-coach-panel">
+                  <div class="call-coach-main">
+                    <span class="coach-step-number">05</span>
+                    <h3>Next Steps</h3>
+                    <p>Anchor the follow-up to a date, time, and reason. Vague agreement fades; calendar commitments move.</p>
+                    <div class="coach-script">
+                      <b>Try this</b>
+                      <p>"Would Tuesday at 10:00 work for a 15-minute conversation around the roles and timing you mentioned?"</p>
+                    </div>
+                  </div>
+                  <div class="coach-grid">
+                    <article><b>Make it specific</b><p>Date, time, attendees, agenda, and desired outcome.</p></article>
+                    <article><b>Confirm value</b><p>Restate why the next conversation matters to them.</p></article>
+                    <article><b>Avoid</b><p>Do not accept "send me something" unless the follow-up is clearly defined.</p></article>
+                  </div>
+                </div>
+              </div>
+              <div class="call-step-panel" id="call-close-step" role="tabpanel" hidden>
+                <div class="call-coach-panel">
+                  <div class="call-coach-main">
+                    <span class="coach-step-number">06</span>
+                    <h3>Close</h3>
+                    <p>Confirm agreement, restate the next step, and document the outcome while the call is still fresh.</p>
+                    <div class="coach-script">
+                      <b>Try this</b>
+                      <p>"Great, I will send the calendar invite and include a short agenda so we can make the time useful."</p>
+                    </div>
+                  </div>
+                  <div class="coach-grid">
+                    <article><b>Confirm</b><p>Time, attendee, purpose, and what you will send.</p></article>
+                    <article><b>Log</b><p>Update notes, tags, follow-up task, and next touch date.</p></article>
+                    <article><b>Avoid</b><p>Do not end without a clear owner for the next move.</p></article>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="call-subpage section-tab-panel" id="call-voicemail" role="tabpanel" hidden>
+                <div class="voicemail-board">
+                  <div class="voicemail-heading">
+                    <p class="eyebrow">Voicemail</p>
+                    <h3>Leave a message that earns a reason to call back</h3>
+                    <p>Keep it short, specific, and easy to act on. The voicemail should sound like a useful follow-up is coming, not a generic pitch.</p>
+                  </div>
+                  <div class="voicemail-grid">
+                    <article>
+                      <span>01</span>
+                      <h4>Identify yourself</h4>
+                      <p>Name, company, and specialty in one clean sentence.</p>
+                    </article>
+                    <article>
+                      <span>02</span>
+                      <h4>Give the reason</h4>
+                      <p>Reference a role, team, market signal, initiative, or hiring pressure.</p>
+                    </article>
+                    <article>
+                      <span>03</span>
+                      <h4>Offer value</h4>
+                      <p>Signal that you can bring market context, talent availability, or a relevant follow-up.</p>
+                    </article>
+                    <article>
+                      <span>04</span>
+                      <h4>Set the next touch</h4>
+                      <p>Tell them you will send a short email and invite a quick response.</p>
+                    </article>
+                  </div>
+                  <div class="voicemail-script">
+                    <b>Sample voicemail</b>
+                    <p>"Hi, this is NAME calling from Mitchell Martin. We specialize in IT, Healthcare, and Finance staffing. I was reaching out because we are helping teams compare the market for hard-to-fill roles and I thought the timing may be relevant for your group. I will send a quick email as well. You can reach me at PHONE. Again, this is NAME from Mitchell Martin."</p>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div class="meeting-detail-panel" id="discover-panel" hidden>
-              <div class="discover-board">
-                <article>
-                  <span>01</span>
-                  <h3>Open with context</h3>
-                  <p>Reference the trigger that earned the meeting: a role, initiative, referral, market signal, current consultant, or candidate conversation.</p>
-                </article>
-                <article>
-                  <span>02</span>
-                  <h3>Diagnose the buying situation</h3>
-                  <p>Learn who owns the work, who approves the spend, who uses the talent, where the process breaks, and what happens if the role stays open.</p>
-                </article>
-                <article>
-                  <span>03</span>
-                  <h3>Confirm next action</h3>
-                  <p>Leave with a calendar event: job-order intake, delivery calibration, market follow-up, manager introduction, or a specific send-date for talent.</p>
-                </article>
+              <div class="intro-meeting-board">
+                <div class="intro-meeting-heading">
+                  <p class="eyebrow">Intro meeting</p>
+                  <h3>Turn a first meeting into a relationship and a next date</h3>
+                  <p>The intro meeting is the first real impression with a client manager. Use it to prepare well, build rapport, learn pain points, position Mitchell Martin, and leave with a specific next step.</p>
+                </div>
+                <div class="section-tabs intro-subtabs" role="tablist" aria-label="Intro meeting detail views">
+                  <button class="section-tab active" type="button" role="tab" aria-selected="true" aria-controls="intro-prepare" data-tab-target="intro-prepare">Prepare</button>
+                  <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="intro-open" data-tab-target="intro-open">Open</button>
+                  <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="intro-questions" data-tab-target="intro-questions">Questions</button>
+                  <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="intro-sell" data-tab-target="intro-sell">Sell</button>
+                  <button class="section-tab" type="button" role="tab" aria-selected="false" aria-controls="intro-next-date" data-tab-target="intro-next-date">Next Date</button>
+                </div>
+
+                <div class="intro-subpage section-tab-panel active" id="intro-prepare" role="tabpanel">
+                  <div class="intro-card-grid three">
+                    <article>
+                      <span>01</span>
+                      <h4>Research before you walk in</h4>
+                      <p>Review the company, the client manager, press releases, competitors, initiatives, and any accounts or consultants MMI already knows.</p>
+                    </article>
+                    <article>
+                      <span>02</span>
+                      <h4>Send a simple agenda</h4>
+                      <p>Use three bullets to remind them the meeting is coming and frame the conversation around their priorities, staffing partner expectations, and hiring friction.</p>
+                    </article>
+                    <article>
+                      <span>03</span>
+                      <h4>Plan the outcome</h4>
+                      <p>Know how you will start, what research can create rapport, what you need to learn, and what next step you want before the meeting ends.</p>
+                    </article>
+                  </div>
+                  <div class="intro-script-box">
+                    <b>Agenda prompts</b>
+                    <p>What are your focus areas this quarter? What makes the best staffing partner for you? What can I do to make your life easier when it comes to hiring?</p>
+                  </div>
+                </div>
+
+                <div class="intro-subpage section-tab-panel" id="intro-open" role="tabpanel" hidden>
+                  <div class="intro-card-grid two">
+                    <article>
+                      <span>01</span>
+                      <h4>Build the relationship first</h4>
+                      <p>Do not cut straight to the chase. Use natural small talk, active listening, and genuine curiosity to learn the person before the hiring process.</p>
+                    </article>
+                    <article>
+                      <span>02</span>
+                      <h4>Transition smoothly</h4>
+                      <p>When the small talk naturally closes, thank them for their time, restate the purpose, reference the agenda, and ask what they want out of the meeting.</p>
+                    </article>
+                  </div>
+                  <div class="intro-script-box">
+                    <b>Transition line</b>
+                    <p>"I appreciate you making the time today. I wanted to learn more about your team, your hiring priorities, and where a staffing partner can be useful. Before I jump in, what would make this conversation most helpful for you?"</p>
+                  </div>
+                </div>
+
+                <div class="intro-subpage section-tab-panel" id="intro-questions" role="tabpanel" hidden>
+                  <div class="intro-card-grid three">
+                    <article>
+                      <span>01</span>
+                      <h4>Use open-ended questions</h4>
+                      <p>Questions that start with who, what, where, when, why, or "tell me about" create better information than yes-or-no prompts.</p>
+                    </article>
+                    <article>
+                      <span>02</span>
+                      <h4>Capture the operating picture</h4>
+                      <p>Learn their team landscape, role, major initiatives, candidate types, interview process, competitors, other firms, referrals, and threads to build.</p>
+                    </article>
+                    <article>
+                      <span>03</span>
+                      <h4>Listen for pain points</h4>
+                      <p>Pain points are what make the conversation actionable. If you are talking too much, reset and let the client manager explain what is hard.</p>
+                    </article>
+                  </div>
+                  <div class="intro-question-list">
+                    <span>Tell me about your team structure and where contractors fit today.</span>
+                    <span>What kinds of candidates have worked well for you recently?</span>
+                    <span>Where does the interview or hiring process usually slow down?</span>
+                    <span>Which hiring pain is most frustrating right now: speed, quality, cost, reliability, flexibility, or niche skills?</span>
+                  </div>
+                </div>
+
+                <div class="intro-subpage section-tab-panel" id="intro-sell" role="tabpanel" hidden>
+                  <div class="intro-card-grid two">
+                    <article>
+                      <span>01</span>
+                      <h4>Pitch MMI simply</h4>
+                      <p>Ask if they have heard of Mitchell Martin. If not, keep the pitch to 30 seconds: employee-owned, niche specialization nationwide, 40+ years, tenured delivery, flexible solutions, and agile execution.</p>
+                    </article>
+                    <article>
+                      <span>02</span>
+                      <h4>Sell from the pain point</h4>
+                      <p>You can only sell well after you know the pain. Tailor the pitch to their specific issue: speed, quality, cost, reliability, flexibility, SOW, RPO, bulk buying, niche talent, or delivery strategy.</p>
+                    </article>
+                  </div>
+                  <div class="intro-script-box">
+                    <b>Pain-to-sell move</b>
+                    <p>"If speed and candidate alignment are the issue, that is where our delivery model helps. We can calibrate against the role, market, and process before sending resumes so your team is reviewing fewer, stronger fits."</p>
+                  </div>
+                </div>
+
+                <div class="intro-subpage section-tab-panel" id="intro-next-date" role="tabpanel" hidden>
+                  <div class="intro-do-dont">
+                    <article>
+                      <h4>Do</h4>
+                      <ul>
+                        <li>Set the second date on the first date.</li>
+                        <li>Be conscientious of their time.</li>
+                        <li>Actively listen and keep the meeting balanced.</li>
+                        <li>Send a personalized thank-you email right after the meeting.</li>
+                        <li>Reiterate one personal and one business topic you discussed.</li>
+                        <li>Confirm the specific follow-up time, then send the invite.</li>
+                      </ul>
+                    </article>
+                    <article>
+                      <h4>Do not</h4>
+                      <ul>
+                        <li>Launch into a full background story about yourself.</li>
+                        <li>Spend 25+ minutes explaining MMI.</li>
+                        <li>Quiz them or make the meeting feel transactional.</li>
+                        <li>Be all personal and no business.</li>
+                        <li>Be all business and no personal.</li>
+                        <li>Overstay your welcome.</li>
+                      </ul>
+                    </article>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1256,6 +1596,6 @@
     </main>
 
     <button class="back-top" type="button" id="backTop" aria-label="Back to top">&uarr;</button>
-    <script src="app.js?v=20260513-objection-coach-clean"></script>
+    <script src="app.js?v=20260515-corp-question-bank"></script>
   </body>
 </html>
