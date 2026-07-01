@@ -1,6 +1,6 @@
 window.playbookAuthConfig = {
   enabled: true,
-  requireAllowedDomain: false,
+  requireAllowedDomain: true,
   allowedDomains: ["mitchellmartin.com", "itmmi.com"],
   msal: {
     auth: {
