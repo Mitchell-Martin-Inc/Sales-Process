@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mitchell Martin Recruiter Toolkit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./recruiter-toolkit-assets/styles.css" />
+  </head>
+  <body>
+    <svg class="sprite" aria-hidden="true">
+      <symbol id="icon-message" viewBox="0 0 24 24"><path d="M4 5h16v10H8l-4 4V5Z"/><path d="M8 9h8M8 12h5"/></symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.3a12 12 0 0 0 5.7 5.7L16 13l4 1.5v3A2.5 2.5 0 0 1 17.3 20 13.3 13.3 0 0 1 4 6.7 2.5 2.5 0 0 1 6.5 4Z"/></symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24"><path d="m4 12 16-8-5 16-3-7-8-1Z"/><path d="m12 13 8-9"/></symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M7 3v4M17 3v4M4 8h16M5 5h14v15H5z"/><path d="m8 14 2 2 5-5"/></symbol>
+      <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-5"/></symbol>
+      <symbol id="icon-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h1M4 12h1M4 18h1"/></symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24"><path d="M8 8h11v12H8z"/><path d="M5 16H4V4h12v1"/></symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></symbol>
+      <symbol id="icon-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+      <symbol id="icon-warning" viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3Z"/><path d="M12 9v5M12 17h.01"/></symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24"><path d="M9 6V4h6v2"/><path d="M4 7h16v12H4z"/><path d="M4 12h16"/></symbol>
+    </svg>
+
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Mitchell Martin Recruiter Toolkit">
+        <img src="./recruiter-toolkit-assets/mitchell-martin-logo.jfif" alt="Mitchell Martin" />
+      </a>
+      <nav aria-label="Toolkit sections">
+        <a href="#job-flow">Job Flow</a>
+        <a href="#templates">Templates</a>
+        <a href="#candidate-conversations">Candidate Conversations</a>
+        <a href="#risk">Risk Check</a>
+        <a href="#ownership">Ownership</a>
+        <a href="#immigration-ic">Immigration, 3rd Parties & ICs</a>
+        <a href="#resume-formatting">Resume Format</a>
+        <a href="#interview">Prep & Debrief</a>
+        <a href="#offer">Offer</a>
+        <a href="#deal-start">Deal Start</a>
+        <a href="#jobdiva-docs">JobDiva Docs</a>
+        <a href="#reference-library">Reference Library</a>
+      </nav>
+      <button class="icon-button" data-theme aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span></span>
+      </button>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Recruiter Encyclopedia</p>
+          <h1>Real work runs on ready recruiters.</h1>
+          <p class="dek">This is a modern, interactive version of the Recruiter Toolkit.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#templates"><svg><use href="#icon-message"/></svg>Open templates</a>
+            <a class="button secondary" href="#risk"><svg><use href="#icon-shield"/></svg>Run risk check</a>
+          </div>
+        </div>
+        <div class="hero-panel branded-art-panel">
+          <img class="hero-art logo-art" src="./recruiter-toolkit-assets/mitchell-martin-logo.jfif" alt="Mitchell Martin logo" />
+        </div>
+      </section>
+
+      <section class="section" id="job-flow">
+        <div class="section-heading">
+          <p class="eyebrow">SOP process</p>
+          <h2>Job flow, step by step.</h2>
+          <p>Follow the handoff from qualified requirement through assignment, submission, interview, close, onboarding, and retention.</p>
+        </div>
+        <div class="process-shell">
+          <div class="process-tabs" role="tablist" aria-label="SOP job flow phases">
+            <button class="active" data-process="qualification">01 Qualification</button>
+            <button data-process="assignment">02 Assignment</button>
+            <button data-process="submission">03 Submission</button>
+            <button data-process="interview">04 Interview</button>
+            <button data-process="close">05 Debrief & Close</button>
+            <button data-process="postclose">06 Post Close</button>
+          </div>
+          <article class="process-panel">
+            <div class="process-kicker" id="processOwner">Owner: Sales</div>
+            <h3 id="processTitle">Qualification</h3>
+            <p id="processSummary">Sales qualifies the requirement by phone and includes recruiting or sales leadership when needed.</p>
+            <div class="process-list" id="processList"></div>
+            <div class="process-note" id="processNote">For new salespeople or new clients, leader involvement and approval are mandatory.</div>
+          </article>
+        </div>
+      </section>
+      <section class="section split" id="templates">
+        <aside class="section-lead">
+          <p class="eyebrow">Templates</p>
+          <h2>Copy-ready messaging, trimmed for action.</h2>
+          <p>Choose the moment, fill the blanks, and copy a polished version. The original toolkit language is preserved where it matters, but the page keeps it scannable.</p>
+          <label class="searchbox">
+            <svg><use href="#icon-search"/></svg>
+            <input id="templateSearch" type="search" placeholder="Find a template or field" />
+          </label>
+        </aside>
+        <div class="tool-surface">
+          <div class="tabs" role="tablist" aria-label="Recruiter templates">
+            <button class="tab active" data-template-tab="linkedin">LinkedIn</button>
+            <button class="tab" data-template-tab="intro">Intro call</button>
+            <button class="tab" data-template-tab="submittal">Submittal</button>
+            <button class="tab" data-template-tab="submittalConfirmation">Submittal confirmation</button>
+            <button class="tab" data-template-tab="confirmation">Interview confirmation</button>
+            <button class="tab" data-template-tab="interviewPrep">Interview prep</button>
+            <button class="tab" data-template-tab="debrief">Debrief</button>
+          </div>
+          <div class="template-stage">
+            <div class="field-grid" id="templateFields"></div>
+            <article class="template-card">
+              <div class="template-head">
+                <div>
+                  <p class="eyebrow" id="templateType">Outreach</p>
+                  <h3 id="templateTitle">LinkedIn Messaging Template</h3>
+                </div>
+                <button class="copy-button" data-copy="#templateOutput"><svg><use href="#icon-copy"/></svg>Copy</button>
+              </div>
+              <pre id="templateOutput"></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="candidate-conversations">
+        <div class="section-heading">
+          <p class="eyebrow">Conversations with candidates</p>
+          <h2>Ask better questions, then listen.</h2>
+          <p>Use this flow to prepare with the salesperson, run stronger candidate discovery calls, and explain benefits or salary model details clearly.</p>
+        </div>
+        <div class="bank-grid conversation-grid">
+          <article>
+            <h3>Understand the req first</h3>
+            <ul>
+              <li>Confirm client specifics, day-to-day work, required skills, nice-to-have skills, certifications, location, rate, markup, pricing, and rules of engagement.</li>
+              <li>Ask the AE what the ideal candidate looks like and what would put someone over the top.</li>
+              <li>Ask whether placements have been made here before and why the role is open.</li>
+              <li>Confirm the interview process before recruiting.</li>
+              <li>If something is unclear, ask and repeat it back at the end.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Open the candidate call</h3>
+            <ul>
+              <li>Introduce who you are, why you are calling, and the value you can add.</li>
+              <li>Ask what brings them to the job market.</li>
+              <li>If currently employed, ask what is causing them to look for a new opportunity.</li>
+              <li>Clarify whether they are actively or passively looking.</li>
+              <li>Build rapport and keep yourself to 40% or less of the talking.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Discovery questions</h3>
+            <ul>
+              <li>Identify hot buttons: compensation, remote/onsite, commute, work-life balance, manager, team, job function, and responsibilities.</li>
+              <li>Validate name, address, phone, email, preferred contact method, best hours, current title, years of experience, certifications, and work authorization.</li>
+              <li>Use if/then questions to separate needs from wants.</li>
+              <li>Ask where else they have been submitted, interviewed, and where they are in the decision process.</li>
+              <li>Ask when they can interview, start, whether they need notice, and whether they have planned time off.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>KYC and close-forward notes</h3>
+            <ul>
+              <li>Ask why they are looking for a new opportunity.</li>
+              <li>Ask the three things that motivate them when thinking about a new role.</li>
+              <li>Ask how they would rank the opportunities presented to them.</li>
+              <li>Summarize their why back to them.</li>
+              <li>Recap the conversation, confirm next steps, set a follow-up, and take strong notes in JobDiva.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Benefits conversation</h3>
+            <ul>
+              <li>Hourly and salaried consultant benefit guides both note eligibility for full-time employees working 30 or more hours per week.</li>
+              <li>Coverage is effective the first of the month following 30 days for benefit-eligible employees electing coverage.</li>
+              <li>Qualified dependents include spouse, children up to age 26, certain incapacitated children, and domestic partners.</li>
+              <li>Qualifying events must be reported to HR within 30 days.</li>
+              <li>Use the benefit guides for the governing details and plan specifics.</li>
+            </ul>
+            <div class="card-downloads">
+              <a href="./reference-library/MMI 2026 Benefit Guide Hourly Consultants.pdf" download>Hourly guide</a>
+              <a href="./reference-library/MMI 2026 Benefit Guide Salary Consultants.pdf" download>Salary guide</a>
+            </div>
+          </article>
+          <article>
+            <h3>Salary model reminders</h3>
+            <ul>
+              <li>Use the salary model for exceptions and manager approval conversations.</li>
+              <li>Inputs include hourly bill rate, discount, annual salary, per diem, payroll tax load, medical cost, immigration costs, referral fees, and other expenses.</li>
+              <li>The model analyzes gross profit and flags low-profit deals requiring manager approval.</li>
+              <li>Salary terms convert total compensation and per diem into hourly equivalents.</li>
+              <li>Use the model to support clear conversations about bill, pay, costs, and gross profit.</li>
+            </ul>
+            <div class="card-downloads">
+              <a href="./reference-library/MMI Consultant Salary Model.xlsx" download>Salary model</a>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="section split" id="risk">
+        <aside class="section-lead">
+          <p class="eyebrow">Risk check</p>
+          <h2>Candidate vetting and red flags</h2>
+          <p>Review LinkedIn, resume, conversation behavior, references, and technical credibility. Address concerns directly, with curiosity and expertise rather than criticism.</p>
+          <div class="risk-meter" aria-live="polite">
+            <span id="riskScore">0</span>
+            <p>signals reviewed</p>
+          </div>
+          <div class="download-row compact-downloads">
+            <a class="download-button" href="./reference-library/Resume Red Flags and Candidate Vetting 2026.pptx" download><svg><use href="#icon-shield"/></svg>Risk check deck</a>
+          </div>
+        </aside>
+        <div class="risk-content">
+          <div class="section-callout risk-callout">
+            <strong>Please stop and run a Ropes Scout Score</strong>
+            <span>To recognize any identification validation concerns and send a Ropes Assessment to validate further skills and validity.</span>
+          </div>
+          <div class="risk-board">
+            <label><input type="checkbox" data-risk /> <span><svg><use href="#icon-search"/></svg></span><strong>LinkedIn identity</strong><small>Watch for recently opened accounts, no picture, no last name, fewer than 500 connections, or no experience/posting history.</small></label>
+            <label><input type="checkbox" data-risk /> <span><svg><use href="#icon-list"/></svg></span><strong>Resume consistency</strong><small>Check gaps, tenure, company legitimacy, degree/graduation alignment, job level changes, and odd career progression.</small></label>
+            <label><input type="checkbox" data-risk /> <span><svg><use href="#icon-warning"/></svg></span><strong>Generic technical claims</strong><small>Generic technology lists and overused buzzwords should be followed with project-specific questions.</small></label>
+            <label><input type="checkbox" data-risk /> <span><svg><use href="#icon-user"/></svg></span><strong>Conversation credibility</strong><small>Red flags include defensiveness, passive interest, inability to explain experience, or hesitation around checks.</small></label>
+            <label><input type="checkbox" data-risk /> <span><svg><use href="#icon-phone"/></svg></span><strong>Reference quality</strong><small>References should be managers, use work email addresses, exist on LinkedIn, and match the role/company history.</small></label>
+            <label><input type="checkbox" data-risk /> <span><svg><use href="#icon-shield"/></svg></span><strong>Verification loop</strong><small>Verify LinkedIn matches the resume, look for red flags on both, and verify references before moving forward.</small></label>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="ownership">
+        <div class="section-heading">
+          <p class="eyebrow">Candidate ownership</p>
+          <h2>Track, attribute, and protect ownership.</h2>
+          <p>All candidates and jobs must be tracked in JobDiva so ownership rules can be administered correctly. True ownership comes from meaningful candidate qualification, updated records, and documented activity.</p>
+        </div>
+        <div class="download-row">
+          <a class="download-button" href="./reference-library/Updated Candidate Ownership.docx" download><svg><use href="#icon-user"/></svg>Ownership guide</a>
+        </div>
+        <div class="bank-grid ownership-grid">
+          <article>
+            <h3>Core ownership rules</h3>
+            <ul>
+              <li>All candidates must be tracked in JobDiva, even when interviews are scheduled outside the system.</li>
+              <li>All jobs must be entered in JobDiva to support proper ownership rules.</li>
+              <li>Phone qualification at length for a current or future MMI client position is a true attribute signal.</li>
+              <li>Active email, phone number, and an accurate updated resume support complete attributes.</li>
+              <li>If a candidate is not tracked, ownership may split with the recruiter who tracks them first in JobDiva.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Attributes collected</h3>
+            <ul>
+              <li>Current situation and real reason for looking.</li>
+              <li>Most important detail for an ideal new role: industry, size, culture, or similar.</li>
+              <li>Top skills and strengths, minimum 3 to 5.</li>
+              <li>Role type preference: direct hire, contract-to-hire, or contract.</li>
+              <li>Employment status, visa status, compensation expectations, location, travel, relocation, interview activity, availability to start, and selling notes.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Existing candidates</h3>
+            <ul>
+              <li>For candidates with prior ownership, new ownership requires submission, new attributes, and updated contact information when provided.</li>
+              <li>Outside the 45-day contact window, refresh comp, interview activity, visa, reason for leaving, location, and new skills.</li>
+              <li>To take full ownership, the candidate must submit to a role.</li>
+              <li>Cross-reference JobDiva, LinkedIn, Dice, Monster, and other tools before reaching out.</li>
+              <li>A retention connect counts only when the candidate replies by email, call, LinkedIn, or text.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Placement ownership</h3>
+            <ul>
+              <li>Full-time placements have 12 months of ownership from placement with quarterly check-ins to maintain lifetime ownership.</li>
+              <li>CNS ownership continues during contract; after 45 days from end date, retention connects must happen every 45 days.</li>
+              <li>No active hunting or proactive outreach to a current/past owned candidate while protected.</li>
+              <li>Referral ownership depends on direct contact info, a recruiter connection, and resume collection.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+      <section class="section" id="immigration-ic">
+        <div class="section-heading">
+          <p class="eyebrow">Immigration, 3rd parties and ICs</p>
+          <h2>Required documents and identity controls.</h2>
+          <p>Use this section when working with H1B transfers, third-party corporations, IC corporations, or subcontractor identity validation.</p>
+        </div>
+        <div class="bank-grid immigration-grid">
+          <article>
+            <h3>3rd party corporations</h3>
+            <ul>
+              <li>MMI works with S-Corp, C-Corp, and qualifying LLC corporations with corporate election proof.</li>
+              <li>Corporations must file corporate taxes and provide proof, such as Federal 941 or a recent W2 issued by the corporation.</li>
+              <li>Corporations filing as 1099 are not accepted.</li>
+              <li>LLCs must provide Form 8832 or Form 2553 when applicable.</li>
+              <li>New corporations must provide the IRS EIN letter and the appropriate completed corporate election form.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/3rd Party Guidelines-Required Documents.pdf" download>Download docs</a></div>
+          </article>
+          <article>
+            <h3>3rd party onboarding list</h3>
+            <ul>
+              <li>Signed agreement, term schedule, rider page, NDA, and client documents.</li>
+              <li>Two references, completed W-9, direct deposit form, and voided business check or bank letter.</li>
+              <li>Proof of corporate ownership and recent payroll tax filing or corporation-issued W2.</li>
+              <li>Completed I-9 and supporting IDs for the employee.</li>
+              <li>E-Verify approval document and certificate of insurance naming Mitchell Martin Inc. as additional insured.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/3rd Party Guidelines-Required Documents.pdf" download>Download docs</a></div>
+          </article>
+          <article>
+            <h3>IC corporation requirements</h3>
+            <ul>
+              <li>S-Corp and C-Corp entities must show corporate business tax filing proof.</li>
+              <li>LLCs must show corporate election through Form 8832 or S-Corp election through Form 2553.</li>
+              <li>MMI will not engage ICs working in California or Wyoming.</li>
+              <li>Required documents include subcontractor agreement, NDA, client documents, two references, W-9, direct deposit, proof of ownership, tax filing proof, I-9 attestation, and insurance.</li>
+              <li>Insurance must name Mitchell Martin Inc. and the client as additional insureds.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/IC Corp Requirements.pdf" download>Download requirements</a></div>
+          </article>
+          <article>
+            <h3>H1B questionnaire</h3>
+            <ul>
+              <li>Collect candidate legal name, phone, client, position, recruiter, and current legal employment status.</li>
+              <li>Capture first U.S. entry, visa terms, initial H-1B status, cap filing, work start date, expiration, travel time, and max-out date.</li>
+              <li>Ask about prior H-1B denials and current work status.</li>
+              <li>If applicable, collect PERM, labor approval, priority date, I-140, EB category, and approval timing.</li>
+              <li>Misrepresentation can jeopardize the application and opportunity.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/MMI H1 Questionnaire.docx" download>Download questionnaire</a></div>
+          </article>
+          <article>
+            <h3>Identity attestation</h3>
+            <ul>
+              <li>Collect candidate legal name, subcontractor name, prospective job title, and prospective end-client name.</li>
+              <li>Authorized subcontractor representative acknowledges the candidate resume, education, and work history are true and accurate.</li>
+              <li>Candidate must be present for all interviews and, if engaged, report to the work site.</li>
+              <li>Subcontractor confirms they are the W2 employer of the candidate.</li>
+              <li>Misrepresentation may result in damages, client/MSP reporting, and no future work with the candidate or subcontractor.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/Subcontractor Attestation of Candidate True Identity.pdf" download>Download attestation</a></div>
+          </article>
+        </div>
+      </section>
+      <section class="section" id="resume-formatting">
+        <div class="section-heading">
+          <p class="eyebrow">Resume formatting</p>
+          <h2>Client-ready resume SOP.</h2>
+          <p>Before submission, remove personal information, follow the requested MMI branding direction, and make the resume clean enough for sales to send directly to the client.</p>
+        </div>
+        <div class="section-callout">
+          <strong>Ropes Companion can format your resumes very easily</strong>
+          <span>Use this SOP to guide the final review.</span>
+        </div>
+        <div class="download-row">
+          <a class="download-button" href="./reference-library/MMI NY Letterhead.doc" download><svg><use href="#icon-copy"/></svg>Download NY Letterhead</a>
+          <a class="download-button" href="./reference-library/Recruiting- Resume Formatting SOP.docx" download><svg><use href="#icon-list"/></svg>Resume SOP</a>
+        </div>
+        <div class="bank-grid format-grid">
+          <article>
+            <h3>Privacy & delivery</h3>
+            <ul>
+              <li>Remove all personal contact information before submission.</li>
+              <li>No home address, personal phone number, or personal email address.</li>
+              <li>Submit resumes as a Word document, .docx.</li>
+              <li>Coordinate with sales on any required header or footer before initial submission.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Letterhead & branding</h3>
+            <ul>
+              <li>Place the resume on MMI letterhead if sales requests it during the initial conversation.</li>
+              <li>Apply a header and/or footer when directed by the sales team for the specific submittal.</li>
+              <li>The goal is that sales can send the resume directly to the client with no additional editing.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Formatting standards</h3>
+            <ul>
+              <li>Use Arial, 10pt throughout.</li>
+              <li>Bold candidate name, section titles, company name, position, and dates.</li>
+              <li>Keep font, spacing, indentation, and alignment consistent throughout.</li>
+              <li>Eliminate excess blank lines and gaps.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Content clean-up</h3>
+            <ul>
+              <li>Shorten or remove technical/professional summaries when duplicated in position descriptions.</li>
+              <li>Remove company descriptions.</li>
+              <li>For positions more than 10 years old, shorten descriptions significantly or remove descriptions entirely.</li>
+              <li>Always retain company name, position title, and dates of employment.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+      <section class="section" id="interview">
+        <div class="section-heading">
+          <p class="eyebrow">Prep & debrief</p>
+          <h2>Prep to sell. Debrief to close.</h2>
+          <p>Use the conversation to sell the role, confirm fit, surface concerns, and set the next follow-up before the call ends.</p>
+        </div>
+        <div class="download-row">
+          <a class="download-button" href="./reference-library/Prep and Debrief Recruiter.pptx" download><svg><use href="#icon-calendar"/></svg>Prep & debrief deck</a>
+          <a class="download-button" href="./reference-library/Interview Prep Template.docx" download><svg><use href="#icon-copy"/></svg>Prep template</a>
+          <a class="download-button" href="./reference-library/Candidate Debrief Template.docx" download><svg><use href="#icon-phone"/></svg>Debrief template</a>
+        </div>
+        <div class="prep-grid">
+          <button class="prep-card active" data-prep="prep"><svg><use href="#icon-calendar"/></svg><span>Prep flow</span></button>
+          <button class="prep-card" data-prep="probing"><svg><use href="#icon-message"/></svg><span>Probing questions</span></button>
+          <button class="prep-card" data-prep="preclose"><svg><use href="#icon-target"/></svg><span>Pre-close</span></button>
+          <button class="prep-card" data-prep="debrief"><svg><use href="#icon-phone"/></svg><span>Debrief</span></button>
+          <button class="prep-card" data-prep="closing"><svg><use href="#icon-send"/></svg><span>Closing mindset</span></button>
+        </div>
+        <div class="prep-detail">
+          <div>
+            <h3 id="prepTitle">Prep flow</h3>
+            <p id="prepBody">Talk through who they are interviewing with, client must-haves, related experience, logistics, next steps, and a scheduled debrief follow-up time.</p>
+          </div>
+          <div class="question-bank">
+            <h3 id="prepBankTitle">Prep checklist</h3>
+            <div class="chips" id="prepBank">
+              <button>Sell the company, interviewers, culture, and opportunity.</button>
+              <button>Discuss client must-haves and the candidate's matching experience.</button>
+              <button>Reconfirm interview logistics and confirmation email resources.</button>
+              <button>If second interview: ask when they are specifically available.</button>
+              <button>If offer: ask whether Mitchell Martin can accept on their behalf.</button>
+              <button>Put the debrief follow-up time on the calendar before ending.</button>
+            </div>
+          </div>
+        </div>
+        <details class="media-drawer">
+          <summary>View original interview graphics</summary>
+          <div class="media-strip">
+            <img src="./recruiter-toolkit-assets/ace-interview.png" alt="How to ace an interview graphic from the toolkit" />
+            <img src="./recruiter-toolkit-assets/video-interview-tips.png" alt="Video interview tips graphic from the toolkit" />
+            <img src="./recruiter-toolkit-assets/question-guide.png" alt="Interview question guide from the toolkit" />
+          </div>
+        </details>
+      </section>
+      <section class="section" id="offer">
+        <div class="section-heading">
+          <p class="eyebrow">Offer letter intake</p>
+          <h2>Collect the right details the first time.</h2>
+          <p>Switch candidate type to reveal the fields recruiters need before generating an official offer letter.</p>
+        </div>
+        <div class="offer-switch" role="tablist" aria-label="Offer type">
+          <button class="active" data-offer="w2">W-2</button>
+          <button data-offer="c2c">C2C</button>
+          <button data-offer="fte">Full-time</button>
+        </div>
+        <div class="offer-grid" id="offerGrid"></div>
+        <div class="offer-template-grid">
+          <article class="offer-template-card">
+            <div class="template-head">
+              <div>
+                <p class="eyebrow">Template 1</p>
+                <h3>W-2 Candidates</h3>
+              </div>
+              <button class="copy-button" data-copy="#offerTemplateW2"><svg><use href="#icon-copy"/></svg>Copy</button>
+            </div>
+            <pre id="offerTemplateW2">Congratulation on your offer with __________
+Tentative Start: 2-3 weeks once background check clears
+Location:
+Duration:
+Rate:
+Could you please share the following details to generate the official offer letter? Thank you.
+
+Your Legal Full Name:
+Your Mailing Address:
+Mobile Phone:
+Social Security Number:
+Visa Status:
+Visa Expiration:
+Date of Birth:
+
+2 Professional Supervisory References:
+Name:
+Title:
+Company:
+Email:
+Phone:</pre>
+          </article>
+          <article class="offer-template-card">
+            <div class="template-head">
+              <div>
+                <p class="eyebrow">Template 2</p>
+                <h3>C2C Candidates</h3>
+              </div>
+              <button class="copy-button" data-copy="#offerTemplateC2C"><svg><use href="#icon-copy"/></svg>Copy</button>
+            </div>
+            <pre id="offerTemplateC2C">Congratulation on your offer with __________
+Tentative Start: 2-3 weeks once background check clears
+Location:
+Duration:
+Rate:
+Could you please share the following details to generate the official offer letter? Thank you.
+
+Candidate's Legal Full Name:
+Candidate's Mailing Address:
+Candidate's Mobile Phone:
+Social Security Number:
+Visa Status:
+Visa Expiration:
+Date of Birth:
+Name of C2C:
+C2C EIN Number:
+Signer's Name:
+Signer's Email Address:
+Company's Address:
+
+2 Professional Supervisory References:
+Name:
+Title:
+Company:
+Email:
+Phone:</pre>
+          </article>
+          <article class="offer-template-card">
+            <div class="template-head">
+              <div>
+                <p class="eyebrow">Template 3</p>
+                <h3>Fulltime Offers</h3>
+              </div>
+              <button class="copy-button" data-copy="#offerTemplateFte"><svg><use href="#icon-copy"/></svg>Copy</button>
+            </div>
+            <pre id="offerTemplateFte">Your Legal Full Name:
+Your Mailing Address:
+Mobile Phone:
+Email Address:
+Start Date:</pre>
+          </article>
+        </div>
+      </section>
+      <section class="section" id="deal-start">
+        <div class="section-heading">
+          <p class="eyebrow">Deal start</p>
+          <h2>Pick the right path.</h2>
+          <p>Start with the deal type, then follow the required JobDiva path for contracts, direct placements, extensions/rate changes, or contract-to-hire conversions.</p>
+        </div>
+        <div class="deal-chooser" role="tablist" aria-label="Deal type">
+          <button class="active" data-deal="contract"><svg><use href="#icon-list"/></svg><span>Contract Deal</span><small>Initiating a Deal in JobDiva</small></button>
+          <button data-deal="fulltime"><svg><use href="#icon-briefcase"/></svg><span>Full-Time Deal</span><small>Invoice Placement</small></button>
+          <button data-deal="extension"><svg><use href="#icon-send"/></svg><span>Extensions & Rate Changes</span><small>Assignment Record</small></button>
+          <button data-deal="conversion"><svg><use href="#icon-target"/></svg><span>Conversions / CTH</span><small>Logging Contract to Hire</small></button>
+        </div>
+        <article class="deal-panel">
+          <div>
+            <p class="eyebrow" id="dealType">Contract Deal</p>
+            <h3 id="dealTitle">Initiating a Deal in JobDiva</h3>
+            <p id="dealSummary">Recruiting confirms candidate information and starts onboarding; sales completes the bill side, then recruiting completes the pay side.</p>
+          </div>
+          <div class="deal-download" id="dealDownload"></div>
+          <div class="deal-steps" id="dealSteps"></div>
+          <div class="process-note" id="dealNote">If the deal is a direct placement, use the Invoice Placement path. For untraditional deals, reach out to recruiting leadership.</div>
+        </article>
+      </section>
+      <section class="section" id="jobdiva-docs">
+        <div class="section-heading">
+          <p class="eyebrow">JobDiva documentation</p>
+          <h2>Quick guides for required tracking.</h2>
+          <p>Use these cards to log the key recruiting actions in JobDiva: submittals, interviews, prep calls, debrief close calls, references, and retention connects.</p>
+        </div>
+        <div class="bank-grid jobdiva-grid">
+          <article>
+            <h3>Submit to a job</h3>
+            <ul>
+              <li>Go to the candidate page.</li>
+              <li>Under Activities, click the paper icon with the up arrow.</li>
+              <li>Select the designated job.</li>
+              <li>Submit to the hiring manager to log an external submittal.</li>
+              <li>For MSP accounts, choose the blank option when needed.</li>
+              <li>Log quoted bill rate and agreed pay rate.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/How to Submit to a Job.pdf" download>Download guide</a></div>
+          </article>
+          <article>
+            <h3>Log an interview</h3>
+            <ul>
+              <li>Go to the candidate page.</li>
+              <li>Under Activities, click Set under the interview section for the designated job.</li>
+              <li>Select the interview date and time.</li>
+              <li>Confirm quoted bill rate and agreed pay rate are still correct.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/Interview Process.pdf" download>Download guide</a></div>
+          </article>
+          <article>
+            <h3>Interview prep in Diva</h3>
+            <ul>
+              <li>Open the candidate notes section and click the plus sign.</li>
+              <li>Set Action to Interview Prep.</li>
+              <li>Set Template to Interview Prep.</li>
+              <li>Link the note to an open job and tag recruiter or sales with @ when needed.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/Interview Prep in Diva.pdf" download>Download guide</a></div>
+          </article>
+          <article>
+            <h3>Debrief close</h3>
+            <ul>
+              <li>Open the candidate notes section and click the plus sign.</li>
+              <li>Set Action to Debrief Close.</li>
+              <li>Set Template to Debrief Close.</li>
+              <li>Link the note to an open job and tag recruiter or sales with @ when needed.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/Debrief Close.pdf" download>Download guide</a></div>
+          </article>
+          <article>
+            <h3>Add a reference</h3>
+            <ul>
+              <li>Visit the candidate page.</li>
+              <li>Click the thumbs-up icon at the top left.</li>
+              <li>Enter first name, last name, title, company, phone number, and email.</li>
+              <li>Save the new reference, create the new contact, then choose No when asked to finish checking the reference.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/Adding a Reference.pdf" download>Download guide</a></div>
+          </article>
+          <article>
+            <h3>Retention connect</h3>
+            <ul>
+              <li>Open the candidate notes section and click the plus sign.</li>
+              <li>Set Action to Retention Connect.</li>
+              <li>Set Template to Retention Connect.</li>
+              <li>Enter call notes and tag recruiter or sales with @ when needed.</li>
+            </ul>
+            <div class="card-downloads"><a href="./reference-library/Retention Connect.pdf" download>Download guide</a></div>
+          </article>
+        </div>
+      </section>
+      <section class="section" id="reference-library">
+        <div class="section-heading">
+          <p class="eyebrow">Reference library</p>
+          <h2>Source documents used in this toolkit.</h2>
+          <p>A consolidated list of every uploaded source document that informed this interactive recruiter toolkit.</p>
+        </div>
+        <div class="reference-library-groups">
+          <div class="reference-category">
+            <h3>Core Toolkit</h3>
+            <div class="reference-grid">
+              <a href="./reference-library/MMI Branding Guide 2025.pdf" download><article><span>Brand</span><strong>MMI Branding Guide 2025.pdf</strong><small>Colors, typography, and Mitchell Martin visual standards.</small></article></a>
+              <a href="./reference-library/Recruiter Toolkit 2026.docx" download><article><span>Toolkit</span><strong>Recruiter Toolkit 2026.docx</strong><small>Original recruiter toolkit structure and baseline templates.</small></article></a>
+              <a href="./reference-library/SOP Job Flow.pdf" download><article><span>SOP</span><strong>SOP Job Flow.pdf</strong><small>Job flow phases from qualification through post close and retention.</small></article></a>
+            </div>
+          </div>
+          <div class="reference-category">
+            <h3>Conversations With Candidates</h3>
+            <div class="reference-grid">
+              <a href="./reference-library/Recruiting Conversations.pptx" download><article><span>Conversations</span><strong>Recruiting Conversations.pptx</strong><small>Candidate conversation objectives, req intake, discovery questions, hot buttons, and closing best practices.</small></article></a>
+              <a href="./reference-library/MMI 2026 Benefit Guide Hourly Consultants.pdf" download><article><span>Benefits</span><strong>MMI 2026 Benefit Guide Hourly Consultants.pdf</strong><small>Hourly consultant eligibility, waiting period, qualifying events, and benefits overview.</small></article></a>
+              <a href="./reference-library/MMI 2026 Benefit Guide Salary Consultants.pdf" download><article><span>Benefits</span><strong>MMI 2026 Benefit Guide Salary Consultants.pdf</strong><small>Salaried consultant eligibility, waiting period, qualifying events, and benefits overview.</small></article></a>
+              <a href="./reference-library/MMI Consultant Salary Model.xlsx" download><article><span>Salary Model</span><strong>MMI Consultant Salary Model.xlsx</strong><small>Salary model for bill rate, compensation, costs, gross profit, and approval conversations.</small></article></a>
+            </div>
+          </div>
+          <div class="reference-category">
+            <h3>Training & Question Banks</h3>
+            <div class="reference-grid">
+              <a href="./reference-library/Prep and Debrief Recruiter.pptx" download><article><span>Training</span><strong>Prep and Debrief Recruiter.pptx</strong><small>Prep, probing, pre-close, debrief, and closing question banks.</small></article></a>
+              <a href="./reference-library/Resume Red Flags and Candidate Vetting 2026.pptx" download><article><span>Training</span><strong>Resume Red Flags and Candidate Vetting 2026.pptx</strong><small>Candidate vetting, LinkedIn red flags, resume red flags, and formatting basics.</small></article></a>
+            </div>
+          </div>
+          <div class="reference-category">
+            <h3>Templates</h3>
+            <div class="reference-grid">
+              <a href="./reference-library/Submittal Template.docx" download><article><span>Templates</span><strong>Submittal Template.docx</strong><small>Account executive submittal pitch template.</small></article></a>
+              <a href="./reference-library/Submittal Confirmation Email Template.docx" download><article><span>Templates</span><strong>Submittal Confirmation Email Template.docx</strong><small>Candidate right-to-represent and reference request.</small></article></a>
+              <a href="./reference-library/Interview Email Confirmation Template.docx" download><article><span>Templates</span><strong>Interview Email Confirmation Template.docx</strong><small>Candidate interview confirmation email.</small></article></a>
+              <a href="./reference-library/Interview Prep Template.docx" download><article><span>Templates</span><strong>Interview Prep Template.docx</strong><small>Candidate prep form and pre-close prompts.</small></article></a>
+              <a href="./reference-library/Candidate Debrief Template.docx" download><article><span>Templates</span><strong>Candidate Debrief Template.docx</strong><small>Structured post-interview debrief guide.</small></article></a>
+            </div>
+          </div>
+          <div class="reference-category">
+            <h3>Ownership, Immigration & Resume</h3>
+            <div class="reference-grid">
+              <a href="./reference-library/Updated Candidate Ownership.docx" download><article><span>Ownership</span><strong>Updated Candidate Ownership.docx</strong><small>Candidate ownership, attributes, renewal, retention, referral, and commission rules.</small></article></a>
+              <a href="./reference-library/3rd Party Guidelines-Required Documents.pdf" download><article><span>Immigration / IC</span><strong>3rd Party Guidelines-Required Documents.pdf</strong><small>Third-party corporation types, required onboarding documents, E-Verify, and insurance requirements.</small></article></a>
+              <a href="./reference-library/IC Corp Requirements.pdf" download><article><span>Immigration / IC</span><strong>IC Corp Requirements.pdf</strong><small>IC corporation eligibility, tax proof, onboarding documents, and insurance requirements.</small></article></a>
+              <a href="./reference-library/MMI H1 Questionnaire.docx" download><article><span>Immigration / IC</span><strong>MMI H1 Questionnaire.docx</strong><small>H1B transfer questionnaire covering status, timing, travel, work history, and I-140/PERM details.</small></article></a>
+              <a href="./reference-library/Subcontractor Attestation of Candidate True Identity.pdf" download><article><span>Immigration / IC</span><strong>Subcontractor Attestation of Candidate True Identity.pdf</strong><small>Candidate identity, resume accuracy, interview presence, and subcontractor employment attestation.</small></article></a>
+              <a href="./reference-library/Recruiting- Resume Formatting SOP.docx" download><article><span>Resume SOP</span><strong>Recruiting- Resume Formatting SOP.docx</strong><small>Privacy, letterhead, formatting, and content clean-up standards.</small></article></a>
+              <a href="./reference-library/MMI NY Letterhead.doc" download><article><span>Resume SOP</span><strong>MMI NY Letterhead.doc</strong><small>NY letterhead document for resume formatting and submission prep.</small></article></a>
+            </div>
+          </div>
+          <div class="reference-category">
+            <h3>Deal Start</h3>
+            <div class="reference-grid">
+              <a href="./reference-library/Initiating a Deal in JobDiva.pdf" download><article><span>Deal Start</span><strong>Initiating a Deal in JobDiva.pdf</strong><small>Contract deal setup, bill side, pay side, and onboarding start flow.</small></article></a>
+              <a href="./reference-library/Invoice Placement.pdf" download><article><span>Deal Start</span><strong>Invoice Placement.pdf</strong><small>Full-time/direct placement invoice placement fields.</small></article></a>
+              <a href="./reference-library/Assignment Record.pdf" download><article><span>Deal Start</span><strong>Assignment Record.pdf</strong><small>Extensions and rate changes in the assignment record.</small></article></a>
+              <a href="./reference-library/Logging Contract to Hire.pdf" download><article><span>Deal Start</span><strong>Logging Contract to Hire.pdf</strong><small>Conversion and contract-to-hire logging process.</small></article></a>
+            </div>
+          </div>
+          <div class="reference-category">
+            <h3>JobDiva Documentation</h3>
+            <div class="reference-grid">
+              <a href="./reference-library/How to Submit to a Job.pdf" download><article><span>JobDiva</span><strong>How to Submit to a Job.pdf</strong><small>External submittal logging steps.</small></article></a>
+              <a href="./reference-library/Interview Process.pdf" download><article><span>JobDiva</span><strong>Interview Process.pdf</strong><small>Interview logging steps and rate checks.</small></article></a>
+              <a href="./reference-library/Interview Prep in Diva.pdf" download><article><span>JobDiva</span><strong>Interview Prep in Diva.pdf</strong><small>Interview prep note tracking steps.</small></article></a>
+              <a href="./reference-library/Debrief Close.pdf" download><article><span>JobDiva</span><strong>Debrief Close.pdf</strong><small>Debrief close note tracking steps.</small></article></a>
+              <a href="./reference-library/Adding a Reference.pdf" download><article><span>JobDiva</span><strong>Adding a Reference.pdf</strong><small>Reference creation and contact creation steps.</small></article></a>
+              <a href="./reference-library/Retention Connect.pdf" download><article><span>JobDiva</span><strong>Retention Connect.pdf</strong><small>Retention connect note tracking steps.</small></article></a>
+            </div>
+          </div>
+          <div class="reference-category">
+            <h3>Assignment Intake</h3>
+            <div class="reference-grid">
+              <a href="./reference-library/Salesperson and Recruiter Initial Req Discussion.docx" download><article><span>Assignment</span><strong>Salesperson and Recruiter Initial Req Discussion.docx</strong><small>Initial req discussion questions for sales and recruiting alignment.</small></article></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+    <script src="./recruiter-toolkit-assets/app.js"></script>
+  </body>
+</html>
